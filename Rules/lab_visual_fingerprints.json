@@ -1,0 +1,1495 @@
+{
+  "version": "0.1",
+  "last_updated": "2026-05-19",
+  "hash_size": 16,
+  "render_dpi": 150,
+  "samples_per_lab": 250,
+  "method": "pHash + dHash on Gaussian-blurred grayscale first page (256-bit each)",
+  "labs": {
+    "janoshik": {
+      "folder": "Janoshik_Tests",
+      "fingerprints": [
+        {
+          "phash": "bb4378e3c1d98726863e9d9ca6e571e26099cc9cc71a8c1b98c96ae173333d8c",
+          "dhash": "402184ce86a6a327b2fba6668c869f069e86b4d69a6298868196831694c680c6",
+          "source": "#87708_Klow80(TB-500_10mg+BPC-157_10mg+GHK-CU_50mg+KPV_10mg).pdf"
+        },
+        {
+          "phash": "bb4238e3c0ddc62686269d9cb7a531e2b199cc9cc63ecc5bd9d9624333333989",
+          "dhash": "402186c69626a326b3ceb7a68c469f068e86b4d69a4294a69196911690c680c6",
+          "source": "#71744_BPC5mg+TB5mg_Blend.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc62686269d9cb7e133a2b199cc9cc63ecc5bd9d86ac133333989",
+          "dhash": "402184c69626a2a6b5ceb7a69e469f068e86b4d6b2429c868196911690c680c6",
+          "source": "#71592_Retatrutide_10mg.pdf"
+        },
+        {
+          "phash": "bb4278d3c8dfc66686269d9ca7a133a29999ccccc65ecc5bd99862c133333989",
+          "dhash": "402184ce9626a626b39ea5868c469f068c86b0d6b2429c8681d6939694c680c6",
+          "source": "#123259_GHK-CU_50mg(CU50).pdf"
+        },
+        {
+          "phash": "bb4378e3c0dcc62686269d8cb5e1b3228599cc9cc61ecc5fd9d86ac333333d89",
+          "dhash": "402184ce9626a3a6b59ea7a69e469f069cc6b0d6b2429c868196931694c680c6",
+          "source": "#146703_R10.pdf"
+        },
+        {
+          "phash": "bb4278c3c1ddc62686269d9ca5e431e2e999cc9cc636cc1b99dc6ac17b733981",
+          "dhash": "402184ce9626a3a6b3d6b3069e869f069e86b4d6b2429c868156931694c680c6",
+          "source": "#110044_GHK-CU_50_mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4378f3c1dcc62686269d9ca7a133a2f199cc8cc65ecc5ac9d86ac333333989",
+          "dhash": "402184ce9626a166b5dea4869e269f068e8694d6b2429c868156931694c680c6",
+          "source": "#110153_tesmorelin_20mg.pdf"
+        },
+        {
+          "phash": "eb6369f391d8964ec67ecc9ca5a5b1a29998ceccc232ce1b99cc68c373333881",
+          "dhash": "402184ce9626a716b79eb71e9c939e2f9ea6b4c29a6298868196811690c680c6",
+          "source": "#100613_KLOW_80mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626943c958cb3e6319ccc99c61ace7bd9d83ac733331c8d862c",
+          "dhash": "002006ce96c60726335eb3260f0696869f0694c694c693469c86019601950004",
+          "source": "Tesamorelin_92726.pdf"
+        },
+        {
+          "phash": "eb6269e190d8964e866ecc9ce5a5b1a29998cedcc676cc5b99c868c173333999",
+          "dhash": "402184ce9626a716b79eb71e9c939e2f9ea6b4d2b2429c868156911690c680c6",
+          "source": "#100597_MOTS-C_40mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c0ddc62686369d9ca5e431e2e199cc98c636cc1f99dc6ac17b733989",
+          "dhash": "402184ce9626a3a6b3d6b3069e869f069e86b4d6b2429c868156931694c680c6",
+          "source": "#110039_Semax_10mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4358c3c07ec62626369d9c94edb1e63999cc98c63ecc1ad9d86ac1333339ac",
+          "dhash": "402184ce9626a326b79ea7069ee69d16849e90e6b2629cb68196831694c680c6",
+          "source": "#153029_Tirzepatide_40mg.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc62686269d9cb5a931a2b19dcc9cc636ce5bd9996ac13363398d",
+          "dhash": "402184ce8626a3a6b3cea3269e469f069ec6b4f692229c868196911690c680c6",
+          "source": "#68060_PEG-MGF_5mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c85cc6268626999ca7a133a2d99cccdcc63eca1b999966c333733cc8",
+          "dhash": "402186ce9626a226b3d6b3869e069f068ec694f692729c868116931690c680c6",
+          "source": "#95887_Tirzepatide_100mg___Ships_within_the_U.S.A._-_Fast.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dcc62686269d9cb4e533a2f199cc9cc63acc5bd9d86a4333333989",
+          "dhash": "402184ce8626a326b3deb7869e469f0696869cd69e4298a68156911690c680c6",
+          "source": "#97079_CJC_1295_no_DAC_5mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c0dd862686369d9ca5e4f1e26999cc98c636cc1bd8dc6ac13b733999",
+          "dhash": "402184ce9626a3a6b3d6b3069e869f069e96b4c6b242948e9356831694c680c6",
+          "source": "#110046_Selank_10_mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4278c1c8dfc62686269d9ca7ed31e2b199cc9cc636cc1b99d962c133333d89",
+          "dhash": "402184ce86a6a326b36eb3068c469b069e86b4d6b2429c868156931690c680c6",
+          "source": "#99952_BPC-157_20mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378e1c15cc626862e998ca4a573a2f19dcc98c63acc5b99d86ec373733989",
+          "dhash": "402184ce8626a5a6a1d6a7869e069f068ec6b4f69a3294868116911690c680c6",
+          "source": "#83375_BPC-157_TB500_10mg_10mg___Shipping_to_US_&_Canada.pdf"
+        },
+        {
+          "phash": "bb4378c3c1b3c6262e2e9d9c95a1b1b3b989cd8cc63eccd298c97a4933333994",
+          "dhash": "402184ce9626a326b79eb716896e9b6e96d6b0e6b2629c868156931694c680c6",
+          "source": "#105307_Retatrutide_60mg.pdf"
+        },
+        {
+          "phash": "bb4358c3c07ec62626369d9c94edb1e23999cc9cc63ecc1ad9d86ac1317339a9",
+          "dhash": "402184ce9626a326b79ea7068ee69d16849eb0e6b2629cb68196831694c680c6",
+          "source": "#153030_Retatrutide_40mg.pdf"
+        },
+        {
+          "phash": "bb4338c3c0dcc62686269d9cb7a131a2b999cc9cc63ecc5bd9d96ac333333989",
+          "dhash": "402186c696a6a326b38eb6a68c469f069e86b4d6b2429c868196911690c680c6",
+          "source": "#71881_Retatrutide_10mg.pdf"
+        },
+        {
+          "phash": "bb6378e3c05886368e2e9d9db7a473e26199cc8dc617cc5899d86ae373233889",
+          "dhash": "402184ce8626a627b1cba3d61eab13090aa7b4c7b2429c868156931690c680c6",
+          "source": "#82282_Retatrutide_40mg___99.5%_Purity_+_Guaranteed._#1_Rated_USA_Supplier__Same_Day....pdf"
+        },
+        {
+          "phash": "bb4278c3c8ddc62686269d9cb7a4b1a6b199cc9cc63ecc1bd9d86ac333333988",
+          "dhash": "402184ce9626a326b3deb3268c469b069e86b0d6b24298b68396831694c680c6",
+          "source": "#109987_AOD_5mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c9d8db3e73198cc98ce5ecc7b59d83ac733233d89862c",
+          "dhash": "002006ce96c6162633deb3a606069686993e94d698c693569c86035611950004",
+          "source": "Semaglutide_150100_blue-cap.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863686369d9c84e173a36189cc9cc61ece5e99dc3cd133633989",
+          "dhash": "402184ce9626a227b7afb7869e069f4698d69ce69c6290868196931694c680c6",
+          "source": "#108744_Sample_6.pdf"
+        },
+        {
+          "phash": "bb4378c3c0d8c62686269d9ca7a533a6f199cc9cc63ecc5bd8d86ac333333989",
+          "dhash": "402184ce9626a326b3deb7869e469f0696869cd69a4294a68156911690c680c6",
+          "source": "#97080_CJC_1295_with_DAC_5mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c8dcc62686269d9ca5e133a2b199ccccc65ecc5bd9d86ac13133398d",
+          "dhash": "402184ce9626a266b1dea5a69e269f4698d6b4d6b2429c868156931694c680c6",
+          "source": "#147613_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c9ddc63686369d9ca4a933e6b18dcc9cc632ce1bc99962c13363398d",
+          "dhash": "402184ce96a6a326b3fea4e69e169f4698d6b4d6b0429c868196939694c680c6",
+          "source": "#121832_NAD+_500mg.pdf"
+        },
+        {
+          "phash": "bb4278e3c9df862686369d9ca4ec71e25999ccd8c6728c1bc9dc68c17b2338a9",
+          "dhash": "402184ce9626a3a7b3dfb3069e869f069c86b4e6b26298869196831694c680c6",
+          "source": "#110043_Epithalon_50_mg_\u2013_Elemental_Impurities_(Heavy_Metals)_Analysis.pdf"
+        },
+        {
+          "phash": "bb4338f3c15cc6268626999ca5a133b39199cc9cc616cc5ed9dc6ec333733989",
+          "dhash": "402184ce9626a7a6b59ea3869e469f068ec6b4f6b2329c868116931694c680c6",
+          "source": "#101950_Retatrutide_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626863c9d8db3e4b198cc99c65ace7bd9dc32c133331d8d8624",
+          "dhash": "002006ce96c61226335eb3a60e069686990698c6b4c69b469c86035601950004",
+          "source": "Wolverine-Blend_133989_Semax.pdf"
+        },
+        {
+          "phash": "bb4278c1c0dd862686369d9ca5ed31e2f199cc9cc636c81ad9d86ec373733c89",
+          "dhash": "402184ce9626a326b36eb34e8c869b068e8694d692429c868156931690c680c6",
+          "source": "#100041_Tirzepatide_30mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c8dd862686369d9ca5e131a2e199cc9cc61ecc5bc9d86e4333733999",
+          "dhash": "402184ce9626a726b79ea69e9e869f168c9eb4c6b2429c868156931694c680c6",
+          "source": "#132753_RT20_Helix_Core_Labs.pdf"
+        },
+        {
+          "phash": "bb4378f3c8dcc62686269d9ca5e133a2b199cc9cc65ecc5bd9d86ac131333989",
+          "dhash": "402184ce9626a326b1dea5a69e269f4698d6b4d6b2429c868156931694c680c6",
+          "source": "#147614_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c8ddc62686269d9ca7e131e2f199cc9cc636cc1a99d86ac333333d89",
+          "dhash": "402186ce96a6a326b3beb3868c269b068e8694d6b2429c868196931694c680c6",
+          "source": "#100571_Tesamorelin_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378e3c9dc863696269d9c84a973a26188cc9cc61ecc5799dc3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4698d69ce69d6290868196911694c680c6",
+          "source": "#133089_17.pdf"
+        },
+        {
+          "phash": "bb4278e3c8ddc62686369d9c97a133a2f19dccccc65ecc1bc9986a4333733981",
+          "dhash": "402184ce9626a626b3dea5a69e069f168c9eb4c6b2429c868156931694c680c6",
+          "source": "#104625_Retatrutide_30mg(RT30).pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c9d8cb3e73198cc99ce5acc7b59d83ac733333d998624",
+          "dhash": "002006ce96c6162633deb3c606069686993e94d698c693569c86015601950004",
+          "source": "Retatrutide_154305_white-cap.pdf"
+        },
+        {
+          "phash": "bb4378d3c87cce266626b99c95a1b3213199cc9cc6364e4cc9dc68d33b733989",
+          "dhash": "402184ce9626a326b19ea1f691b693b690ee90f29a3296c68396831694c680c6",
+          "source": "#147406_Proviron_20mg_tab.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c958db3e73198cc99ce5ecc7bd9d832c733331ca9862c",
+          "dhash": "002006ce96c6122633deb3c60e06968699069cc694c69b469c86039611950004",
+          "source": "Melanotan-II_150108_black-cap.pdf"
+        },
+        {
+          "phash": "bb4338f1c8dcc62686269d9ca5a133a3b199cc9cce5ece5ed9986ac333633981",
+          "dhash": "402184ce9626a5a6b59ea5869e269f4698c694de900f9cc68196931694c680c6",
+          "source": "#74007_Tesofensine_500mcg.pdf"
+        },
+        {
+          "phash": "bb4278c3c9dfc62686269d9ca6e133a2b99dccdcc636cc1bc998664133733989",
+          "dhash": "402186ce96a6a326b3fea4e69e169f069e86b4d6b2429c868156919694c680c6",
+          "source": "#121827_GHK-CU_100mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dc862696369d9ca6653362e199cc9cc636ccdad9986e4373633989",
+          "dhash": "402184ce96a6a326b3eea4e69e069f0696869cd69e4298868196911694c680c6",
+          "source": "#121834_CP10_(CJC-1295_without_DAC_5mg_+_IPA_5mg).pdf"
+        },
+        {
+          "phash": "bb4378c3c0ddc62686269d9cb5e531a2b199cc9cc672cc5bd9d96ac133333989",
+          "dhash": "402184ce8626a5a6b3deb7269e469f069e86b4d6b2429c868156931694c680c6",
+          "source": "#91620_GHK-cu_50mg.pdf"
+        },
+        {
+          "phash": "bb4238c3c8ddc62686369d9c85e131e2b18dcc9cc63ece1bd9996ac333733989",
+          "dhash": "402186c696a6a326b78eb7a68c269d4698d6b4d6b0429c868196911690c680c6",
+          "source": "#71870_NAD+500.pdf"
+        },
+        {
+          "phash": "bb4278c3c8dfc62686269d9ca7ed31e2f199cc9cc636cc1b99d862c133333c89",
+          "dhash": "402184ce86a6a326b36eb3068c269b069e86b4d6b2429c868156931694c680c6",
+          "source": "#99945_Ipamorelin_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863696269d9c84a973a26189cc9cc61ecc5799dc3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4698d69ce69c6290868196911694c680c6",
+          "source": "#133092_20.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c9d8db3e73198cc99ce5acc7b59d83ac733233d89862c",
+          "dhash": "002006ce96c6162633deb3c60e069686993e94d698c693569c86039611950004",
+          "source": "Semaglutide_150102_white-cap.pdf"
+        },
+        {
+          "phash": "bb4278e3c8ddc62686369d9c97a533a6f199ccccc65ecc1bc998624333733981",
+          "dhash": "402184ce9626a226b3dea5a69e069f168c9e94c692429c868156931694c680c6",
+          "source": "#104623_Tirzepatide_60mg(TR60).pdf"
+        },
+        {
+          "phash": "eb6369e191d8964a866ec99c25a5b1a29199cedcc636ce5b99c86cc373333b81",
+          "dhash": "402184ce9626a316b59eb71e9c939e2f9e8694f29e729c868196931690c680c6",
+          "source": "#100537_HGH_191AA_36iu.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c62686269d9ca4e531a6f199cc9cc63ecc5bd8d96ec131b33989",
+          "dhash": "402184ce8626a3a6b3deb7269ec69f0696869cd69a4294868156911690c680c6",
+          "source": "#80903_TB_500_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c627943c958cb7e73198cc99c61ace7b59d83ac733231c8d862c",
+          "dhash": "002006ce96c61326335eb3260f0696869f0694c694c693469c86015601950004",
+          "source": "Sermorelin_107698.pdf"
+        },
+        {
+          "phash": "bb4378c3c87cce26663eb99c95a1b322b199cc98c636ce5cc99c68c33b633989",
+          "dhash": "402184ce8626a326b3dea1f691b693b698e694f6923296868396811694c680c6",
+          "source": "#147411_Telmisartan_40_mg_tab.pdf"
+        },
+        {
+          "phash": "bb4278e3c8dd863686369d9ce5ad73a27189cc98c632cc5a99dc6ac17b2339a1",
+          "dhash": "402184ce8626a5a7b3cba3069e869f4698d6b4d6b0429c868196911690c680c6",
+          "source": "#96844_NAD+750mglPeptidegurus_Domestic_shipping_from_USA,UK,EU.pdf"
+        },
+        {
+          "phash": "bb4378c3c0d88626863e9d9ca7e533e6e199cc98c63acc1a99d86ac57b733981",
+          "dhash": "402184ce9626a3a6b3deb3069e869f068e8694d692429c868156931694c680c6",
+          "source": "#110045_TIRZEPATIDE_15MG___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4378d3c8dcc62686269d9ca6e133e3f199cc9cc63ecc5bd8c86a4133333989",
+          "dhash": "402184ce86a6a136b3fea6e68c969f068e8694d6b2429c868156931694c680c6",
+          "source": "#87710_Tesamorelin_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c9d8cb3a73198cc99ce5ecc7b59d83bc733233d89862c",
+          "dhash": "002006ce96c6162633deb3a606069686993e94d698c693569c86039611950004",
+          "source": "Semaglutide_150098_teal-cap.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c9d8cb3e73198cc99ce5acc7b59d83ac733333d89862c",
+          "dhash": "002006ce96c6162633deb3a60e069686993e94d694c693569c86035611950004",
+          "source": "GLP-2_150104_white-cap.pdf"
+        },
+        {
+          "phash": "bb4378e3c17cc6368626999ca5e131a2f19dcc98c612cc5ed9dc6ec333633989",
+          "dhash": "402184ce9626a5a6b5cea3869e069f068ec6b4f6b2329c868116931694c680c6",
+          "source": "#79432_Retatrutide_20mg___Shipping_to_US_&_Canada.pdf"
+        },
+        {
+          "phash": "bb4278c3c0dcc62686369d9ca5ed31e2e199cc9cc636cc1b99d86ac3717339c9",
+          "dhash": "402184ce8626a7a6b3ceb3069e869f068e8694d692429c868156931694c680c6",
+          "source": "#99619_Tirzepatide_50_mg___UK,USA,EU_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4378d3c0dcc62686269d9cb7e531a2f199cc9cc636cc5bd8d86ac133333989",
+          "dhash": "402184ce8626a5a6b3deb7269e469f069e86b4d6b2429ca68156931694c680c6",
+          "source": "#91625_Ipamorelin_5mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863696269d9c84a973a26188cc9cc61ecc5799dd3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4698d69ce69e6290868196911694c680c6",
+          "source": "#133081_9.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c636943c958cb3e73198cc99ce1ace73d9d872c533633c89862c",
+          "dhash": "002006ce96c61626336eb366061696869b0696c698e61b669486019601950004",
+          "source": "BAC-Water_150116_white-cap.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dc862686269d9ca5a173a27199cc9cc676cc5b99dc6ac3733339a1",
+          "dhash": "402184ce9626a2a6b39fa3069e069f068e8694d6b2429c868196911690c680c6",
+          "source": "#147023_Tesamorelin_10mg_Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4378c3c9dcc62686269d9ca6e133a2b999ccdcc636cc5bc9d8664133733989",
+          "dhash": "402184ce96a6a326b3fea4e69e169f068e86b4d6b2429c868156911694c680c6",
+          "source": "#121829_Retatrutide_30mg.pdf"
+        },
+        {
+          "phash": "bb4378f3c0dc8626863e999ca7e171a2f199cc8cc63eccdb99d86ac131333989",
+          "dhash": "402184c69626a226b5deb7869e069f069e86b4d69a429ca69196811690c680c6",
+          "source": "#71599_BPC_157_10mg+GHK-CU_50mg+TB500_10mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c8ddc62686269d9c87e533a2f199ccdcc65ecc1ac99c6a4333633981",
+          "dhash": "402184ce9626a326b1dea5a69e069f168c9e94e692629c8681d6939694c680c6",
+          "source": "#113534_Tirzepatide_120mg(TR120).pdf"
+        },
+        {
+          "phash": "bb4358c3c9dcc626a6369d9894e5b1e6f19ccc9cc63ace1bc9986ac339633988",
+          "dhash": "402184ce9626a326b75eb7269e869f168c9eb4c6b2429c8681d6911694c680c6",
+          "source": "#123328_Retatrutide.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dcc62686269d9ca6e133a2f199cc8cc61ecc5bd9d86ac333333989",
+          "dhash": "402184ce8626a166b5dea4869e269f068e8694d692429c868156931694c680c6",
+          "source": "#110143_tirzepatide10mg.pdf"
+        },
+        {
+          "phash": "bb4378d3c1dcc62686269d9ca7e133a3b199cc9cc676cc5bc8d86ac133333989",
+          "dhash": "402184ce9626a3a6b39ea5269e469f068e8694d692429c868156931694c680c6",
+          "source": "#147617_Tirzepatide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378d3c1dcc62686269d9ca7e133a3b199cc9cc63ecc5bc8d86ac133333989",
+          "dhash": "402184ce9626a3a6b39ea7069e469f068e8694d692429c868156931694c680c6",
+          "source": "#147616_Tirzepatide_20mg.pdf"
+        },
+        {
+          "phash": "bb4338d3c87cce262626b99c95a5b321e199cc9cc6364e5cd9d868f333333989",
+          "dhash": "402184ce9626a326b59ea1f691b693b690ee90f292329c868196911690c680c6",
+          "source": "#147405_Winstrol_10_mg_tab.pdf"
+        },
+        {
+          "phash": "bb4378f3c8dcc62686269d9c84e133a2b199cc9cc65ecc5bd9d86ec131b33989",
+          "dhash": "402184ce9626a3a6b79ea7069e269f4698d6b4d6b2429c868156931694c680c6",
+          "source": "#147610_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dec62686269d9cb4e131a2f199cc9cc63ecc5bc9d86ec133333989",
+          "dhash": "402184ce8626a3a6b3dea5269e469f0696869cd6be4294868156931694c680c6",
+          "source": "#147737_GHK-Cu_100mg.pdf"
+        },
+        {
+          "phash": "bb4338f3c15cc6268626999ca5a133b39199cc9cc656cc5ed9dc6ec333333989",
+          "dhash": "402184ce9626a7a6b59ea3869e469f068ec6b4f6b2329c868116931694c680c6",
+          "source": "#109583_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dcc62686269d9ca7a133a2b199cc9cc67ecc5bd9d86ac333333989",
+          "dhash": "402184ce9626a366b3dea7a69e469f068e9694d692429c868156911694c680c6",
+          "source": "#137806_Tirzepatide_20mg.pdf"
+        },
+        {
+          "phash": "bb4278c1c0d9862686269d9ca7a531e6e999cc9cc63acc5b99d96ac37333398d",
+          "dhash": "402186ce9626a326b396b3068c069b068e96b4d69a4294868156919694c680c6",
+          "source": "#125441_tb_bp_30_30_Cocer_Peptides\uff0cWhatsApp_+852_6904_8891.pdf"
+        },
+        {
+          "phash": "bb4378c3c1ddc62686269d9cb6a133a2f199cc9cc63ecc5bc9d86ac133333989",
+          "dhash": "402184ce8626a326b1dea5a69e469f0696969cd6be4294868196931694c680c6",
+          "source": "#147739_GHK-Cu_100mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dc862686269d9ca7a173a27199cc9cc676cc5e99dc6ac1733339a9",
+          "dhash": "402184ce9626a2a7b3b7a3069e069f068e86b4d6b2429ca68156931694c680c6",
+          "source": "#147020_Retatrutide_5mg_Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626943c958db3e73198cc98c65ace7bd9d832c333333d89862c",
+          "dhash": "002006ce96c6162633deb3a60e4696869f0694c698c693469c8601d611950004",
+          "source": "Retatrutide_112521_60mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dcc63686269d9c84e1b1e2f199cc9cc61ece5ad9dc6ec133633981",
+          "dhash": "402184ce9626a726b79eb7069ea69f4690d69ce69c6290868196931694c680c6",
+          "source": "#106018_Decca.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626943c9d8cb3e4319ccc99c65ace7b99d87ac133331d8d862c",
+          "dhash": "002006ce96c60626335eb326060696869f0694c694c693669c86015611950004",
+          "source": "Selank-Semax_80492.pdf"
+        },
+        {
+          "phash": "bb4378f3c0dcc62686269d9cb5e533a2b199cc9cc636cc5bd8d86ac133333989",
+          "dhash": "402184ce8626a5a6b3deb7269e469f068e86b4d6b2429c868156931694c680c6",
+          "source": "#91618_Retatrutide_10mg.pdf"
+        },
+        {
+          "phash": "eb6269e190d8964e8666cc9ce5a5b1a29998cedcc636cc5b99c86cc373333999",
+          "dhash": "402184ce9626a316b39eb71e9c939e2f8ea6b4d2b2429c868156911690c680c6",
+          "source": "#100668_GLP-3_R_30mg.pdf"
+        },
+        {
+          "phash": "bb4358c3c1dec62626369d9c94ecb1e66999cc9cc63ec21b59996ac1316339ad",
+          "dhash": "402184ce9626a326b75ea7069ee69d16988e94e6b66298868156931694c680c6",
+          "source": "#153028_rHGH_40_IU.pdf"
+        },
+        {
+          "phash": "bb4278c3c1dec62686269d9cb6a133a2f19dccccc63ecc5bc9986ac13333398d",
+          "dhash": "402184ce8626a366b3dea5a69e469f0696869cd6be4294868156931694c680c6",
+          "source": "#147738_GHK-Cu_100mg.pdf"
+        },
+        {
+          "phash": "bb4378f1c1dcc62686269d9ca7e1b1a2b999cc9cc636cc5bc8d86ec133333989",
+          "dhash": "402184c68626a726b796a5069e469f068e86b4d6b2429c868156911690c680c6",
+          "source": "#85254_Retatrutide_10mg.pdf"
+        },
+        {
+          "phash": "bb4378f3c8dcc62686269d9c84e133a2b199cc9cc67ecc5bc9d86ec131b33989",
+          "dhash": "402184ce9626a3a6b59ea5269ea69f4698d6b4d6b2429c868156911690c680c6",
+          "source": "#147611_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dcc6268626999cb4e531a2d19dcc9cc63ace1bd9d86ec333333989",
+          "dhash": "402184ce8626a326b79eb7869e469f069ec6b4f6b66298868156911690c680c6",
+          "source": "#97081_HGH_10iu.pdf"
+        },
+        {
+          "phash": "bb4378c3c8dc862686269d9ca5e173a27199cc9cc676cc5e99dc6ac173333989",
+          "dhash": "402184ce8726a2a7b3b7a3069e069f069e86b4d6b2429c868196911690c680c6",
+          "source": "#147113_Pinealon_20mg__Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626843c958db3e73198cc99ce5ece7bd9d832c733331c89862c",
+          "dhash": "002006ce96c6162633deb3c60e26968699069cc694c69b469c86039611950004",
+          "source": "Melanotan-II_150110_green-cap.pdf"
+        },
+        {
+          "phash": "bb4378f3c8dec66686269d9ca7a53322b199ccccc65ecc5bc99c62c133333981",
+          "dhash": "402184ce9626a326b1dea5869e469f068c86b0d6b2429c868156911694c680c6",
+          "source": "#135103_GHK-CU_100mg(CU100).pdf"
+        },
+        {
+          "phash": "eb6269e190d8964e8666cc9ca5a5b1a29998cedcc637cc5b99c86cc373333999",
+          "dhash": "402184ce9626a316b79eb71e9c939e2f8ea694d292429c868156911690c680c6",
+          "source": "#100735_GLP-1_T_60mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d84626843c9d8db3e73198cc98ce5ecc7b59d83ac733333d89862c",
+          "dhash": "002006ce96c61626339eb3a606069686993e94d698c693569c86039611950004",
+          "source": "GLP-2_150106_pink-cap.pdf"
+        },
+        {
+          "phash": "bb4278c3c0ddc62686369d9ca5e433e6e199cc98c632cc9b99dc6ac173733989",
+          "dhash": "402184ce8626a5a6b3ceb3069e869f069e86b4d6b2429c868156911690c680c6",
+          "source": "#96850_BPC-157_20mg___Peptidegurus_Domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dc862686269d9ca7a173a27199cc9cc656cc5f99dc6ac1733339a1",
+          "dhash": "402184ce9626a2a7b39fa3069e069f068e86b4d6b2429c868156931694c680c6",
+          "source": "#147022_Retatrutide_10mg_Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dc862686269d9ca7a173a27199cc9cc676cc5e99dc6ac3733339a1",
+          "dhash": "402184ce9626a2a7b397a3069e069f068e8694d692429c868156931694c680c6",
+          "source": "#147008_Tirzepatide_10mg_Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4278c3c8ddc62686369d9c97a533a2f199ccccc65ecc5bc9986a4333733981",
+          "dhash": "402184ce9626a326b3dea5a69e069f168c9e94c692429c868156931694c680c6",
+          "source": "#109708_Tirzepatide_60mg(TR60).pdf"
+        },
+        {
+          "phash": "bb4378d3c1dec62686269d9cb6a133a2f199cc9cc63ecc5bc9d86a4133333989",
+          "dhash": "402184ce8626a3a6b1dea5a69e469f0696869cd6be4294868196931694c680c6",
+          "source": "#147740_GHK-Cu_100mg.pdf"
+        },
+        {
+          "phash": "bb4338c3c0dcc62686269d9cb7e131a3b199cc9cc63ecc5bd9d962c333333989",
+          "dhash": "402184c69626a326b38eb6a68c469f068e9694d6b2429c868156911690c680c6",
+          "source": "#71884_Tesamorelin_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626943c9d8cb3e73198cc99ce1acc7bd9d832c733333d89862c",
+          "dhash": "002006ce96c6162633deb3c60e2696869f0694c694d693469c86019601950004",
+          "source": "Melanotan-I_74829_purple-cap.pdf"
+        },
+        {
+          "phash": "bb4278c3c0dd862686369d9ca7ed31e2f199cc9cc636c81ad9d86e4333733c89",
+          "dhash": "402184ce96a6a326b36eb34e8c869b069e86b4d6b2429c868156931694c680c6",
+          "source": "#105651_Retatrutide_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dd862686369d9ca7a573a6e19dcc9cc632cc5b99d86ac173733881",
+          "dhash": "402184ce8626a7a6b3eba3069e869f069e86b4d6b2429ca68156911694c680c6",
+          "source": "#96845_PE_22-28___Domestic_shipping_from_USA,UK,EU_warehouse.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dcc62686269d9ca6a133a2f19dcc9cc63ecc1bc9d86e413333398d",
+          "dhash": "402184ce8626a726b7dea5069e469f0696869cd69e4298868156931694c680c6",
+          "source": "#95209_CJC-1295_NO_DAC_10MG.pdf"
+        },
+        {
+          "phash": "bb4338f3c85cc6268626999ca5a133a39199ccdcc636cc5ed9dc6ec333333989",
+          "dhash": "402184ce9626a7a6b19ea3869e469f068ec694f692729c868116931694c680c6",
+          "source": "#101952_Tirzepatide_30mg.pdf"
+        },
+        {
+          "phash": "bb4278c1c8ddc62686369d9cb7a531e2f199cc9cc636cc1ad9d86ac333333c89",
+          "dhash": "402186ce96a6a326b36eb3068c269b068e8694d692429c868156931694c680c6",
+          "source": "#106724_Tirzepatide_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c1b3c626262e9d9c87a1b1f3b989cd8cc63eccd298c97a4933333994",
+          "dhash": "402184ce9626a326b79ea716896e9b6e96d6b0e6b2629c868156931694c680c6",
+          "source": "#105306_Retatrutide_40mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c87cce2e263eb59c9421b3203199cc9cc63e6e59d9d86a6333633989",
+          "dhash": "402184ce9626a326b3dea0f691b693b690f69ce69e62908e8106811690c680c6",
+          "source": "#104874_Primobolan_100_mg_ml.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dc862686369d9cb7a973a27199cc9cc636cc5b99986ac173e33889",
+          "dhash": "402184ce9626a2a7b3c7a3069e069f068e96b4d69a4294868156931694c680c6",
+          "source": "#150377_Wolverine(bpc-157_10mg_blend_with_tb-500_10mg)___USA,UK,Europe_warehouse.pdf"
+        },
+        {
+          "phash": "bb4278c3c0ddc62686269d9ca5e531e2e199cc9cc636cc9b99dc6ac179733989",
+          "dhash": "402184ce8626a7a6b3ceb3069e869f068e86b4d6b2429c868156931694c680c6",
+          "source": "#99618_Retatrutide_30_mg___UK,USA,EU_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4278c3c0d9862686369d9ca5ed31e2e199cc9cc636c81bd9d86e4373733d89",
+          "dhash": "402184ce9626a326b36eb34e8c869b0696969cd69a4294868156919694c680c6",
+          "source": "#125486_tb_500_farg_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626863c9d8db3e4b198cc99c65ace7bd9dc32c133331d8d8624",
+          "dhash": "002006ce96c61226335eb3a60e069686990698c6b4c69b469c86035601950004",
+          "source": "Semax_133989.pdf"
+        },
+        {
+          "phash": "bb4378d3c1dcc62686269d9ca7a133a2b199cc9cc67ecc5bc8d86ac333333989",
+          "dhash": "402184ce9626a326b1dea5a69e469f068e8694d692429c868156911694c680c6",
+          "source": "#147619_Tirzepatide_20mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c0dfc62686269d9ca5e431e2e999cc98c636cc1b99dc6ac17b733989",
+          "dhash": "402184ce9626a3a6b3d6b3069e869f069e86b4d6b2429c868156931694c680c6",
+          "source": "#110055_Mots-c_40mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bbf078f3c89dc62786269d8da56a33663128819cc726cc1ec89dccc371f338d9",
+          "dhash": "24c324c3063321d327c326032e033b432cc330f3326330830003230a220324cb",
+          "source": "BAC-Water_COA_Batch-A2601BC1.pdf"
+        },
+        {
+          "phash": "bb4378d3c8dcc62686269d9cb7e133a2b199ccccc676cc5fc99c624133333989",
+          "dhash": "402184ce9626a326b59ea4869e069f069896b4d6b2429c868156911694c680c6",
+          "source": "#135093_MOTS-C_40mg(MS40).pdf"
+        },
+        {
+          "phash": "bb4378e3c0d8c626863e9d9ca6e533e2b199cd9cc71acc9ad8cc66c133733988",
+          "dhash": "402184ce9626a5a6b7feb6668c969f068e86b4d69a4294a69196931694c680c6",
+          "source": "#123419_BB10(BPC_5mg_+_TB_5mg).pdf"
+        },
+        {
+          "phash": "bb4358c3c8ddc62686369d9c84e4b1e2d99dc8dcc632ce1bc99c6ec139733989",
+          "dhash": "402184ce9626a326b75eb6069e469f069886b4d6b2429c868156911694c680c6",
+          "source": "#123935_Selank_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dfc6268636999cb6e131e2e19dccccc636c81bd9987ac131333dc1",
+          "dhash": "402184ce8626a666b3f6a3069ea69f069e8694d6b66290a68196931694c680c6",
+          "source": "#96921_NAD_MOTS-c_5amino_100_10_10mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c8d9c62686369d9ca7e533e2b199cc9cc61acc1b99d86ac333333988",
+          "dhash": "402184ce96a6a366b3deb6c68c269f068e8694d692429c868156931694c680c6",
+          "source": "#49669_Tirzepatide_30mg.pdf"
+        },
+        {
+          "phash": "bb4278c1c8dfc62686369d9ca7ad31e2b19dcc9cc632cc1bd99962c133333d89",
+          "dhash": "402184ce9626a326b3ceb3268c469b069e86b4d6b2429c868156939694c680c6",
+          "source": "#122567_Motsc_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378f3c8dcc62686269d9ca5e133a2b199cc9cc65ecc5bd9d86ac131333989",
+          "dhash": "402184ce9626a3a6b59ea5a69e269f4698d6b4d6b2429c868156931694c680c6",
+          "source": "#147615_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c8dc862686369d9c87ad73a26099cc9cc63ece5a999c3a473b633889",
+          "dhash": "402184ce9626a227b7afb1869e069f368cb69cc6984294868196931694c680c6",
+          "source": "#136100_Sample_12.pdf"
+        },
+        {
+          "phash": "bb4378e3c8dcc62686269d9ca7a533a6b199ccdcc636cc1bc9d8664133733989",
+          "dhash": "402186ce86a6a326b3dea4c69e269f068e8694d692429c868156931694c680c6",
+          "source": "#89403_Tirzepatide_120mg.pdf"
+        },
+        {
+          "phash": "eb6369e391d8964e867ecc9ca5a5b1a29998ceccc632cc1b9dcc68c373333a81",
+          "dhash": "402184ce9626a716b79eb71e9c939e2f9ea6b4d29a429ca68196911690c680c6",
+          "source": "#100645_GLOW_70mg.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc626862e9d9cb7e133a2b199cc9cc63ecc5bd8d86ac133333989",
+          "dhash": "402184c69626a2a6b5ceb7a69e469f068e8694d6b2429c868156911690c680c6",
+          "source": "#71595_Cagrilintide_10mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c07cc626862e999ca7a1b1a2999dcc98c63ec85ed99c6ac33b633c85",
+          "dhash": "402184ce9626a7a6b79ea3869e469f069ec6b4f69a329c868196831694c680c6",
+          "source": "#109589_KLOW_80.pdf"
+        },
+        {
+          "phash": "bb4338f3c85cc6268626999ca5a133a3919dcc9cc636cc5ed9d86ec333733989",
+          "dhash": "402184ce8626a5a6b18ea7869e469f068ec694f692329c868116931694c680c6",
+          "source": "#99769_Tirzepatide_15mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dcc62686269d9cb7a533a2f199cc9cc636cc5bd8d86ac133333989",
+          "dhash": "402184ce8626a5a6b39eb7269e469f068e8694d6b2429c868156931694c680c6",
+          "source": "#91621_Semaglutide_10mg.pdf"
+        },
+        {
+          "phash": "bb4338f3c87cc6268626999ca5a931a2919dcc9cc672cc5fd9d86ec333333989",
+          "dhash": "402184ce8626a7a6b38ea3869e469f069ec6b4f6b2729c868116931694c680c6",
+          "source": "#99766_Cartalax_20mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c8dcc62686269d9cb7a533a2f199ccdcc636cc1ad9d86ac133733c81",
+          "dhash": "402184ce8626a7a6b3feb3869e469f068e86b4d6b2429c868156931694c680c6",
+          "source": "#57046_Retatrutide_10MG___PeptideGurus.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dcc62686269d9ca7a133a2b199ccccc67ecc5bd9d86ac333333989",
+          "dhash": "402184ce9626a366b3dea5a69e469f068e8694d692429c868156931694c680c6",
+          "source": "#147618_Tirzepatide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378f1c1dcc6668626999ca5a131a3c19dccdcc67aca5b99996ac133333d85",
+          "dhash": "402186ce8726a626b59ea1868c069f069ec6b4f6be6298868156931694c680c6",
+          "source": "#95031_HGH_24iu.Mandy_factory_supplies_globally..pdf"
+        },
+        {
+          "phash": "bb4378e3c1dd862686369d9ca7ad73a2e199cc9c8632cc5b99d86ac173a33981",
+          "dhash": "402184ce8626a7a7b3cba3069e869f0696869cd69e4298a68196911694c680c6",
+          "source": "#96846_cjc_no_dac_4mg_blend_ipamorelin_4mg___Domestic_shipping_from_USA,UK,EU_wareh....pdf"
+        },
+        {
+          "phash": "bb4378d3c0dcc62686269d9cb7e533a2b199cc9cc636cc5bd8d86ac133333989",
+          "dhash": "402184ce8626a5a6b3deb7269e469f068e8694d692429c868156931694c680c6",
+          "source": "#91619_Tirzepatide_10mg.pdf"
+        },
+        {
+          "phash": "eb6369e191d8964e866ecc9ce5a5b1a2b188ccdcc617cc5299d86cc373633b91",
+          "dhash": "402184ce9626a716b79eb71e9c939e6f98c69ce2996294868196911690c680c6",
+          "source": "#100526_BACTERIOSTATIC_WATER_10ml.pdf"
+        },
+        {
+          "phash": "bb4278c1c8d9c62686269d9cb7a533e2f199cc9cc636c85b99dc624333733d89",
+          "dhash": "402184ce8626a726a3eea3c68c269f068e86b4d69a4294869196931694c680c6",
+          "source": "#62752_BPC157_5mg+Tb500_5mg_blend.pdf"
+        },
+        {
+          "phash": "ba4278c3c1dfc72636369c9c87e5b3a238999c9cc716ce1bc8986e6331733989",
+          "dhash": "402184ce9626a326b79eb6068e9e8d1e8c96b0c6b2429ca68156911694c680c6",
+          "source": "#123932_Retatrutide_5mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1b3c626662e9d9c95a1f1f33989cd8cc63ecc92d8c97a4133333994",
+          "dhash": "402184ce9626a326b79ea716896e9b6e96d6b8e6b2629c868156831694c680c6",
+          "source": "#105303_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863696269d9c84a973a26189cc9cc61ecc5799dc3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4690d69ce69c6294868196911694c680c6",
+          "source": "#133094_22.pdf"
+        },
+        {
+          "phash": "bb4278c3c0dd862686269d9ca5e471e67999cc98c63ecc1bd9dc6ac13b733981",
+          "dhash": "402184ce9626a3a6b3d6b3069e869f069e86b4d6b2429c868156831694c680c6",
+          "source": "#110040_Ovagen_20mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626943c958cb3a63198ccd9c65ace73d9d83ac733331d8d862c",
+          "dhash": "002006ce96c61626335eb3260e0696869f0694c698c69b469c86035613950004",
+          "source": "TB-500_89285_10mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c9dc863686369d9c84a973a26189cc9cc63ece5e999c3e413b633989",
+          "dhash": "402184ce9626a627b7afb1869e069f3690b69ce69c6290868196931694c680c6",
+          "source": "#136067_Sample_4.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863696269d9c84a973a26188cc9cc61ecc5799dd3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4690d69ce69d6294868196911694c680c6",
+          "source": "#133079_7.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f88626843c9d8db3a73198cc99c65ece73d9d873c73b3319898624",
+          "dhash": "002006ce96c6162633deb3a6064696869f0694c694d69b469c86015611950004",
+          "source": "GLP-2_107699_60mg.pdf"
+        },
+        {
+          "phash": "bb4338c3c0dcc736863e9d8cb4e1b1e2a58dcd98c33ace1bc9d868c33b633989",
+          "dhash": "402184ce9626a3a6b6dea6069e469b0698c6b4d6b2029c868196911694c680c6",
+          "source": "#108614_Bac_water.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626963c9d8cb3a73198ccd9ce1ace7359d83ac333233da9862c",
+          "dhash": "002006ce96c61626339eb3a60e4696869b4694c698e61b669486019601950004",
+          "source": "BAC-Water_107691.pdf"
+        },
+        {
+          "phash": "bb4338f3c85cc6268626999ca5a931a2919dccdcc676cc5fd9d86ec133333989",
+          "dhash": "402184ce8626a5a6a18ea3869e469f069ec6b4f6b2329c868116931694c680c6",
+          "source": "#99765_BPC-157_20mg.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc62686269d9cb7a533a2b199cc98c63ecc5ad8dc6ac333333999",
+          "dhash": "402184ce8626a5a6b196a3869e469f068e8694d692429c868156911690c680c6",
+          "source": "#83183_Tirzepatide_60mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c0ddc63686369d9ca5e431e2e199cc98c632cc1bd9dc6ac13b733d89",
+          "dhash": "402184ce9626a3a6b3eeb3069e869f069e86b4e6b2429c868156931694c680c6",
+          "source": "#110047_Dsip_10mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4358c3c8dcc62686269d9ca4e5b3a2d999c8dcc676ce1ac99c6ec331733989",
+          "dhash": "402184ce9626a326b79eb6069e469f069886b4d6b2429c868156919694c680c6",
+          "source": "#123933_Ipamorelin_10mg.pdf"
+        },
+        {
+          "phash": "bb4378f3c0de8626862e9d9ca6e131e3b899cc9cc63ecc1ad9d862c333333989",
+          "dhash": "402184ce8626a626b7bea5868c269b069e86b4d6b2429c868156831690c680c6",
+          "source": "#101518_RT30_Mandy_factory_global_supply.pdf"
+        },
+        {
+          "phash": "bb4378e3c9dec6268636999c84e121a2e599cc9cc656ccdbd9986ac731633d89",
+          "dhash": "402184ce9626a626b75ea7069e869f168c9e94c692429c868156931694c680c6",
+          "source": "#123809_Tirzepatide_30MG___Wholesale___Global_supply.pdf"
+        },
+        {
+          "phash": "bb4378e3c85cc6268626999ca7a131a2d99cccdcc61eca1f999962c333733dc9",
+          "dhash": "402184ce9626a226b3fea1869e069f068ec6b4f6b2329c868116931694c680c6",
+          "source": "#101083_Retatrutide_20mg___Ships_within_the_U.S.A._-_Fast.pdf"
+        },
+        {
+          "phash": "bb4278c3c9dfc62686369d9c86e133a2f199ccdcc676cc1bc998664133733989",
+          "dhash": "402184ce96a6a326b3eeb4e69e869f568c9eb4c6b2429c868156931694c680c6",
+          "source": "#137659_Retatrutide_30mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c0d8c62686369d9ca7a533e6b199cc9cc61ecc1b99d96ac333333988",
+          "dhash": "402184ce96a6a266b3deb6c68c269f068e9694d692429c868156931694c680c6",
+          "source": "#49668_Tirzepatide_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626943c9d8db3e73198cc99c61acc7bd9d832c733333d89862c",
+          "dhash": "002006ce96c6162633deb3c6062696869f06948694c692469c86015601950004",
+          "source": "Melanotan-I_74828_green-cap.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dcc62686269d9ca6e133a2f199cc9cc61ecc5ad9d86ac333333989",
+          "dhash": "402184ce9626a166b5dea4869e269f069e86b4d6b2429c868156931694c680c6",
+          "source": "#110150_kisspeptin_10mg.pdf"
+        },
+        {
+          "phash": "bb4338c3c0dcc62686269d9cb7e533a2f199cc9cc63ecc5bd8d86a4333333989",
+          "dhash": "402184ce8626a326b396b6c69e069f068e8694d692429c868156911690c680c6",
+          "source": "#69934_Tirzepatide_30mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c8dcc63686269d9c84e1b1e2b199cc9cc61ece5ad9d86ac33b633989",
+          "dhash": "402184ce9626a726b79eb7069ea69f4698d694d69a4294868196931694c680c6",
+          "source": "#106016_Anavar.pdf"
+        },
+        {
+          "phash": "bb4278c3c9ddc62686369d9ca6e533e2999dccdcc632ce1bc998664133633989",
+          "dhash": "402186ce96a6a326b3fea4e69e169f069e86b4d6b2429c868156919694c680c6",
+          "source": "#121837_Selank_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dc863686269d9cb5a173a27989cc9cc67e8c5bd99c6ac13b633989",
+          "dhash": "402184ce8726a2a7b3b7a3069e069f069ec6b4d6b24296868196811690c680c6",
+          "source": "#147111_Hcg_10,000_IU__Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "eb6369e191d8964e8666cc9ca5a5b1a2b198cedcc636c85399c86ec373333a99",
+          "dhash": "402184ce9626a316b59eb71e9c939e2f8ea6b4d29a4294868156911690c680c6",
+          "source": "#100491_BPC-157_10mg_+_TB_500_10mg.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc626862e9d9cb7e133a2b199cc9cc63ecc5bd8d86ac133333989",
+          "dhash": "402184c69626a2a6b1ceb7a69e469f068e8694d692429c868156911690c680c6",
+          "source": "#71600_Tirzepatide_30mg.pdf"
+        },
+        {
+          "phash": "bb4358e3c0d9c62686269d9cb4a5b1a6b199cc9cc63ecc5bc9d86ac533b33989",
+          "dhash": "402184ce8626a5a6b3deb7269e469f06968698d69a429cb68196931694c680c6",
+          "source": "#91623_TB_500_5mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1ddc62686269d9cb4a131a2f199cc9cc63ecc5bc9d86ec133b33989",
+          "dhash": "402184ce8626a3a6b39ea7069e469f0696869cd6be4294868196931694c680c6",
+          "source": "#147736_GHK-Cu_100mg.pdf"
+        },
+        {
+          "phash": "eb6369e190d8964e8666cc9ca5a5b1a29998cedcc636cc5b99c86ec373333991",
+          "dhash": "402184ce9626a316b59eb71e9c939e2f8ea694e292429c868156911690c680c6",
+          "source": "#100755_GLP-1_T_120mg.pdf"
+        },
+        {
+          "phash": "bb4358e3c9dc262686369d9c85adf3a26589c8d8c25e4e1e99d83ac53b6378c9",
+          "dhash": "402184ce9626a227b7afb1869e069f369cb690e693629a9e835e831694c680c6",
+          "source": "#136069_Sample_6.pdf"
+        },
+        {
+          "phash": "bb4378e3c85cc6268626999ca7a131a2d99cccdcc61eca1f999962c333733dc9",
+          "dhash": "402184ce9626a226b3fea1869e069f068ec6b4f6b2329c868116931694c680c6",
+          "source": "#101082_Retatrutide_10mg___Ships_within_the_U.S.A._-_Fast.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc626862e9d9cb7e133a2b199cc9cc63ecc5ad9d86ac133333989",
+          "dhash": "402184c69626a6a6b5ceb7a69e469f068e8694d6b2429c868156911690c680c6",
+          "source": "#71597_Tesamorelin_10mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dcc62686269d9cb6a133a2f199cc9cc63ecc5bc9d96ac133333989",
+          "dhash": "402184ce9626a366b3dea7a69e469f0696869cd6be4294868156931694c680c6",
+          "source": "#137807_GHK-Cu_100mg.pdf"
+        },
+        {
+          "phash": "bb4338c3c87cce262626b99c95a1b321f199cc9cc636c65cd9dc68c33b733989",
+          "dhash": "402184ce8626a326b19ea1f681b693b698e690f692329cc68196931694c680c6",
+          "source": "#147410_Clomid_25_mg_tab.pdf"
+        },
+        {
+          "phash": "bb4278c3c8dfc62686269d9ca7e131e2f199cc9cc636cc1a99d86ac333333d89",
+          "dhash": "402184ce96a6a326b36eb3868c269b069e86b4d6b2429c868156931690c680c6",
+          "source": "#100564_kisspeptin_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c8ddc62686269d9c97a533a2f199ccccc65ecc5bc9986a4333733981",
+          "dhash": "402184ce9626a326b3dea5a69e069f168c9e94c692429c868156931694c680c6",
+          "source": "#135076_Tirzepatide_20mg(TR20).pdf"
+        },
+        {
+          "phash": "bb4378f3c0d98626863e9d9ca7a471e6e999cc8cc63acc1b99cc6ac17b333881",
+          "dhash": "402184ce8626a5a6b3d7a3069e869f069e96b4d69a429c868196811690c680c6",
+          "source": "#96849_KLOW___Peptidegurus_Domestic_shipping_from_USA,UK,EU.pdf"
+        },
+        {
+          "phash": "bb4378c1c0dcc62686269d9ca7a533a2f199cc9cc636cc5bd9d96ac133733989",
+          "dhash": "402184ce8626a326b36eb7a69e469f068e86b4d69a4294a69196931694c680c6",
+          "source": "#97078_BPC-157_TB500_blend_5_5mg.pdf"
+        },
+        {
+          "phash": "ba4378e3c1dd8626862e9d9ca6a171a3c999cc9c865ecc5b99d96ac173333989",
+          "dhash": "402186ce8626a626b593a5868c069f069ec6b4f6b66298868156931694c680c6",
+          "source": "#95361_HGH24iu._Mandy_pep._fac._currently_ranks_1st_in_global_supply..pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863686369d9c94e173a26189cc9cc61ece5e99dc3cc133e33989",
+          "dhash": "402184ce9626a227b7afb7869e069f4698d69ce69c6290868196931694c680c6",
+          "source": "#108746_Sample_8.pdf"
+        },
+        {
+          "phash": "bb4338c3c0ddc62686269d9cb7e131a2b999cc9cc63ecc5bd8d962c333333989",
+          "dhash": "402186c696a6a326b38eb6a68c469f068e8694d692429c868156911690c680c6",
+          "source": "#72096_Tirzepatide_30mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c97dce662636919c9465b362c199cc9cc632c21999dc6ce339333dc9",
+          "dhash": "402184ce9626a326b79ea1f691b693b698e69cf69e729c868196911690c680c6",
+          "source": "#97064_HGH_24_iu.pdf"
+        },
+        {
+          "phash": "bb4378f3c0dcc62686269d9ca7a133a3b199cc9cc67ecc5bc8d86ac133333989",
+          "dhash": "402184ce9626a3a6b19ea5a69e469f068e8694d692429c868156931694c680c6",
+          "source": "#147620_Tirzepatide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dc862686369d9cb7a973a27199cc9cc636cc5b999c6ac173633889",
+          "dhash": "402184ce9626a2a7b3cfa3069e069f068e86b4d69a4294a68196931694c680c6",
+          "source": "#150379_Wolverine(bpc-157_5mg_blend_with_tb-500_5mg)___USA,UK,Europe_warehouse.pdf"
+        },
+        {
+          "phash": "bb4378d3c8dcc62686269d9c97e1b1a2b199cc98c666cc5ac9dc6ac13b333999",
+          "dhash": "402184ce9626a326b59ea7a69e069f168c9eb4c6b2429ca68156831694c680c6",
+          "source": "#102150_Retatrutide_10_mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dc862686269d9cb5a173a27999cc9cc6768c5ad9dc6ac17b333989",
+          "dhash": "402184ce8726a2a7b3b7a3069e069f069e86b4d6b2429c868156831694c680c6",
+          "source": "#147112_Oxytocin_10mg__Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4378e3c9dc863696269d9c84a973a26198cc9cc61ecc5799dd2ec133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4690d69ce69a6294868196931694c680c6",
+          "source": "#133080_8.pdf"
+        },
+        {
+          "phash": "ba4378c3c9dc8726873e9d9ca6e163e36099cc8c873ecc1a999866c17373398d",
+          "dhash": "402184ce96a6a626b66ba6b69e869f368c9eb4c6b2429c868156931694c680c6",
+          "source": "#101582_20mg_Retatrutide___Join_Group_Link_in_Report___Affordable.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f82626943c958db7e6f198cc9dc61acc7b19cc7bc333331c8d8624",
+          "dhash": "002006ce96c61726335eb3260e0696869f0694c694c69a669486015601950004",
+          "source": "Glow-Blend_107697.pdf"
+        },
+        {
+          "phash": "bb4278e3c0dc863786369d9ca5ad73a66188cc9cc637cc5b99d86ac373633981",
+          "dhash": "402184ce8626a3a7b3d7a3069e869f0696c69cd69a4294868196911690c680c6",
+          "source": "#96852_FST344_follistatin_344_fst-344___Domestic_shipping_from_USA,UK,EU_warehouse.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dcc63686369d9c84e1b1e2f18dcc9cc63ace5ad9d86ec133633981",
+          "dhash": "402184ce9626a726b79eb7069ea69f4690d69ce69e6290868196931694c680c6",
+          "source": "#106019_Test_cyp.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626943c958db3a73198cc99c61ace7bd9d833c733331d89862c",
+          "dhash": "002006ce96c60626339eb3a60f4696869f0694c698c693469c86019601950004",
+          "source": "Semaglutide_101413_15mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863696269d9c84a973a26189cc9cc61ecc5799dc3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4698d69ce69c6290868196911694c680c6",
+          "source": "#133093_21.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dcc626862e9d9ca6a133a3b199cc9cc61ecc5ac9dc6ac333333989",
+          "dhash": "402184ce8626a166b5dea6869e269f068e86b4e6b2629c868156831694c680c6",
+          "source": "#110149_glutathione_1500mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dc8626943c958cb7e77198cc99ce1acc73d9d93ac733233c899624",
+          "dhash": "002006ce96c61626336eb366061696869d0694c69cd69f469486019601950004",
+          "source": "CJC-Ipa_154307.pdf"
+        },
+        {
+          "phash": "bb4338e3c8dcc636862e9d9ca4e133e2b19dcc9cc63ece1bd9986ac133633981",
+          "dhash": "402184c69726a2a6b7ceb7a69e269f4698d6b4d6b0429c868196911690c680c6",
+          "source": "#71591_NAD+500.pdf"
+        },
+        {
+          "phash": "bb4278e3c8ddc63686369d9ca4e533e6318ccc9cc63acc1bd9d96ac13323398c",
+          "dhash": "402184ce96a6a266b3deb6c68c269d4698d6b4e6b0429c868196931694c680c6",
+          "source": "#49670_NAD+_500mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8c626943c958cb3a73198cc98c61ece7bd9d83bc733331d89862c",
+          "dhash": "002006ce96c61626339eb3a60e4696869f0694c698c693469c86019601950004",
+          "source": "Semaglutide_107695_10mg.pdf"
+        },
+        {
+          "phash": "bb4338f3c85cc6268626999ca5a133b39199cc9cc656cc5ed9dc6ec333333989",
+          "dhash": "402184ce9626a7a6b59ea3869e469f068ec6b4f6b2729c868116931694c680c6",
+          "source": "#109584_Retatrutide_50mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c0d8c62686269d9cb7a533a6f199cc98c632ccdbd9dc6ac533733981",
+          "dhash": "402184ce9626a3a6b3deb3269ec69f068e86b4d69a4294a69196931694c680c6",
+          "source": "#110048_bpc157_5mg_tb500_5mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d8c626963c9d8db3a73198cc99ce1ace7259d83ac733233da9862c",
+          "dhash": "002006ce96c61626339eb3a60e4696869b4694c698e61b669486019601950004",
+          "source": "BAC-Water_107692.pdf"
+        },
+        {
+          "phash": "bb4278c3c8ddc62686369d9c95e531a2f199cc9cc636cc1bd9986ac13b733989",
+          "dhash": "402184ce8726a2a6b3dea3269e869f168c9eb4c6b2429c868156931694c680c6",
+          "source": "#101176_GLP-3RT_20mg.pdf"
+        },
+        {
+          "phash": "bb4338e3c0dcc62686269d9cb7e533a2b199cc9cc63ecc5bd8d86a4333333989",
+          "dhash": "402184ce8626a326b396b6c69e069f068e96b4d6b2429c868156911690c680c6",
+          "source": "#69929_Retatrutide_10mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863686369d9c84e173a36189cc9cc61ece5e99dc3cd133633989",
+          "dhash": "402184ce9626a227b7afb7869e069f4698d69ce69d6290868196931694c680c6",
+          "source": "#108745_Sample_7.pdf"
+        },
+        {
+          "phash": "bb4378c3c0de862686269d9ca7a973a27199cc9cc676cc5a99dc6ac173333989",
+          "dhash": "402184ce8626a2a6b1f7a3069e069f069e86b4d6b2429c868156931694c680c6",
+          "source": "#147108_Pt-141_10mg_Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4378e3c95cc62686269d9c25a531a2f19dcc98c61acc5ed9dc6ec333633989",
+          "dhash": "402184ce8626a5a6b5dea3569e069f068ec6b4f6b2329c868116911694c680c6",
+          "source": "#97031_Retatrutide_10mg___Shipping_to_US_&_Canada.pdf"
+        },
+        {
+          "phash": "bb4378e3c8dcc6268626999ca7a133a2d99cccccc63ec81b999962c333733dcc",
+          "dhash": "402186ce9626a226b3feb5869e069f068ec694f692729c868116931690c680c6",
+          "source": "#95886_Tirzepatide_60mg___Ships_within_the_U.S.A._-_Fast.pdf"
+        },
+        {
+          "phash": "bb4378e3c97dc62686269d9ca5a131a39199cc98c61ecc5ed8d86ec333333999",
+          "dhash": "402184ce8626a5a6b39ea7868c469f068ec694f692729c868116931694c680c6",
+          "source": "#88910_Tirzepatide_15mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c1dc863696269d9c84a973a26188cc9cc61ecc5f99dc3ed133733989",
+          "dhash": "402184ce9626a227b5afb7869e069f4698d69ce69d6290868196911694c680c6",
+          "source": "#133082_10.pdf"
+        },
+        {
+          "phash": "bb4378c3c1f8e626943c958cb7e73198cc99c61ace7b19dc7ac13b331c89862c",
+          "dhash": "002006ce96c61326375eb3260f0696869f0694c694e693669c86015601950004",
+          "source": "GHK-Cu_101414_100mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c8dfc626862e9d9ca5a131a23999cc9cc63ecc1bd9d96ac133333d85",
+          "dhash": "402184ce9626a2a6b3dea3068c169f069e86b4d6b2429c868196831694c680c6",
+          "source": "#150378_SS-31_40mg___USA,UK,Europe_warehouse.pdf"
+        },
+        {
+          "phash": "bb4278c3c8ddc62786369d9cb7a531a2b199cc9cc632cc1bd9d86ac333333989",
+          "dhash": "402184ce9626a326b3cea3268c469b069e86b4d6b2429c868156939694c680c6",
+          "source": "#122594_reta10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4338c3c87cce262626b99c95a5b321e199cc9cc636ce5cd9d868d333733989",
+          "dhash": "402184ce9626a326b59ea1f691b693b690ee98f29a3294c68196911694c680c6",
+          "source": "#147404_Anadrol_25_mg_tab.pdf"
+        },
+        {
+          "phash": "bb4278c1c8dfc62686269d9cb7a531e2f199cc9cc636cc1bd9d962c133333c89",
+          "dhash": "402186ce86a6a326b36eb3068c269b069e86b4d6b2429c868156911694c680c6",
+          "source": "#97463_Epithalon_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378d3c0fc4626843c958cb3e63199cc9dc65ecc7b19cd72c133333d8d862c",
+          "dhash": "002006ce96c6162633deb3a6060696c69b1e909eb4c29a669486035611950004",
+          "source": "Glow-Blend_150112_green-cap.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dc862686269d9ca7a173a27199cc9cc676cc5b99dc6ac1733339a1",
+          "dhash": "402184ce9626a2a7b397a3069e069f068e8694d692429c868156931694c680c6",
+          "source": "#147011_Tirzepatide_30mg_Domestic_shipping_from_USA,_Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4278c3c8dfc62686269d9cb5a431e2b19dcc9cc632cc1bd9d96ac133333d89",
+          "dhash": "402186ce9626a326b3ceb3268c469b069e86b4d6b2429c868156939694c680c6",
+          "source": "#122574_bpc_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4278c3c0ddc62686369d9ca7a531e6f199cc9cc636cc1bd9d86ac333333988",
+          "dhash": "402184ce9626a326b3ceb3068c469b06968694d69a4294868196931694c680c6",
+          "source": "#100580_TB500_10mg_Cocer_Peptides.pdf"
+        },
+        {
+          "phash": "bb4378c3c8dc862686369d9cb5a173a2e199cc9c8676cc5f99d86ac173233d89",
+          "dhash": "402184ce9626a3a6b3cfa3069e069b0698c6b4d6b2429c268196931694c680c6",
+          "source": "#105658_Hgh_36iu_Sterility_test___Domestic_shipping_from_USA_,Europe_and_UK.pdf"
+        },
+        {
+          "phash": "bb4258c3c0dd862686369d9ca4e5b1e69999c8dcc276ce1bc99c6ec339733989",
+          "dhash": "402184ce9626a326b75eb6069e469f069886b4d6b2429c868156819694c680c6",
+          "source": "#123934_Epitalon_50mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c0ddc62686269d9cb5a5b1a6b199cc9cc632cc5bd9d86ac133333989",
+          "dhash": "402184ce8626a5a6b3deb7269e469f069e86b4d6b2429cb68196931694c680c6",
+          "source": "#91622_BPC_157_5mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c0dcc62686269d9cb7a533a2b199cc9cc636cc5ad9dc6ac133333989",
+          "dhash": "402184ce8726a6a6b1dea3a69e469f068e86b4d6b2429c868156931694c680c6",
+          "source": "#62743_Retatrutide_30mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c1d84626843c9d8cb3e73198cc99ce5ecc7b59d83ac733333d89862c",
+          "dhash": "002006ce96c6122633deb3a60e069686993e94d698c693569c86035601950004",
+          "source": "Semaglutide_133988_5mg.pdf"
+        },
+        {
+          "phash": "bb4278c3c0d9c62686369d9ca7e433e6e199cc98c632cc9b99d86ac773733981",
+          "dhash": "402184ce8626a5a6b3d6a3069e869f069e86b4d6b2429ca68156911694c680c6",
+          "source": "#96847_sermorelin_10mg___Peptidegurus_Domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4338f3c07cc6268626999cb5a133a39199cc9cc676cc5ed9d86ec333333989",
+          "dhash": "402184ce8626a5a6b58ea3869e469f068ec6b4f6b2729c868116931694c680c6",
+          "source": "#99767_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378c3c0dcc62786269d9cb4e533e6e19dcc98c63ace1bd99c68c13b633981",
+          "dhash": "402184ce9626a2a6b3d6b3069e869b069886b4e692629c868196931694c680c6",
+          "source": "#110042_epithalon_50mg___USA,_UK,_Europe_domestic_shipping.pdf"
+        },
+        {
+          "phash": "bb4278d3c0df862686369d9ca7e931e2e999cc8cc636c81b99cd6ac171333d89",
+          "dhash": "402184ce96a6a326b34eb3068c069b069e86b4d69a629c868196919694c680c6",
+          "source": "#125442_glow_Cocer_Peptides\uff0cWhatsApp_+852_6904_8891.pdf"
+        },
+        {
+          "phash": "bb4378e3c8dcc62686269d9ca5e133a2b199cc9cc65ecc5bd9d86ac131b33989",
+          "dhash": "402184ce9626a326b5dea7a69e469f4698d6b4d6b2429c868156931694c680c6",
+          "source": "#137804_Retatrutide_20mg.pdf"
+        },
+        {
+          "phash": "bb4378e3c9dc862696269d9c85a973a26198cc9cc61ecc5f99dc2ec333333989",
+          "dhash": "402184ce9626a227b5afb7869e069f4698d694e690629c868196931694c680c6",
+          "source": "#133076_5.pdf"
+        },
+        {
+          "phash": "bb4378c3c1dcc626843e9d8cb3e4b199cc98c65ece73d9d873c13b331c8d8624",
+          "dhash": "002006ce96c61626335eb3a60e0696869d069cc6b0c6b2469c86035611950004",
+          "source": "GHK-Cu_150114_red-cap.pdf"
+        },
+        {
+          "phash": "bb4338c3c87cce262626b99c95a5b321e199cc9cc6364e5cd9dc68d333733989",
+          "dhash": "402184ce9626a326b59ea1f691b693b690ee94f292329c868196911690c680c6",
+          "source": "#147403_Arimidex_1_mg_tab.pdf"
+        },
+        {
+          "phash": "bb4358c3c0fec62626349d9c94e5b1e63999cc9cc63ecc1ac9d86ac1337339a9",
+          "dhash": "402186ce9626a326b79ea7069ee69d16849e90e6ba429cb68196831694c680c6",
+          "source": "#153031_Semaglutide_10mg.pdf"
+        }
+      ]
+    },
+    "vanguard": {
+      "folder": "VANGUARD LABORATORY",
+      "fingerprints": [
+        {
+          "phash": "bce0c383c7c13c00c3a31ae898e867853c3ccc9fc74f3838b1cff1ff6078b44e",
+          "dhash": "3003333311b01838005b24cd68cd0a8f0c9c0d8c8f208f1e8e7e127b249b00c0",
+          "source": "VANGUARD LABORATORY_Semaglutide_5mg_March-Test_VANGUARD.pdf"
+        },
+        {
+          "phash": "bce0c781c3c13c00c3b31ee898e8630d3c3ccc8fc44f3838b3cff1ff6078b54f",
+          "dhash": "3003333311b01838005f246960712a730c9c0d8c8f208f9e8e7e127b249b00c0",
+          "source": "VANGUARD LABORATORY_MOTS-C_March-Test_VANGUARD.pdf"
+        }
+      ]
+    },
+    "freedom_diagnostics": {
+      "folder": "Freedom Diagnostic",
+      "fingerprints": [
+        {
+          "phash": "ee45cccec9de737991391993b723b70d9d8ec46e6e84661c6e518cf0807a6251",
+          "dhash": "08c9d526c676ca7f9e7a9f3b86db869b916b946b94eb9cfa9a37878e4a040083",
+          "source": "GLP-3-RT_20mg_Endotoxin_Batch-A2601R20.pdf"
+        },
+        {
+          "phash": "bcefc788e395907ec3a03b219c6e6780946e7867e3856c7e6e908cd86f10d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365f70012f354e654e414e55911717874001",
+          "source": "kpv_10mg_coa.pdf"
+        },
+        {
+          "phash": "bcebc7cce39d907bc3a03b239c3b6780946e7867e3846c796e808cc86f11d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365b20012675462d4ead4e3d911717874001",
+          "source": "ghkcu_100mg_coa.pdf"
+        },
+        {
+          "phash": "ee45cccec9de737991391993b72937099caec06e6a85e6586e408cf2c0796ad1",
+          "dhash": "08c9d526c676ca7f9e7a9e7f90df869b946b956394eb94eb9a379707cb042043",
+          "source": "BPC-157-TB500_10mg_Endotoxin_Batch-A2601BT2.pdf"
+        },
+        {
+          "phash": "ee45cccec9fe667991391992b729b7099da6c46e6a8566186e418cf2c07966d1",
+          "dhash": "08c9d526c676ca7f9e7a9f3b86db869b916b956b946b9cea9a17878e4a040083",
+          "source": "Glow_70mg_Endotoxin_Batch-A2601G70.pdf"
+        },
+        {
+          "phash": "ecf8c58feb9f9078d3873b319c382f87947878e5e3876c786e808cc83c11c07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf36db608152e56d296c654d55931f17874001",
+          "source": "kisspeptin_coa.pdf"
+        },
+        {
+          "phash": "ecf8c48feb9f9078d3873b219c782f8794687865e387ec796e908cc86c01d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf36db608162ed6c756c694c4d931717874001",
+          "source": "pt141_10mg_coa.pdf"
+        },
+        {
+          "phash": "ecf9cc8f6997907893073b2194383f87947878e7e18f6c786e908cf86d81907a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf165b704152756c756479440d931717874001",
+          "source": "Elit2603130033_2.pdf"
+        },
+        {
+          "phash": "eedfccdcc0d1d37391b23b0397011d8e93256367c0f464fc6c8d8cd96a52c172",
+          "dhash": "08cb65354e3f463f1f3f1f3704c710d74a950e9514d714c71cd71737138f6001",
+          "source": "lipoc_10mg_coa.pdf"
+        },
+        {
+          "phash": "bcfbc78dc1569072c30738339c29078d90607367c3dc6ce96e1dccf86953c0fa",
+          "dhash": "08cb6435463f423f1f371f37173703df35893141463166dd66151937138f6001",
+          "source": "Glow_70mg_COA_Batch-A2601G70.pdf"
+        },
+        {
+          "phash": "bcfbc7cce395907ac3a03b239c336780946e7867e3c56c7a6e908cc86f10d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf265f68012a4546b54ea14e95911717874001",
+          "source": "dsip_5mg_coa.pdf"
+        },
+        {
+          "phash": "bccfc7c8e3d9907ec3a03b019c2f678094fe3867e34d6cda6e048cc86c91d13e",
+          "dhash": "08c964354e3f463f9f3f9f3706cf165f60116a3546d946b54e75911717074001",
+          "source": "Tesamorelin_5mg_COA_Batch-A2601T5.pdf"
+        },
+        {
+          "phash": "bcdfc7cce355907bc3203b079c2e2784946d7867c3cc6cf92e948ccc7911d072",
+          "dhash": "08cb65354e3f463f1f371f3706cf075f39b1717146b146a94e2d1017138f4001",
+          "source": "CJC-1295-Ipamorelin_5mg_COA_Batch-A2601CI5.pdf"
+        },
+        {
+          "phash": "bccfc7c8e39c907fc3a03b279c2f6780946f7867e394685b6e908cd86901d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf165f30012e654e694ee94e6d911717874001",
+          "source": "GHK-CU_50mg_COA_Batch-A2601GU5.pdf"
+        },
+        {
+          "phash": "bcefc78ce399907bc3a03b219c7b6780946e3867e38d687e2e908cc86f50d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365b6011662946654685465d913717874001",
+          "source": "IGF-LR3_1mg_COA_Batch-A2601IL1.pdf"
+        },
+        {
+          "phash": "bcfbc78ce39d9072c3863b219c736784947c7867e38d78786e908cc83c71c07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365b600172714ee546954e17913717874001",
+          "source": "GLP-3-RT_30mg_COA_Batch-A2601R30.pdf"
+        },
+        {
+          "phash": "bcfbc78cc3539070c30638139c61278f90f07967c34c3cf96c0cccd97933c37b",
+          "dhash": "08cb6435463f423f1f371f37172703df3149718146716639662d1917130f6001",
+          "source": "BPC-157-TB500_10mg_COA_Batch-A2601BT2.pdf"
+        },
+        {
+          "phash": "bcdfc7c8e3dc907fc3a03b019c2f6780946e7867e3cd6c5a2e808cc86d10d07f",
+          "dhash": "08c964354e3f463f9f3f9f3706cf361b60314b35464946154e75911f17874001",
+          "source": "tesamorelin_10mg_coa.pdf"
+        },
+        {
+          "phash": "afe32f07cf07c1024af8d07cd87cd8f827adc703a5070fa62dc9c3fa6036f0b0",
+          "dhash": "19031a0394d894d94c6d6f2d44d1346121392085b82d2a556025106420833007",
+          "source": "retatrutide_coa.pdf"
+        },
+        {
+          "phash": "bcffc78ce3999072c3823b219c7a6784947c3867e38d68782e988ce86dd1d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf165b600146614ee546954e9f913717874001",
+          "source": "GLP-3-RT_10mg_COA_Batch-A2601R10.pdf"
+        },
+        {
+          "phash": "bccfc7c8e391907fc3a03b219c3f6780946e38e7e30d687e2e948cc86c91d07e",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365f60414265463146ad4e2d911717874001",
+          "source": "MOTS-C_10mg_COA_Batch-A2601MC1.pdf"
+        },
+        {
+          "phash": "bccfc7c8e394907fc3a03b279c6f6780946e7867e3c4687e6e908cc86d10d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf175f61014165462146a14e35911717874001",
+          "source": "Ipamorelin_5mg_COA_Batch-A2601IP5.pdf"
+        },
+        {
+          "phash": "ecf9cc8f699f9078d3073b2194383f87946878e5e18f6c786e908cf86d81907a",
+          "dhash": "08c964374e3f463f9f3f9f3706cf165b70415275647164f9440d931707874001",
+          "source": "VIP_COA_ERL_2501_B027_T.pdf"
+        },
+        {
+          "phash": "ee45cccec9de667991b91992b729b7099d86c46e6ec566986e408ce0c47b62d1",
+          "dhash": "08c9d526c676ca7f9e7a9f3b86db869b956b946b94eb9cea9a17878e4a040083",
+          "source": "GLP-3-RT_30mg_Endotoxin_Batch-A2601R130.pdf"
+        },
+        {
+          "phash": "bcfbc78de39d907ac3863b219c3a6784947c3867e38d68786e908cc86cd1d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365b600162614ee546854e97911717874001",
+          "source": "GLP-3-RT_20mg_COA_Batch-A2601R20.pdf"
+        },
+        {
+          "phash": "bcefc78ce394907bc3a03b219c7a6780946e7867e304ec7b6e809cd86f90d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365b7001462546654e414e55911717874001",
+          "source": "5amino1mq_5mg_coa.pdf"
+        },
+        {
+          "phash": "bccfc7c8e39d907ec3a03b279c2f6780946e7867e30568de2e908cc86fc1907a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365f200131414e714ee14e39911717874001",
+          "source": "NAD+_500mg_COA_Batch-A2601ND5.pdf"
+        },
+        {
+          "phash": "ecf8c58feb9f9078d3873b219c382f87947878e5e38f6c786e908cc82c11c07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf36cb608152a56c316c3d4c2d931717874001",
+          "source": "motsc_10mg_coa.pdf"
+        },
+        {
+          "phash": "ecfb6ccce78c907093063b0798703f8f95acb871638ec0fd6e518cd83c41c5ba",
+          "dhash": "08cb6435463f423f1f3f1f3706df56575001466564d5649544171317430d2041",
+          "source": "tirzepatide_10mg_coa.pdf"
+        },
+        {
+          "phash": "bcefc7cce391907bc3a03b219c3b6784946e7867e385687e6e808cc86d10d07f",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365b6201626d466546e14e35911717874001",
+          "source": "bpc157_10mg_coa.pdf"
+        },
+        {
+          "phash": "bcefc4d8e791907ec3323b079c6d2f0387ac38e76395c1ed6e558cd82d4184b0",
+          "dhash": "08cb64354e3f463f1f3f1f3706df56c550814675466946c94e1f1337438d2041",
+          "source": "Melanotan-II_10mg_COA_Batch-A2601MT1.pdf"
+        },
+        {
+          "phash": "ee45cccec9fe637991391982b721b7099d8ec46e6e8566986e408cf6c47962d1",
+          "dhash": "08c9d526c676ca7f9e7a9f3b86db869b916b956b94eb9cea9a17878e4a040083",
+          "source": "GLP-3-RT_10mg_Endotoxin_Batch-A2601R10.pdf"
+        },
+        {
+          "phash": "bcefc788e39d907ec3a03b259c7f2780946e7867e18d687e2e908ce86b10d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365f20112639467546c54e5d9137178f4001",
+          "source": "igf1lr3_1mg_coa.pdf"
+        },
+        {
+          "phash": "bcefc7c8e390907fc3a03b279c2f6780946e3867e3cc6c7e2e90ccc83d10d07a",
+          "dhash": "08c964354e3f463f9f3f9f3706cf365f38014a6546e946d94e5d911717874001",
+          "source": "SLU-PP-332_5mg_COA_Batch-A2601SP5.pdf"
+        },
+        {
+          "phash": "bccfc4d8e7d1907ec3303b039c662f0195ac38e76345c0fc6e5dccd83c51c5b1",
+          "dhash": "08cb64354e3f423f1f3f1f3706df5355510146754e614ec14e171317438d2041",
+          "source": "FREEDOM_BPC-157_10mg_COA_Batch-A2601B10.pdf"
+        }
+      ]
+    },
+    "accumark_labs": {
+      "folder": "ACCUMARK LABS",
+      "fingerprints": [
+        {
+          "phash": "bc3fc7e0c3f1383ec3e06569901e393fc703c6d6382dc3a1b01a7c0bc1a338ef",
+          "dhash": "00002e032e031a061e301891326a3072043c4ffd4ffc4dbc4fed4ffd00030028",
+          "source": "ACCUMARK LABS_Retatrutide_AccuMark_47NG-ZLKT.pdf"
+        },
+        {
+          "phash": "bfea7aaa7a0af22f703fc2bf05fc87d085f48477502f681fda00bd40fe007c40",
+          "dhash": "618d01e59067373334263727468924db24d9346166b0449476050081ce36ee7e",
+          "source": "ACCUMARK LABS_Semaglutide_5mg_March-Test.pdf"
+        },
+        {
+          "phash": "bc1fc7e0c3f1383fc3e06569901e392fc703c6d3382fc321b01a780bc5e338ef",
+          "dhash": "00002e032e031a061e300891326a3032063c4ffd4ffc4dac4fed4ffd00030028",
+          "source": "ACCUMARK LABS_Semaglutide_AccuMark_AUDC-H32M.pdf"
+        }
+      ]
+    },
+    "bioviridian": {
+      "folder": "BIOVIRIDIAN",
+      "fingerprints": [
+        {
+          "phash": "affa0fea8b1fcd3a95008b47f01e6aef6fe21fa048bfb48185558550e050287f",
+          "dhash": "1a4d3db578003b096667667726b13c8c24dd4c312c202cb1428f480f00004002",
+          "source": "COA4066_page_1.pdf"
+        },
+        {
+          "phash": "bffa1fb28b5fcc6a95008b45f01f6abf0fe21f606a6ff00285558550e011687f",
+          "dhash": "1a4d3db578003ac959b369b326d9341024194c212c002c31420f480f00004002",
+          "source": "BIOVIRIDIANCOA4065_page_1.pdf"
+        },
+        {
+          "phash": "8ff81f9fc03f9f208fc0f01f701f0fe01fa8783fb5008f54f000c07f3f9068be",
+          "dhash": "1a4d1d816d9479896273466642b33631342436152c5148404c540c477a0f4000",
+          "source": "COA4251_HD.pdf"
+        },
+        {
+          "phash": "8ffe7e92e00f97688ff09045f0074fcc0ff86aaf7c03817f87d0c015b0158f35",
+          "dhash": "3a457c91688075a9633362b266d32f332e002e9155916640641834c3588b401c",
+          "source": "BIO_NAD+_March-Test_BIOVIRIDIAN.pdf"
+        },
+        {
+          "phash": "8fea1faac81fc40f9fc08fe0f00f683f3fc00ff07817c01f815587f0e03f741a",
+          "dhash": "1a4d1da169a276254c49498923933600275142d158c450441e7d788f400e0000",
+          "source": "BIO_Klow-Blend_April-Test.pdf"
+        },
+        {
+          "phash": "8ffa1f8e8b1fd5208dc0fa0f780f4bee3780493ff00185558c50607f7ab537b0",
+          "dhash": "1a4d1d916d927a892333766647e32479266c244d4d9128800cf04e0f700f0000",
+          "source": "BIOVIRIDIAN_Oxytocin_COA.pdf"
+        },
+        {
+          "phash": "8ffa1f97ca1f9d2087e0f80f700f0fe01d28683fb50087d4f014e07f3f803ff8",
+          "dhash": "1a4d59a16db679892333426642f346992c10261d4c0928086c0c0e0f7a0f4000",
+          "source": "BIOVIRIDIAN_GLP-2_Tirzepatide_10mg_April-Test.pdf"
+        },
+        {
+          "phash": "8ffa1fa3c91fd50097a0f84f700e4beb1f80493ff00087558c50607f7bb537b8",
+          "dhash": "1a4d1d916d927b092373666642c324b93dac24c54c5128400c714e8f700f0000",
+          "source": "BIOVIRIDIAN_Snap8_COA.pdf"
+        },
+        {
+          "phash": "8ff81f8bc01f9d208fe0f80f780f0fe81da0c83fb40187d4e414703f3fb03ff8",
+          "dhash": "1a4d59a16db2780929a3727243b327992410241dcc1928182c9c4a8f780f4000",
+          "source": "BIO_Retatrutide_10mg_April-Test-B.pdf"
+        },
+        {
+          "phash": "8ffa1fb7c81f9d0087e0f00f784f4fe0178868bfb5808755e010c07f3f9069be",
+          "dhash": "1a4d198168947b096477444642d326f134b4369d2c6908404c680e2f7a4f4000",
+          "source": "COA4252_HD.pdf"
+        },
+        {
+          "phash": "affa1fea8b1fcd3b95008b45f01e6aef6fe01fa068bff40385558540c050287f",
+          "dhash": "1a0d3db178003989226742332771344c245d44b92c202c31428f480f00004002",
+          "source": "COA4068_page_1.pdf"
+        },
+        {
+          "phash": "8ffa1f83c83f95009fc0f81f701f4bea17c0483ff00387558c40607f7bbd36b8",
+          "dhash": "1a4d1d916d967a892333766643832251325022914c5128400c754a8f700f0000",
+          "source": "BIOVIRIDIAN_AHK_COA.pdf"
+        },
+        {
+          "phash": "8ffa17b7c85f9d4087c0f81f701f0fe01f68686fb4028755e410c07f3e007bfa",
+          "dhash": "1a4d1d816d94724d199341324ab32719355035596c05480c4c240e877a0f4000",
+          "source": "COA4249_HD.pdf"
+        },
+        {
+          "phash": "8ffa1fbbc85f97408fc0f01f701f0fe01fe0686fb5008755e410c03f3e007afe",
+          "dhash": "1a4d1d816d94724d1993413242b33611355035992c4908c04cd00e8f7a0f4000",
+          "source": "COA4250_HD.pdf"
+        },
+        {
+          "phash": "bffa0ffa8b1f992e95008945f01e6a6f2fea1fa049bff40385558550c050687f",
+          "dhash": "1a0d3db578003b996667423327b13600261944892a002b35430f480f00004002",
+          "source": "COA4067_page_1.pdf"
+        },
+        {
+          "phash": "8ffa0f87c83f950087e0f81ff01f4fe01fa8683fb4028754f440e03f7e103ff8",
+          "dhash": "1a4d198169947b896677444642d32399376832594a992e006f100e0f780f4000",
+          "source": "COA4248_HD.pdf"
+        },
+        {
+          "phash": "8ffa1f8fc91f952087e0f81f780f0fe01fe0683fb5008754f010e03f3f803ff8",
+          "dhash": "1a4d59a16db47c892333426642f32671244026d94cb128204c300ea7780f4000",
+          "source": "BIO_Ipamorelin_April-Test.pdf"
+        },
+        {
+          "phash": "9ffa0f83cb3f950087c0fa1d701f4bef3780497ff0038555844060b77bb136ba",
+          "dhash": "1a4d1d916d967c892333723242d32751367026914d91290009f04a8f700f0000",
+          "source": "BIOVIRIDIAN_Glutathione_COA.pdf"
+        },
+        {
+          "phash": "8ffa1f9bc03f9d208fc0f01ff01f4fe11fc0493f742387558440e07fe81176b8",
+          "dhash": "1a4d1d91799078892233426642d33671341436914c5128400c786a0f680f4000",
+          "source": "COA4253_HD.pdf"
+        },
+        {
+          "phash": "9ffa1f87c03f9f208fc0f01f601f0fe01fa0683fb50087d4f010e03f3f807bfa",
+          "dhash": "1a4d5d816db278892333422242f327d13600369dcc812c006dc40c8f7a0f4000",
+          "source": "BIOVIRIDIAN_Glutathione_April-Test.pdf"
+        },
+        {
+          "phash": "8fea1fabc81f9d4087c0f00f702f4fe81fc0687fb4038755f000e07f3c807bfe",
+          "dhash": "1a4d19816d907a350c69410942d926713414363d444d2c08448c068f7a0f4000",
+          "source": "COA4254_HD.pdf"
+        },
+        {
+          "phash": "8ff81f97ca1f9d2087e0f80f700f0fe01fa8683fb50087d4f010e07f3f803ff8",
+          "dhash": "1a4d59a16db27c892333426242f32699241026954c0928084c0c0a8f7a0f4000",
+          "source": "BIO_Retatrutide_10mg_April-Test-A.pdf"
+        }
+      ]
+    }
+  }
+}

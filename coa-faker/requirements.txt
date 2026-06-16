@@ -1,0 +1,7 @@
+pymupdf>=1.24.0
+Pillow>=10.0.0
+reportlab>=4.0.0
+Faker>=25.0.0
+PyYAML>=6.0
+numpy>=1.26.0
+pytesseract>=0.3.10   # requires system tesseract binary: sudo apt install tesseract-ocr

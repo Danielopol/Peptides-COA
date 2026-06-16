@@ -1,0 +1,28 @@
+fakes_per_original: 5
+difficulty_distribution:
+  easy: 0.3
+  medium: 0.5
+  hard: 0.2
+perturbation_weights:
+  test_values: 0.8
+  batch_number: 0.6
+  dates: 0.7
+  names: 0.4
+  logo_shift: 0.3
+  font_mismatch: 0.5
+  metadata: 0.6
+  dpi_quality: 0.4
+  alignment: 0.3
+  page_structure: 0.2
+  paper_cast: 0.5
+  contrast_noise: 0.5
+  jpeg_regions: 0.4
+  stamp_repaste: 0.5
+  signature_shift: 0.5
+image_render_dpi: 300
+output_format: pdf      # pdf or png
+seed: 42
+
+# Safety: every output gets a hidden marker tagging it as synthetic
+# training data. Keeps fakes out of circulation if a file leaks.
+synthetic_marker: "X-Synthetic-Training-Data: coa-faker v1"

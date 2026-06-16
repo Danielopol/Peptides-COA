@@ -1,0 +1,203 @@
+{
+  "version": "1.0",
+  "created": "2026-05-17",
+  "description": "Scoring algorithm for peptide COA authenticity verification. Produces a 0–100 final score with band labels and action recommendations.",
+  "scoring_algorithm": {
+    "method": "weighted_sum_normalized",
+    "score_range": "0–100",
+    "step_by_step": [
+      "1. For each rule, assign a result: PASS=1, FAIL=0, NOT_APPLICABLE (excluded from calculation)",
+      "2. Apply severity multiplier to each rule weight: critical × 1.5, major × 1.0, minor × 0.5",
+      "3. effective_weight = rule.weight × severity_multiplier",
+      "4. For applicable rules only: weighted_score = sum(effective_weight × result) for all applicable rules",
+      "5. max_possible = sum(effective_weight) for all applicable rules",
+      "6. raw_score = (weighted_score / max_possible) × 100",
+      "7. Check auto_fail_conditions — if any triggered, override final_score = 0",
+      "8. Apply confidence_modifiers (bonus/penalty adjustments, capped at 0–100)",
+      "9. final_score = floor(clamped(raw_score + modifier_sum, 0, 100))"
+    ],
+    "severity_multipliers": {
+      "critical": 1.5,
+      "major": 1.0,
+      "minor": 0.5
+    },
+    "not_applicable_handling": "Exclude rule from both numerator and denominator entirely. Do not penalize or reward. Use NOT_APPLICABLE only when the check genuinely cannot apply (e.g., charge state rule for a MALDI-only COA).",
+    "auto_fail_conditions": [
+      {
+        "trigger": "META-003 FAIL",
+        "description": "Future-dated analysis — physically impossible; automatic evidence of fabrication",
+        "override": "final_score = 0, label = REJECT"
+      },
+      {
+        "trigger": "FORG-007 FAIL",
+        "description": "Localized pixelation in specific data fields — direct evidence of digital alteration",
+        "override": "final_score = 0, label = REJECT"
+      },
+      {
+        "trigger": "FORG-013 FAIL",
+        "description": "Lab has no record of vendor or batch — COA definitively not genuine",
+        "override": "final_score = 0, label = REJECT"
+      },
+      {
+        "trigger": "XREF-007 FAIL",
+        "description": "QR code or digital verification data does not match paper COA — tampered document",
+        "override": "final_score = 0, label = REJECT"
+      },
+      {
+        "trigger": "FORG-004 FAIL",
+        "description": "Identical COA documents across different peptide products — systematic fabrication",
+        "override": "final_score = 0, label = REJECT"
+      },
+      {
+        "trigger": "FORG-002 FAIL AND STRUCT-008 FAIL",
+        "description": "Zero impurity peaks combined with no purity value — no analytical basis for any quality claim",
+        "override": "final_score = 0, label = REJECT"
+      }
+    ]
+  },
+  "score_bands": [
+    {
+      "min": 90,
+      "max": 100,
+      "label": "VERIFIED",
+      "color_code": "green",
+      "description": "COA passes all critical checks and the substantial majority of secondary checks. High confidence in document authenticity and product quality representation.",
+      "action": "Accept for intended research use",
+      "typical_profile": "Third-party lab, ISO 17025 accredited, digital verification passes, batch number confirmed, realistic purity decimals, natural chromatogram, dates consistent"
+    },
+    {
+      "min": 75,
+      "max": 89,
+      "label": "ACCEPTABLE",
+      "color_code": "light_green",
+      "description": "COA passes all critical checks but has minor gaps, unverifiable elements, or missing supplementary data. Acceptable for standard RUO research purposes.",
+      "action": "Accept with notation of identified gaps",
+      "typical_profile": "Third-party lab verified, but chromatogram missing (common with Janoshik) OR accreditation not confirmed OR minor formatting issues — no critical failures"
+    },
+    {
+      "min": 55,
+      "max": 74,
+      "label": "REVIEW_REQUIRED",
+      "color_code": "yellow",
+      "description": "COA has significant gaps, one or more major red flags, or multiple minor issues. Vendor should be contacted for clarification before proceeding.",
+      "action": "Request supplementary documentation and/or direct lab verification before use",
+      "typical_profile": "In-house COA with no independent verification, or third-party lab unverifiable, or COA age borderline, or multiple missing structural elements"
+    },
+    {
+      "min": 30,
+      "max": 54,
+      "label": "SUSPICIOUS",
+      "color_code": "orange",
+      "description": "COA has multiple major red flags or fails critical checks outside the auto-fail list. High risk of misrepresentation or document manipulation.",
+      "action": "Reject unless product is independently retested by a verified third-party lab before use",
+      "typical_profile": "Round purity values across catalog, missing MS data, unverifiable lab, old COA, no batch number match — multiple compounding issues"
+    },
+    {
+      "min": 0,
+      "max": 29,
+      "label": "REJECT",
+      "color_code": "red",
+      "description": "COA fails critical checks, triggers auto-fail conditions, or shows direct evidence of fabrication. Product should not be used.",
+      "action": "Reject; consider reporting to community testing databases",
+      "typical_profile": "Auto-fail condition triggered, or: lab denies issuing document, community testing contradicts claims, localized pixelation, future-dated analysis"
+    }
+  ],
+  "category_weight_distribution": {
+    "description": "Approximate contribution of each category to the total possible score, based on rule weights and severity multipliers in coa_rules.json",
+    "structure": "~14% (12 rules, mix of critical/major/minor)",
+    "numerical": "~20% (11 rules, predominantly critical/major)",
+    "analytical_methods": "~14% (12 rules, mix of critical/major/minor)",
+    "lab_credentials": "~16% (10 rules, predominantly critical/major)",
+    "formatting": "~10% (8 rules, mix of critical/major/minor)",
+    "metadata": "~12% (5 rules, critical/major)",
+    "cross_reference": "~10% (8 rules, predominantly critical/major)",
+    "forgery_indicators": "~4% net contribution (15 rules, predominantly critical/major — these rules are FAIL-oriented; passing them adds less than failing them subtracts)"
+  },
+  "confidence_modifiers": {
+    "description": "Adjustments applied after raw score calculation. Capped so final score remains 0–100.",
+    "bonuses": [
+      {
+        "condition": "Direct lab contact confirms COA authenticity (LAB-007 verified)",
+        "adjustment": "+10",
+        "notes": "Strongest possible external confirmation; applies only if actively verified, not just that contact was possible"
+      },
+      {
+        "condition": "Digital verification key or QR code passes (XREF-007 verified)",
+        "adjustment": "+5",
+        "notes": "Independent cryptographic or database confirmation of document authenticity"
+      },
+      {
+        "condition": "Community testing data consistent with COA claims (multiple independent sources)",
+        "adjustment": "+5",
+        "notes": "Requires at least 2 independent third-party test results from separate buyers"
+      }
+    ],
+    "penalties": [
+      {
+        "condition": "Community testing consistently contradicts COA claims (multiple independent sources)",
+        "adjustment": "-20",
+        "notes": "Requires at least 2 independent third-party test results showing substantially lower purity or wrong compound"
+      },
+      {
+        "condition": "Vendor behavior is evasive or hostile when verification is attempted (FORG-011 pattern)",
+        "adjustment": "-10",
+        "notes": "Behavioral indicator — applies when vendor actively impedes verification attempts"
+      },
+      {
+        "condition": "Pricing is 50%+ below verified market rate without explanation",
+        "adjustment": "-5",
+        "notes": "FORG-015 scoring supplement; applies as a soft penalty in combination with other red flags"
+      }
+    ]
+  },
+  "not_applicable_examples": {
+    "METH-009": "MALDI-TOF method confirmed — charge state multiplicity rule N/A (MALDI shows singly-charged ions)",
+    "NUM-009": "Product is explicitly non-injectable (topical or in-vitro only) — endotoxin threshold N/A",
+    "METH-011": "Basic RUO COA without pharmaceutical-grade claims — heavy metals panel N/A",
+    "STRUCT-012": "Lab confirmed to operate under client confidentiality policy — client name absence N/A",
+    "LAB-008": "Lab confirmed to not offer digital verification system — absence of QR code N/A",
+    "METH-003": "C4 column justified for large hydrophobic peptide (>30 residues) — C18 rule N/A",
+    "NUM-005": "NPC not reported — NPC range check N/A (absence of NPC is not itself a red flag)",
+    "METH-010": "NPC not reported — NPC method check N/A"
+  },
+  "example_score_calculations": [
+    {
+      "scenario": "Ideal Janoshik COA — no embedded chromatogram, all other elements present and verified",
+      "rule_results": {
+        "STRUCT": "All 12 PASS",
+        "NUM": "All 11 PASS",
+        "METH-001": "PASS",
+        "METH-002": "PASS",
+        "METH-006": "NOT_APPLICABLE (Janoshik does not embed chromatogram; lab verified via verification key)",
+        "METH-007": "NOT_APPLICABLE",
+        "METH-008": "NOT_APPLICABLE",
+        "other_METH": "PASS",
+        "LAB": "All 10 PASS",
+        "FMT": "All 8 PASS",
+        "META": "All 5 PASS",
+        "XREF": "All 8 PASS",
+        "FORG": "All 15 PASS (no red flags triggered)"
+      },
+      "estimated_raw_score": "95–98",
+      "confidence_modifier": "+10 (lab verified) +5 (QR key passes)",
+      "estimated_final_score": "100 (capped)",
+      "band": "VERIFIED"
+    },
+    {
+      "scenario": "In-house COA with round purity numbers and no MS data",
+      "rule_results": {
+        "LAB-001": "FAIL (in-house)",
+        "LAB-002": "FAIL (no accreditation)",
+        "STRUCT-009": "FAIL (no MS data)",
+        "METH-002": "FAIL (no MS method)",
+        "NUM-002": "FAIL (round purity 99.00%)",
+        "FORG-001": "FAIL (round number)",
+        "other_rules": "PASS"
+      },
+      "estimated_raw_score": "45–55",
+      "confidence_modifier": "0",
+      "estimated_final_score": "45–55",
+      "band": "SUSPICIOUS"
+    }
+  ]
+}

@@ -1,0 +1,681 @@
+{
+  "version": "1.8",
+  "last_updated": "2026-05-22",
+  "note": "Each peptide stores both monoisotopic_mass and average_mass (Da). The pipeline picks which to compare based on the detected MS technique: high-res MS (ESI/Q-TOF) reports monoisotopic; most COAs labelled 'MW' quote average mass. 'verified' marks entries confirmed against an authoritative source (PubChem/literature). Seed values migrated from v0.1 are average_mass with verified=false \u2014 confirm before relying on MW-mismatch flags. Entries with is_blend=true are multi-component products with no single molecular weight; skip MW-mismatch checks for these. Entries with a variants[] array are species-ambiguous (e.g. peptide vs copper-complex, fragment vs full-length): the matcher should accept a COA mass that matches the primary OR any variant, and report which form matched rather than flagging a mismatch.",
+  "tolerance_da": {
+    "monoisotopic": {
+      "MALDI-TOF": 0.3,
+      "ESI-MS": 0.05,
+      "ESI-TOF": 0.05,
+      "Q-TOF": 0.05,
+      "default": 0.5
+    },
+    "average": {
+      "default": 1.5
+    }
+  },
+  "peptides": [
+    {
+      "name": "BPC-157",
+      "aliases": [
+        "BPC157",
+        "Body Protection Compound"
+      ],
+      "formula": "C62H98N16O22",
+      "monoisotopic_mass": 1418.70416,
+      "average_mass": 1419.53,
+      "verified": true,
+      "pubchem_cid": 9941957
+    },
+    {
+      "name": "TB-500",
+      "aliases": [
+        "TB500",
+        "Thymosin Beta-4 fragment"
+      ],
+      "formula": "C212H350N56O78S",
+      "monoisotopic_mass": 4960.48632,
+      "average_mass": 4963.44,
+      "verified": true,
+      "pubchem_cid": 45382195,
+      "source_note": "Locked to full-length Thymosin Beta-4 (43 aa) per research-market convention and mw_table_decisions.md. The literal Ac-LKKTETQ fragment (~889, CID 62707662) is a different molecule if ever tested explicitly.",
+      "variants": [
+        {
+          "form": "Full-length Thymosin Beta-4 (43aa) - market default",
+          "formula": "C212H350N56O78S",
+          "monoisotopic_mass": 4960.48632,
+          "average_mass": 4963.51,
+          "pubchem_cid": 45382195
+        },
+        {
+          "form": "Ac-LKKTETQ fragment (literal TB-500)",
+          "formula": "C38H68N10O14",
+          "monoisotopic_mass": 888.49165,
+          "average_mass": 889.02,
+          "pubchem_cid": 62707662
+        }
+      ]
+    },
+    {
+      "name": "Thymosin Beta-4",
+      "aliases": [
+        "TB4"
+      ],
+      "formula": "C212H350N56O78S",
+      "monoisotopic_mass": 4960.48632,
+      "average_mass": 4963.44,
+      "verified": true,
+      "pubchem_cid": 45382195
+    },
+    {
+      "name": "GHK-Cu",
+      "aliases": [
+        "GHKCu",
+        "GHK"
+      ],
+      "formula": "C14H21CuN6O4-",
+      "monoisotopic_mass": 400.09203,
+      "average_mass": 400.9,
+      "verified": true,
+      "pubchem_cid": 139035031,
+      "source_note": "Corrected from bare-peptide 340.83 to Cu complex. PubChem record is the -1 anion (400.9); neutral GHK-Cu is often cited ~403.9 - confirm protonation form vs the COA.",
+      "variants": [
+        {
+          "form": "Cu complex, PubChem -1 anion",
+          "formula": "C14H21CuN6O4-",
+          "monoisotopic_mass": 400.09203,
+          "average_mass": 400.91,
+          "pubchem_cid": 139035031
+        },
+        {
+          "form": "Cu complex, neutral (peptide+Cu)",
+          "formula": "C14H24CuN6O4",
+          "monoisotopic_mass": 403.1155,
+          "average_mass": 403.93,
+          "note": "commonly cited ~403.9 on COAs"
+        },
+        {
+          "form": "Bare GHK tripeptide (no copper)",
+          "formula": "C14H24N6O4",
+          "monoisotopic_mass": 340.1859,
+          "average_mass": 340.38
+        }
+      ]
+    },
+    {
+      "name": "Semaglutide",
+      "aliases": [],
+      "formula": "C187H291N45O59",
+      "monoisotopic_mass": 4111.11538,
+      "average_mass": 4113.58,
+      "verified": true,
+      "pubchem_cid": 56843331
+    },
+    {
+      "name": "Tirzepatide",
+      "aliases": [],
+      "formula": "C225H348N48O68",
+      "monoisotopic_mass": 4810.52486,
+      "average_mass": 4813.45,
+      "verified": true,
+      "pubchem_cid": 166567236
+    },
+    {
+      "name": "Retatrutide",
+      "aliases": [],
+      "formula": "C221H342N46O68",
+      "monoisotopic_mass": 4728.47176,
+      "average_mass": 4731.33,
+      "verified": true,
+      "cas": "2381089-83-2",
+      "source_note": "Formula/avg from literature (CAS 2381089-83-2); monoisotopic computed from formula. Not in PubChem."
+    },
+    {
+      "name": "Tesamorelin",
+      "aliases": [],
+      "formula": "C221H366N72O67S",
+      "monoisotopic_mass": 5132.71664,
+      "average_mass": 5135.85,
+      "verified": true,
+      "pubchem_cid": 16137828
+    },
+    {
+      "name": "Ipamorelin",
+      "aliases": [],
+      "formula": "C38H49N9O5",
+      "monoisotopic_mass": 711.38567,
+      "average_mass": 711.86,
+      "verified": true,
+      "pubchem_cid": 9831659
+    },
+    {
+      "name": "CJC-1295",
+      "aliases": [
+        "CJC1295 DAC"
+      ],
+      "formula": "C165H269N47O46",
+      "monoisotopic_mass": 3645.01548,
+      "average_mass": 3647.2,
+      "verified": true,
+      "pubchem_cid": 91971820,
+      "source_note": "This is CJC-1295 WITH DAC. The DAC-less form (Mod GRF 1-29) is the separate 'CJC-1295 no DAC' entry."
+    },
+    {
+      "name": "CJC-1295 no DAC",
+      "aliases": [
+        "Mod GRF 1-29"
+      ],
+      "formula": "C152H252N44O42",
+      "monoisotopic_mass": 3365.89358,
+      "average_mass": 3367.95,
+      "verified": true,
+      "source_note": "Mod GRF 1-29 (DAC-less). Formula C152H252N44O42 from literature; masses computed from formula. Not Sermorelin (GRF 1-29, ~3357.9)."
+    },
+    {
+      "name": "PT-141",
+      "aliases": [
+        "Bremelanotide"
+      ],
+      "formula": "C50H68N14O10",
+      "monoisotopic_mass": 1024.52428,
+      "average_mass": 1025.18,
+      "verified": true,
+      "pubchem_cid": 9941379
+    },
+    {
+      "name": "Melanotan II",
+      "aliases": [
+        "MT-2",
+        "MT2"
+      ],
+      "formula": "C50H69N15O9",
+      "monoisotopic_mass": 1023.54027,
+      "average_mass": 1024.18,
+      "verified": true,
+      "pubchem_cid": 92432
+    },
+    {
+      "name": "Melanotan I",
+      "aliases": [
+        "MT-1",
+        "Afamelanotide"
+      ],
+      "formula": "C78H111N21O19",
+      "monoisotopic_mass": 1645.83651,
+      "average_mass": 1646.85,
+      "verified": true,
+      "pubchem_cid": 16197727
+    },
+    {
+      "name": "DSIP",
+      "aliases": [],
+      "formula": "C35H48N10O15",
+      "monoisotopic_mass": 848.33006,
+      "average_mass": 848.84,
+      "verified": true,
+      "pubchem_cid": 68816
+    },
+    {
+      "name": "Selank",
+      "aliases": [],
+      "formula": "C33H57N11O9",
+      "monoisotopic_mass": 751.43407,
+      "average_mass": 751.86,
+      "verified": true,
+      "pubchem_cid": 11765600
+    },
+    {
+      "name": "Semax",
+      "aliases": [],
+      "formula": "C37H51N9O10S",
+      "monoisotopic_mass": 813.34796,
+      "average_mass": 813.95,
+      "verified": true,
+      "pubchem_cid": 9811102
+    },
+    {
+      "name": "Epithalon",
+      "aliases": [
+        "Epitalon"
+      ],
+      "formula": "C14H22N4O9",
+      "monoisotopic_mass": 390.13868,
+      "average_mass": 390.35,
+      "verified": true,
+      "pubchem_cid": 219042
+    },
+    {
+      "name": "MOTS-C",
+      "aliases": [
+        "MOTSC"
+      ],
+      "formula": "C101H152N28O22S2",
+      "monoisotopic_mass": 2173.10774,
+      "average_mass": 2174.46,
+      "verified": true,
+      "pubchem_cid": 146675088
+    },
+    {
+      "name": "Kisspeptin-10",
+      "aliases": [
+        "Kisspeptin"
+      ],
+      "formula": "C63H83N17O14",
+      "monoisotopic_mass": 1301.63054,
+      "average_mass": 1302.49,
+      "verified": true,
+      "pubchem_cid": 25240297
+    },
+    {
+      "name": "AOD-9604",
+      "aliases": [
+        "AOD9604"
+      ],
+      "formula": "C78H123N23O23S2",
+      "monoisotopic_mass": 1813.86036,
+      "average_mass": 1815.07,
+      "verified": true,
+      "pubchem_cid": 71300630,
+      "cas": "221231-10-3",
+      "sequence": "Tyr-Leu-Arg-Ile-Val-Gln-Cys-Arg-Ser-Val-Glu-Gly-Ser-Cys-Gly-Phe"
+    },
+    {
+      "name": "Hexarelin",
+      "aliases": [],
+      "formula": "C47H58N12O6",
+      "monoisotopic_mass": 886.46023,
+      "average_mass": 887.04,
+      "verified": true,
+      "pubchem_cid": 6918297
+    },
+    {
+      "name": "GHRP-2",
+      "aliases": [],
+      "formula": "C45H55N9O6",
+      "monoisotopic_mass": 817.42753,
+      "average_mass": 817.94,
+      "verified": true,
+      "pubchem_cid": 6918245
+    },
+    {
+      "name": "GHRP-6",
+      "aliases": [],
+      "formula": "C46H56N12O6",
+      "monoisotopic_mass": 872.44458,
+      "average_mass": 873.02,
+      "verified": true,
+      "pubchem_cid": 4345065
+    },
+    {
+      "name": "Sermorelin",
+      "aliases": [],
+      "formula": "C149H246N44O42S",
+      "monoisotopic_mass": 3355.8187,
+      "average_mass": 3357.93,
+      "verified": true,
+      "pubchem_cid": 16132413
+    },
+    {
+      "name": "Oxytocin",
+      "aliases": [],
+      "formula": "C43H66N12O12S2",
+      "monoisotopic_mass": 1006.43646,
+      "average_mass": 1007.19,
+      "verified": true,
+      "pubchem_cid": 439302
+    },
+    {
+      "name": "Glutathione",
+      "aliases": [
+        "GSH"
+      ],
+      "formula": "C10H17N3O6S",
+      "monoisotopic_mass": 307.08381,
+      "average_mass": 307.32,
+      "verified": true,
+      "pubchem_cid": 124886
+    },
+    {
+      "name": "KPV",
+      "aliases": [],
+      "formula": "C16H30N4O4",
+      "monoisotopic_mass": 342.22671,
+      "average_mass": 342.43,
+      "verified": true,
+      "pubchem_cid": 125672,
+      "source_note": "Corrected: prior seed 401.5 was wrong; KPV = Lys-Pro-Val tripeptide."
+    },
+    {
+      "name": "Snap-8",
+      "aliases": [
+        "Snap8",
+        "Acetyl Octapeptide-3"
+      ],
+      "formula": "C42H72N16O15S",
+      "monoisotopic_mass": 1072.50838,
+      "average_mass": 1073.2,
+      "verified": true,
+      "pubchem_cid": 71587832,
+      "source_note": "Corrected from 894.0; SNAP-8 = Acetyl octapeptide-3."
+    },
+    {
+      "name": "VIP",
+      "aliases": [
+        "Vasoactive Intestinal Peptide"
+      ],
+      "formula": "C147H237N43O43S",
+      "monoisotopic_mass": 3324.74011,
+      "average_mass": 3325.85,
+      "verified": true,
+      "pubchem_cid": 53314964
+    },
+    {
+      "name": "IGF-1 LR3",
+      "aliases": [
+        "IGF1LR3",
+        "Long R3 IGF-1"
+      ],
+      "formula": "C400H619N111O115S9",
+      "monoisotopic_mass": null,
+      "average_mass": 9111.55,
+      "verified": true,
+      "cas": "946870-92-4",
+      "source_note": "Formula computed from published 83aa Long-R3 IGF-1 sequence (3 disulfide bonds; CAS 946870-92-4). Average mass only - monoisotopic not meaningful for ~9 kDa protein."
+    },
+    {
+      "name": "HGH 191aa",
+      "aliases": [
+        "Somatropin",
+        "Human Growth Hormone"
+      ],
+      "formula": "C990H1528N262O300S7",
+      "monoisotopic_mass": null,
+      "average_mass": 22125.0,
+      "verified": true,
+      "cas": "12629-01-5",
+      "source_note": "Somatropin, 191aa, 2 disulfide bonds. Average mass only; monoisotopic not meaningful/measured for a ~22 kDa protein (COAs report deconvoluted average)."
+    },
+    {
+      "name": "5-Amino-1MQ",
+      "aliases": [
+        "5amino1mq"
+      ],
+      "formula": "C10H11N2+",
+      "monoisotopic_mass": 159.09222,
+      "average_mass": 159.21,
+      "verified": true,
+      "pubchem_cid": 950107
+    },
+    {
+      "name": "AHK-Cu",
+      "aliases": [
+        "AHK"
+      ],
+      "formula": "C15H26CuN6O4",
+      "monoisotopic_mass": 417.13115,
+      "average_mass": 417.96,
+      "verified": true,
+      "variants": [
+        {
+          "form": "Cu complex, neutral (peptide+Cu)",
+          "formula": "C15H26CuN6O4",
+          "monoisotopic_mass": 417.13115,
+          "average_mass": 417.96,
+          "note": "likely COA form"
+        },
+        {
+          "form": "Bare AHK tripeptide Ala-His-Lys (no copper)",
+          "formula": "C15H26N6O4",
+          "monoisotopic_mass": 354.20155,
+          "average_mass": 354.41
+        },
+        {
+          "form": "Cu+chloride salt anion (PubChem)",
+          "formula": "C15H24ClCuN6O4-",
+          "monoisotopic_mass": 450.08435,
+          "average_mass": 451.39,
+          "pubchem_cid": 168431292
+        }
+      ],
+      "source_note": "Ambiguous species - see variants[]. Primary = neutral 1:1 Cu complex. Prior seed 341 was wrong (looked copied from GHK)."
+    },
+    {
+      "name": "Lipo-C",
+      "aliases": [
+        "Lipoc"
+      ],
+      "formula": null,
+      "monoisotopic_mass": null,
+      "average_mass": null,
+      "verified": true,
+      "is_blend": true,
+      "source_note": "Lipotropic blend (e.g. methionine/inositol/choline + B-vitamins); no single MW."
+    },
+    {
+      "name": "Ovagen",
+      "aliases": [],
+      "formula": "C15H25N3O8",
+      "monoisotopic_mass": 375.16416,
+      "average_mass": 375.37,
+      "verified": true,
+      "source_note": "Corrected from 360.4: Ovagen = Glu-Asp-Leu (EDL) tripeptide bioregulator, MW 375.37."
+    },
+    {
+      "name": "GLOW",
+      "aliases": [],
+      "formula": null,
+      "monoisotopic_mass": null,
+      "average_mass": null,
+      "verified": true,
+      "is_blend": true,
+      "source_note": "Blend (commonly GHK-Cu + BPC-157 + TB-500); no single MW."
+    },
+    {
+      "name": "KLOW",
+      "aliases": [],
+      "formula": null,
+      "monoisotopic_mass": null,
+      "average_mass": null,
+      "verified": true,
+      "is_blend": true,
+      "source_note": "Blend (commonly GHK-Cu + KPV + BPC-157 + TB-500); no single MW."
+    },
+    {
+      "name": "Cagrilintide",
+      "aliases": [
+        "Cagri"
+      ],
+      "formula": "C194H312N54O59S2",
+      "monoisotopic_mass": 4406.25151,
+      "average_mass": 4409,
+      "verified": true,
+      "pubchem_cid": 171397054
+    },
+    {
+      "name": "Thymosin Alpha-1",
+      "aliases": [
+        "Thymalfasin",
+        "TA1",
+        "Ta1"
+      ],
+      "formula": "C129H215N33O55",
+      "monoisotopic_mass": 3106.50413,
+      "average_mass": 3108.3,
+      "verified": true,
+      "pubchem_cid": 16130571
+    },
+    {
+      "name": "SS-31",
+      "aliases": [
+        "Elamipretide",
+        "MTP-131"
+      ],
+      "formula": "C32H49N9O5",
+      "monoisotopic_mass": 639.38567,
+      "average_mass": 639.8,
+      "verified": true,
+      "pubchem_cid": 11764719
+    },
+    {
+      "name": "LL-37",
+      "aliases": [
+        "Cathelicidin LL-37"
+      ],
+      "formula": "C205H340N60O53",
+      "monoisotopic_mass": 4490.57543,
+      "average_mass": 4493,
+      "verified": true,
+      "pubchem_cid": 16198951
+    },
+    {
+      "name": "Gonadorelin",
+      "aliases": [
+        "GnRH",
+        "LHRH"
+      ],
+      "formula": "C55H75N17O13",
+      "monoisotopic_mass": 1181.57303,
+      "average_mass": 1182.3,
+      "verified": true,
+      "pubchem_cid": 638793
+    },
+    {
+      "name": "Argireline",
+      "aliases": [
+        "Acetyl hexapeptide-8",
+        "Acetyl hexapeptide-3"
+      ],
+      "formula": "C35H62N14O11S",
+      "monoisotopic_mass": 886.44432,
+      "average_mass": 887.0,
+      "verified": true,
+      "pubchem_cid": 71587772,
+      "source_note": "Acetyl hexapeptide-8 (cosmetic). Distinct from Snap-8 / acetyl octapeptide-3."
+    },
+    {
+      "name": "Survodutide",
+      "aliases": [
+        "BI 456906"
+      ],
+      "formula": "C192H289N47O61",
+      "monoisotopic_mass": 4229.0957,
+      "average_mass": 4232,
+      "verified": true,
+      "pubchem_cid": 171378821
+    },
+    {
+      "name": "Mazdutide",
+      "aliases": [
+        "IBI362",
+        "LY3305677"
+      ],
+      "formula": "C207H317N45O65",
+      "monoisotopic_mass": 4473.28832,
+      "average_mass": 4476,
+      "verified": true,
+      "pubchem_cid": 167312357
+    },
+    {
+      "name": "Liraglutide",
+      "aliases": [],
+      "formula": "C172H265N43O51",
+      "monoisotopic_mass": 3748.94646,
+      "average_mass": 3751,
+      "verified": true,
+      "pubchem_cid": 16134956
+    },
+    {
+      "name": "NAD+",
+      "aliases": [
+        "Nicotinamide adenine dinucleotide",
+        "NAD"
+      ],
+      "formula": "C21H27N7O14P2",
+      "monoisotopic_mass": 663.10912,
+      "average_mass": 663.4,
+      "verified": true,
+      "pubchem_cid": 5892,
+      "source_note": "Non-peptide; often co-tested/sold on peptide COAs. Contains P (outside std residue calc)."
+    },
+    {
+      "name": "MK-677",
+      "aliases": [
+        "Ibutamoren",
+        "Ibutamoren mesylate"
+      ],
+      "formula": "C27H36N4O5S",
+      "monoisotopic_mass": 528.24064,
+      "average_mass": 528.7,
+      "verified": true,
+      "pubchem_cid": 178024,
+      "source_note": "Non-peptide small molecule (GH secretagogue); often sold alongside peptides."
+    },
+    {
+      "name": "Vilon",
+      "aliases": [
+        "KE"
+      ],
+      "formula": "C11H21N3O5",
+      "monoisotopic_mass": 275.14812,
+      "average_mass": 275.31,
+      "verified": true,
+      "source_note": "Khavinson short-peptide bioregulator, sequence KE; formula/masses computed from sequence."
+    },
+    {
+      "name": "Pinealon",
+      "aliases": [
+        "EDR"
+      ],
+      "formula": "C15H26N6O8",
+      "monoisotopic_mass": 418.18121,
+      "average_mass": 418.41,
+      "verified": true,
+      "source_note": "Khavinson short-peptide bioregulator, sequence EDR; formula/masses computed from sequence."
+    },
+    {
+      "name": "Vesugen",
+      "aliases": [
+        "KED"
+      ],
+      "formula": "C15H26N4O8",
+      "monoisotopic_mass": 390.17506,
+      "average_mass": 390.39,
+      "verified": true,
+      "source_note": "Khavinson short-peptide bioregulator, sequence KED; formula/masses computed from sequence."
+    },
+    {
+      "name": "Cortagen",
+      "aliases": [
+        "AEDP"
+      ],
+      "formula": "C17H26N4O9",
+      "monoisotopic_mass": 430.16998,
+      "average_mass": 430.41,
+      "verified": true,
+      "source_note": "Khavinson short-peptide bioregulator, sequence AEDP; formula/masses computed from sequence."
+    },
+    {
+      "name": "Pancragen",
+      "aliases": [
+        "KEDW"
+      ],
+      "formula": "C26H36N6O9",
+      "monoisotopic_mass": 576.25438,
+      "average_mass": 576.61,
+      "verified": true,
+      "source_note": "Khavinson short-peptide bioregulator, sequence KEDW; formula/masses computed from sequence."
+    },
+    {
+      "name": "Thymalin",
+      "aliases": [
+        "Thymarin"
+      ],
+      "formula": null,
+      "monoisotopic_mass": null,
+      "average_mass": null,
+      "verified": true,
+      "is_blend": true,
+      "source_note": "Polypeptide extract/complex from thymus; not a single compound (no single MW)."
+    }
+  ]
+}

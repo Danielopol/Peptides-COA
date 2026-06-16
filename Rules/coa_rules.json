@@ -1,0 +1,1405 @@
+{
+  "version": "1.0",
+  "created": "2026-05-17",
+  "description": "Machine-readable forensic verification ruleset for peptide Certificates of Analysis (COAs). Extracted from 9 reference articles covering COA authentication, HPLC/MS interpretation, document forensics, and vendor evaluation. 81 rules across 8 categories.",
+  "source_articles": [
+    "SubQProtocol_COA_Verification_2026",
+    "TruPeptide_Fake_COA_Red_Flags",
+    "PeptideRecon_Verify_COAs_Guide",
+    "HonestPeptide_How_to_Read_COA",
+    "HonestPeptide_Vendor_Selection",
+    "HonestPeptide_Complete_Guide_RUO",
+    "bestpepprices_COA_Guide",
+    "Reddit_r_PeptideProgress_COA_Beginners"
+  ],
+  "categories": {
+    "structure": [
+      {
+        "rule_id": "STRUCT-001",
+        "name": "Product Name Present",
+        "description": "COA must include the complete, unambiguous name of the peptide compound being analyzed.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 8,
+        "expected_value": "Full compound name matching vendor label (e.g., 'BPC-157', 'Thymosin Beta-4', 'Semaglutide')",
+        "red_flags": [
+          "Name absent",
+          "Vague descriptor like 'Peptide A' or 'Research Compound'",
+          "Name does not match product label"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_Complete_Guide_RUO", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Check for clearly labeled compound name field; cross-reference against vendor product listing",
+        "false_positive_notes": "Custom or novel sequences may use internal code names — rule applies specifically to catalog peptides"
+      },
+      {
+        "rule_id": "STRUCT-002",
+        "name": "Batch or Lot Number Present",
+        "description": "Every COA must reference a specific, unique batch or lot number tying test results to a specific production run.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Unique alphanumeric batch/lot number (e.g., 'LOT-24A-0312', 'BATCH-2025-BPC157-04')",
+        "red_flags": [
+          "No batch number",
+          "Generic placeholder like 'BATCH-001' or '123'",
+          "Batch number field exists but is blank",
+          "Single-digit or obviously sequential lot numbers across different peptide products"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags", "HonestPeptide_How_to_Read_COA", "bestpepprices_COA_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Verify batch number is present, non-generic, and matches the batch number on the product vial or packing slip",
+        "false_positive_notes": "Small vendors may use simple numbering schemes that are still legitimate; context and other indicators matter"
+      },
+      {
+        "rule_id": "STRUCT-003",
+        "name": "Analysis Date Present",
+        "description": "COA must include the date on which testing was performed.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Specific date in recognizable format (DD/MM/YYYY, MM/DD/YYYY, or YYYY-MM-DD)",
+        "red_flags": [
+          "No date listed",
+          "Date field present but empty",
+          "Vague timeframe like 'Q3 2024' with no specific date"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_How_to_Read_COA", "bestpepprices_COA_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Confirm a specific, parseable date is present",
+        "false_positive_notes": "None — a COA without a specific date cannot be verified regardless of other factors"
+      },
+      {
+        "rule_id": "STRUCT-004",
+        "name": "Testing Laboratory Name Present",
+        "description": "The COA must identify the specific laboratory that performed the testing.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Named laboratory (e.g., 'Janoshik Analytical', 'Colmaric Analyticals', 'Vanguard Laboratory')",
+        "red_flags": [
+          "No lab name anywhere on document",
+          "'Internal Lab' or 'In-House QC'",
+          "'XYZ Research Internal Lab' with no independent identity",
+          "Logo without named legal entity",
+          "'Third-party tested' with no lab named"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags", "Reddit_r_PeptideProgress_COA_Beginners", "bestpepprices_COA_Guide"],
+        "evaluation_method": "Check for a specific, named laboratory; attempt independent web search to verify lab exists",
+        "false_positive_notes": "None — lab name must be explicitly present"
+      },
+      {
+        "rule_id": "STRUCT-005",
+        "name": "Laboratory Address Present",
+        "description": "The COA should include a physical address for the testing laboratory.",
+        "check_type": "presence",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Full or partial physical address including at minimum city and country",
+        "red_flags": [
+          "No address",
+          "P.O. Box only with no street address",
+          "Address that cannot be verified via mapping services"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "bestpepprices_COA_Guide"],
+        "evaluation_method": "Verify address presence; optionally cross-reference with lab's own website",
+        "false_positive_notes": "Some labs list only city and country in header — acceptable if lab is otherwise independently verifiable"
+      },
+      {
+        "rule_id": "STRUCT-006",
+        "name": "Laboratory Contact Information Present",
+        "description": "The COA should include contact details for the testing laboratory (phone, email, or website URL).",
+        "check_type": "presence",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "At least one contact method: phone number, email address, or website URL",
+        "red_flags": [
+          "No contact information whatsoever",
+          "Generic email (gmail.com, yahoo.com) rather than lab domain email"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "bestpepprices_COA_Guide"],
+        "evaluation_method": "Check for at least one legitimate contact method; attempt contact to verify lab identity",
+        "false_positive_notes": "Some accredited labs list only their website URL — acceptable if website independently verifiable"
+      },
+      {
+        "rule_id": "STRUCT-007",
+        "name": "Analyst Signature or Certification Present",
+        "description": "The COA should include an analyst signature, printed name, or laboratory director certification.",
+        "check_type": "presence",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Handwritten signature, digital signature, printed analyst name, or authorized lab representative certification",
+        "red_flags": [
+          "No signature or certification of any kind",
+          "Generic 'Approved By' field with no name",
+          "Signature appears identical across multiple COAs from different dates (copy-paste)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "bestpepprices_COA_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Check for a human signature or named certification; assess whether signature appears genuine vs. copy-pasted",
+        "false_positive_notes": "Electronic signature systems produce consistent signatures by design — this rule applies primarily to supposedly handwritten signatures"
+      },
+      {
+        "rule_id": "STRUCT-008",
+        "name": "Purity Result Present as Numerical Value",
+        "description": "The COA must include an HPLC purity percentage as a specific numerical value.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Numerical purity percentage (e.g., '98.3%', '99.1%')",
+        "red_flags": [
+          "No purity listed at all",
+          "'Purity: Pass' without a numerical percentage",
+          "'Purity: High' or similar qualitative descriptor",
+          "Purity field blank"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_Complete_Guide_RUO", "Reddit_r_PeptideProgress_COA_Beginners", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Verify purity is reported as a specific numerical percentage, not a qualitative assessment",
+        "false_positive_notes": "None — numerical purity is mandatory for any credible analytical COA"
+      },
+      {
+        "rule_id": "STRUCT-009",
+        "name": "Mass Spectrometry Identity Confirmation Present",
+        "description": "The COA must include mass spectrometry results confirming compound identity via observed molecular weight.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Observed molecular weight value compared to theoretical MW for the stated peptide",
+        "red_flags": [
+          "No MS data anywhere on document",
+          "Identity 'confirmed' only by compound name without mass verification",
+          "MS column present but blank or showing only 'Conforms'"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags", "HonestPeptide_Complete_Guide_RUO", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Confirm MS-derived observed mass is present alongside theoretical mass for comparison",
+        "false_positive_notes": "Custom novel sequences may not have pre-calculated theoretical MW in literature — primarily applies to standard catalog peptides"
+      },
+      {
+        "rule_id": "STRUCT-010",
+        "name": "Pass or Fail Determination Present",
+        "description": "The COA should include an explicit Pass or Fail determination relative to a stated specification.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Explicit 'PASS' or 'FAIL' alongside specification (e.g., 'Purity: 98.3% — Spec: ≥98% — PASS')",
+        "red_flags": [
+          "Results listed with no pass/fail judgment",
+          "Pass/Fail field present but empty"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check for explicit pass/fail language relative to stated specification",
+        "false_positive_notes": "Some legitimate lab formats list only results without explicit pass/fail language — absence alone is not disqualifying"
+      },
+      {
+        "rule_id": "STRUCT-011",
+        "name": "Sample Receipt and Test Date Present",
+        "description": "The COA should document when the sample was received by the lab and when testing was performed.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "Sample receipt date and/or test date clearly stated as distinct from report issuance date",
+        "red_flags": [
+          "Only 'report date' without analysis date",
+          "Single date with no clarification of what it represents"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "bestpepprices_COA_Guide"],
+        "evaluation_method": "Verify chronological plausibility: receipt date ≤ test date ≤ report date",
+        "false_positive_notes": "Some labs combine receipt and test date into a single 'analysis date' field — acceptable"
+      },
+      {
+        "rule_id": "STRUCT-012",
+        "name": "Client or Supplier Name on COA",
+        "description": "The COA should identify the client or supplier who submitted the sample for testing.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Vendor or client name listed as sample submitter (e.g., 'Client: Honest Peptide')",
+        "red_flags": [
+          "No client name anywhere on document",
+          "Client name does not match vendor from whom product was purchased"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Verify client name matches vendor identity; flag mismatch as cross-reference failure",
+        "false_positive_notes": "Some labs omit client names under confidentiality agreements — absence alone is not disqualifying"
+      }
+    ],
+    "numerical": [
+      {
+        "rule_id": "NUM-001",
+        "name": "HPLC Purity Meets Minimum Threshold",
+        "description": "HPLC purity must meet minimum thresholds for the intended research application.",
+        "check_type": "numerical",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "≥95% for standard RUO research; ≥98% for advanced quantitative research; ≥99% for pharmaceutical-aspirant grade",
+        "red_flags": [
+          "Purity < 95% for any research-grade claim",
+          "Purity < 98% when vendor claims 'pharmaceutical grade' or 'premium'",
+          "Purity < 90% in any context"
+        ],
+        "source_article": ["HonestPeptide_Complete_Guide_RUO", "SubQProtocol_COA_Verification_2026", "bestpepprices_COA_Guide", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Parse purity percentage; flag below 95% as major concern; flag below 90% as critical rejection",
+        "false_positive_notes": "Early-stage exploratory research may accept 85-90%; crude peptides exist for specific assay types — context-dependent"
+      },
+      {
+        "rule_id": "NUM-002",
+        "name": "Purity Value Has Specific Non-Round Decimal",
+        "description": "Genuine HPLC purity results are reported to one or two decimal places and show natural instrument variation — not suspiciously round numbers.",
+        "check_type": "pattern",
+        "severity": "major",
+        "weight": 8,
+        "expected_value": "Values like 98.3%, 99.1%, 97.8% — specific, non-round decimal values",
+        "red_flags": [
+          "Purity reported as exactly 99.0% or 100.0%",
+          "All products from vendor showing identical purity to the decimal",
+          "Purity reported as integer with no decimal (e.g., '99%')"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "PeptideRecon_Verify_COAs_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Check decimal precision; evaluate pattern across multiple COAs from same vendor for suspicious uniformity",
+        "false_positive_notes": "A single round number on a single COA is inconclusive; the pattern across a vendor's catalog is the key indicator"
+      },
+      {
+        "rule_id": "NUM-003",
+        "name": "Purity Does Not Exceed 100%",
+        "description": "HPLC purity cannot physically exceed 100%. Any reported value above 100% indicates data fabrication.",
+        "check_type": "numerical",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Purity ≤ 100.0%",
+        "red_flags": [
+          "Any purity value > 100%"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Simple numerical check; any value exceeding 100.0% is an automatic forgery indicator",
+        "false_positive_notes": "None — physically impossible; automatic disqualification"
+      },
+      {
+        "rule_id": "NUM-004",
+        "name": "Mass Spectrometry Error Within Instrument Tolerance",
+        "description": "The difference between observed and theoretical molecular weight must fall within instrument-appropriate tolerances.",
+        "check_type": "numerical",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "MALDI-TOF: ±0.1–0.3 Da for peptides <2000 Da; ESI-MS: ±0.05 Da; general tolerance ±1 Da",
+        "red_flags": [
+          "Mass error > 1 Da (general threshold)",
+          "Mass error > 0.3 Da for MALDI-TOF on small peptides",
+          "Observed mass exactly equals theoretical mass with zero error (see FORG-003)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Calculate |observed_mass - theoretical_mass|; compare to instrument-appropriate tolerance; note method used",
+        "false_positive_notes": "ESI-MS calculates mass from charge states — averaging can shift apparent error; method must be known to determine appropriate tolerance"
+      },
+      {
+        "rule_id": "NUM-005",
+        "name": "Net Peptide Content Within Expected Range",
+        "description": "Net Peptide Content (NPC) measures actual peptide percentage in total powder, accounting for counter-ions (TFA, acetate, HCl) and residual moisture. Should fall within 60–90%.",
+        "check_type": "numerical",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "NPC between 60% and 90%; ideally ≥70%",
+        "red_flags": [
+          "NPC > 95% (chemically implausible for lyophilized peptides with counter-ions and moisture)",
+          "NPC < 50% (suggests excessive counter-ion or moisture content)",
+          "NPC = 100% (physically impossible)",
+          "NPC value identical to HPLC purity (suggests the two metrics are being confused)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Parse NPC value; flag values outside 50–95% range as suspicious; values >95% should be treated as critical forgery flag",
+        "false_positive_notes": "Short di/tripeptides may have NPC outside typical range; the NPC determination method affects results"
+      },
+      {
+        "rule_id": "NUM-006",
+        "name": "COA Age Within Acceptable Window",
+        "description": "The analysis date should be recent enough to be relevant to current stock.",
+        "check_type": "numerical",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Analysis date within 18 months of purchase or evaluation date; ideally within 90 days",
+        "red_flags": [
+          "Analysis date > 24 months before current date",
+          "Analysis date > 18 months for actively marketed product",
+          "Single old COA provided for new orders as if it applies to all inventory"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "PeptideRecon_Verify_COAs_Guide", "HonestPeptide_Complete_Guide_RUO", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Calculate days between analysis date and current date; flag if >548 days (18 months); critical concern if >730 days (24 months)",
+        "false_positive_notes": "Long-shelf-life compounds tested at synthesis may have older COAs for legitimate old stock batches"
+      },
+      {
+        "rule_id": "NUM-007",
+        "name": "HPLC Detection Wavelength is Standard for Peptides",
+        "description": "Peptide purity by HPLC should be measured at standard UV detection wavelengths for amide bond absorption.",
+        "check_type": "numerical",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "Detection wavelength at 214 nm or 220 nm (primary peptide bond UV absorption)",
+        "red_flags": [
+          "Detection at 254 nm without justification (typical for aromatic chromophores, not general peptides)",
+          "No wavelength specified in HPLC method"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check stated detection wavelength; flag use of non-standard wavelengths without explanation",
+        "false_positive_notes": "Peptides containing aromatic residues (Trp, Tyr, Phe) may use 280 nm — acceptable with justification; 210 nm also acceptable"
+      },
+      {
+        "rule_id": "NUM-008",
+        "name": "Trace Impurity Peaks Present in HPLC Chromatogram",
+        "description": "Real HPLC chromatograms show small impurity peaks even in high-purity samples. A completely clean chromatogram with zero secondary peaks is suspicious.",
+        "check_type": "numerical",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Minor secondary peaks visible, totaling 0.1–5% area for samples claiming 95–99% purity",
+        "red_flags": [
+          "Zero impurity peaks visible in chromatogram while purity claimed at <100%",
+          "Chromatogram shows only a single perfect Gaussian peak",
+          "Integration table showing 100% area for main peak when purity listed as 98% or 99%"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Examine chromatogram for presence of impurity peaks; flag complete absence when purity claimed below 99.9%",
+        "false_positive_notes": "Very high purity (>99.8%) may show negligible impurity peaks; low-resolution chromatogram images may hide minor peaks"
+      },
+      {
+        "rule_id": "NUM-009",
+        "name": "Endotoxin Level Meets Standard Threshold",
+        "description": "For injectable-grade peptides, bacterial endotoxin testing should meet standard thresholds.",
+        "check_type": "numerical",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Endotoxin < 0.5 EU/mg (standard injectable threshold); result in EU/ml or EU/vial with volume stated",
+        "red_flags": [
+          "Endotoxin level > 0.5 EU/mg",
+          "Endotoxin listed as 'Not Tested' for products marketed with injection-adjacent language",
+          "Units not specified"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "SubQProtocol_COA_Verification_2026", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Parse endotoxin value and units; convert to EU/mg if possible; flag values exceeding threshold",
+        "false_positive_notes": "RUO peptides not intended for injection do not require endotoxin testing — absence is expected in basic RUO COAs"
+      },
+      {
+        "rule_id": "NUM-010",
+        "name": "Known Catalog Peptide Molecular Weight in Reference Range",
+        "description": "Commonly tested catalog peptides have well-established theoretical molecular weights that the COA observed mass should closely match.",
+        "check_type": "numerical",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "BPC-157: ~1419.5 Da; TB-500 (Thymosin Beta-4): ~4963 Da; GHK-Cu peptide component: ~340 Da",
+        "red_flags": [
+          "BPC-157 observed mass significantly different from ~1419 Da",
+          "TB-500 observed mass significantly different from ~4963 Da",
+          "Any standard catalog peptide with mass discrepancy > 2 Da from known theoretical value"
+        ],
+        "source_article": ["Reddit_r_PeptideProgress_COA_Beginners", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Look up theoretical MW for the specific peptide; compare to observed MS value; flag discrepancies beyond instrument tolerance",
+        "false_positive_notes": "Salt adducts (Na+22, K+38) can shift apparent mass in certain MS modes; ESI shows charge-state-divided m/z values — calculate correctly"
+      },
+      {
+        "rule_id": "NUM-011",
+        "name": "HPLC Flow Rate Within Analytical Range",
+        "description": "HPLC method parameters should include a plausible flow rate for analytical-scale peptide separation.",
+        "check_type": "numerical",
+        "severity": "minor",
+        "weight": 3,
+        "expected_value": "Flow rate between 0.5 and 1.5 mL/min for standard analytical-scale HPLC",
+        "red_flags": [
+          "Flow rate > 5 mL/min (preparative scale, not analytical)",
+          "Flow rate < 0.1 mL/min (unusually slow for standard HPLC)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Parse flow rate from method parameters; flag values outside typical analytical range",
+        "false_positive_notes": "UHPLC systems operate at 0.2–0.5 mL/min legitimately; minor deviation acceptable — this is a plausibility check, not a hard cutoff"
+      }
+    ],
+    "analytical_methods": [
+      {
+        "rule_id": "METH-001",
+        "name": "HPLC Method Explicitly Named",
+        "description": "HPLC is the industry standard for peptide purity analysis. COA must explicitly reference HPLC as the purity testing method.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Explicit reference to HPLC (High-Performance Liquid Chromatography) as purity analysis method",
+        "red_flags": [
+          "No method specified for purity result",
+          "Purity stated without any analytical method named",
+          "Purity claimed via spectrophotometry alone without HPLC"
+        ],
+        "source_article": ["HonestPeptide_Complete_Guide_RUO", "PeptideRecon_Verify_COAs_Guide", "bestpepprices_COA_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Confirm 'HPLC' is explicitly named as purity analysis method in method section or results table",
+        "false_positive_notes": "None — HPLC is mandatory for credible purity claims on research peptides"
+      },
+      {
+        "rule_id": "METH-002",
+        "name": "Mass Spectrometry Method Explicitly Named",
+        "description": "MS testing is required to confirm molecular identity. HPLC alone cannot confirm the compound is correct.",
+        "check_type": "presence",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "MS, ESI-MS, MALDI-TOF, or equivalent method explicitly named for identity confirmation",
+        "red_flags": [
+          "Identity 'confirmed' only by HPLC retention time with no MS",
+          "No MS data present for catalog peptides",
+          "'Identity: Conforms' without any molecular weight data"
+        ],
+        "source_article": ["HonestPeptide_Complete_Guide_RUO", "TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Verify MS-derived molecular weight data is present; distinguish MS identity data from HPLC purity data",
+        "false_positive_notes": "NMR is an accepted supplementary identity method; MS remains the primary standard for catalog peptides"
+      },
+      {
+        "rule_id": "METH-003",
+        "name": "Reversed-Phase HPLC with C18 Column",
+        "description": "Standard peptide purity analysis uses RP-HPLC with a C18 stationary phase column.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "Column type specified as C18 or octadecylsilica (ODS); RP-HPLC method stated",
+        "red_flags": [
+          "Column type not specified anywhere in method",
+          "Ion-exchange or non-reversed-phase column without justification"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Check method section for column type specification; note if non-C18 without justification",
+        "false_positive_notes": "C4 or C8 columns are legitimately used for large hydrophobic peptides — acceptable deviation with justification"
+      },
+      {
+        "rule_id": "METH-004",
+        "name": "Mobile Phase Specification Present",
+        "description": "HPLC mobile phase should be specified. Standard for peptides is a water/acetonitrile gradient with TFA or formate modifier.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Mobile phase components listed (e.g., 'A: 0.1% TFA in water; B: 0.1% TFA in acetonitrile')",
+        "red_flags": [
+          "No mobile phase specified at all",
+          "Mobile phase incompatible with UV detection at 214/220 nm"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check for mobile phase specification in method parameters section",
+        "false_positive_notes": "Formate, phosphate, or ammonium acetate buffers are acceptable alternatives to TFA — exact composition is less critical than presence"
+      },
+      {
+        "rule_id": "METH-005",
+        "name": "MS Technique Type Specified",
+        "description": "The type of mass spectrometry used should be specified to allow appropriate mass error tolerance assessment.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "MS technique explicitly named: MALDI-TOF, ESI-MS, ESI-QTOF, Q-TOF, or similar",
+        "red_flags": [
+          "MS data present but technique type not named anywhere",
+          "'Mass confirmed' without naming any technique",
+          "Only 'MS' listed with no elaboration"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check for explicit MS technique name in method section or results table",
+        "false_positive_notes": "Some COA formats list MS results without naming technique — request clarification from vendor if evaluating for high-stakes use"
+      },
+      {
+        "rule_id": "METH-006",
+        "name": "HPLC Chromatogram Data Attached",
+        "description": "A credible HPLC COA should include the actual chromatogram or peak table data, not just a purity number.",
+        "check_type": "presence",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Visual chromatogram image or peak table data with retention times and area percentages",
+        "red_flags": [
+          "Purity percentage stated without any supporting chromatogram",
+          "Chromatogram field labeled but blank",
+          "No peak integration table provided"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Check for presence of chromatogram image or peak table; a purity number alone without supporting data is insufficient",
+        "false_positive_notes": "Some established labs (notably Janoshik Analytical) provide numerical results without embedded chromatogram images — absent chromatogram is not disqualifying if lab is independently verifiable and digital verification key is provided"
+      },
+      {
+        "rule_id": "METH-007",
+        "name": "HPLC Chromatogram Baseline Stability",
+        "description": "HPLC chromatogram baseline should be flat and stable, indicating proper equipment calibration and sample preparation.",
+        "check_type": "boolean",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Flat, stable baseline before and after main peptide peak",
+        "red_flags": [
+          "Significant monotonic baseline drift throughout entire run",
+          "Baseline rises sharply at gradient end (may indicate column bleed or contamination)",
+          "Periodic noise pattern throughout baseline (instrument malfunction)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Visual inspection of chromatogram baseline for stability across the run",
+        "false_positive_notes": "Minor drift in gradient elution systems is normal; concern is pronounced instability or non-monotonic drift"
+      },
+      {
+        "rule_id": "METH-008",
+        "name": "Integration Lines Visible on Chromatogram",
+        "description": "Properly analyzed HPLC chromatograms show integration markers at peak boundaries, indicating software-processed rather than manually drawn data.",
+        "check_type": "boolean",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Integration start and end markers visible on peaks in chromatogram",
+        "red_flags": [
+          "No integration lines visible on any peaks while area percentages are claimed",
+          "Peak areas claimed without any visible integration boundary markers"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Visual inspection of chromatogram image for integration markers on peaks",
+        "false_positive_notes": "Some software does not display integration marks visually in exported chromatograms — absence alone is weak evidence"
+      },
+      {
+        "rule_id": "METH-009",
+        "name": "ESI-MS Charge States Present for Large Peptides",
+        "description": "For peptides >1000 Da analyzed by ESI-MS, multiple charge states should be present in the spectrum. Each state should yield the same calculated mass.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "Multiple charge state peaks ([M+H]+, [M+2H]2+, [M+3H]3+, etc.) for ESI-MS of peptides >1000 Da",
+        "red_flags": [
+          "Single charge state peak only for large peptide analyzed by ESI-MS",
+          "Multiple charge states present but yielding inconsistent calculated masses"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check for multiple charge state peaks in ESI spectrum for large peptides; verify mass calculations from each state are internally consistent",
+        "false_positive_notes": "MALDI-TOF typically shows predominantly singly charged ions — charge state multiplicity requirement applies specifically to ESI-MS, not MALDI"
+      },
+      {
+        "rule_id": "METH-010",
+        "name": "Net Peptide Content Method Specified",
+        "description": "If NPC is reported, the method of determination should be specified.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "NPC determination method specified (e.g., amino acid analysis, nitrogen determination, UV at 205 nm)",
+        "red_flags": [
+          "NPC stated without any method specified",
+          "NPC value identical to HPLC purity percentage (indicates confusion of two distinct metrics)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Check if NPC is reported; if so, verify method is specified and value differs from HPLC purity",
+        "false_positive_notes": "NPC is optional for basic RUO COAs; absence of NPC is not a red flag — it is reporting NPC without a method that raises concern"
+      },
+      {
+        "rule_id": "METH-011",
+        "name": "Heavy Metals Testing by ICP-MS",
+        "description": "Comprehensive COAs should include heavy metals screening using ICP-MS for Pb, Cd, As, Hg.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "ICP-MS heavy metals results for at minimum Pb, Cd, As, Hg at ppb-level detection",
+        "red_flags": [
+          "Heavy metals listed as 'Not Detected' without specifying the method or detection limit",
+          "Heavy metals panel absent for products with pharmaceutical-grade claims"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Check for ICP-MS heavy metals data; note absence as incomplete documentation for premium claims",
+        "false_positive_notes": "RUO peptides are not required to test heavy metals; absence in basic COAs is expected and not a red flag by itself"
+      },
+      {
+        "rule_id": "METH-012",
+        "name": "Endotoxin Testing by LAL Assay",
+        "description": "If endotoxin testing is performed, it should use the Limulus Amebocyte Lysate (LAL) assay or accepted equivalent.",
+        "check_type": "presence",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "LAL assay method cited for endotoxin results; results expressed in EU/ml, EU/vial, or EU/mg",
+        "red_flags": [
+          "Endotoxin result claimed without specifying any test method",
+          "Method described that is not LAL or rFC (Recombinant Factor C)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Verify LAL or rFC is cited as endotoxin method if endotoxin testing is included",
+        "false_positive_notes": "Recombinant Factor C (rFC) assay is a fully accepted alternative to LAL — not a red flag"
+      }
+    ],
+    "lab_credentials": [
+      {
+        "rule_id": "LAB-001",
+        "name": "Third-Party Independent Laboratory Used",
+        "description": "Testing must be performed by an independent laboratory with no financial or operational relationship with the vendor.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Testing performed by named independent third-party laboratory",
+        "red_flags": [
+          "In-house testing by vendor",
+          "'Internal QC lab' designation",
+          "Lab owned or operated by vendor",
+          "Vendor explicitly states they test their own products"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "Reddit_r_PeptideProgress_COA_Beginners", "HonestPeptide_Complete_Guide_RUO", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Verify independence of testing lab from vendor; check for disclosed financial relationship",
+        "false_positive_notes": "In-house COAs are better than none but should receive substantially lower scores; independence is the gold standard and cannot be substituted"
+      },
+      {
+        "rule_id": "LAB-002",
+        "name": "ISO/IEC 17025 Accreditation Stated",
+        "description": "The testing laboratory should hold ISO/IEC 17025 accreditation, the international standard for testing laboratory competence.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 8,
+        "expected_value": "ISO/IEC 17025 accreditation explicitly stated; accreditation body named",
+        "red_flags": [
+          "No accreditation mentioned",
+          "'ISO certified laboratory' used (incorrect terminology — labs are accredited not certified)",
+          "Accreditation body named but non-existent or unverifiable"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "bestpepprices_COA_Guide"],
+        "evaluation_method": "Check for ISO/IEC 17025 accreditation language; verify accreditation body is legitimate; search accreditation body database",
+        "false_positive_notes": "Some legitimate specialized peptide testing labs (e.g., Janoshik Analytical) are widely trusted in the community despite not always prominently displaying accreditation — combine with LAB-006 and LAB-007"
+      },
+      {
+        "rule_id": "LAB-003",
+        "name": "Correct Accreditation Terminology Used",
+        "description": "Testing laboratories are 'accredited' under ISO/IEC 17025, not 'certified'. Consistent terminology misuse is a credibility signal.",
+        "check_type": "pattern",
+        "severity": "minor",
+        "weight": 3,
+        "expected_value": "'Accredited' used in context of laboratory quality standard compliance",
+        "red_flags": [
+          "'ISO 17025 certified laboratory'",
+          "'Certified analytical lab' when referring to laboratory quality system status"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check accreditation language; note consistent misuse of 'certified' vs 'accredited' for quality systems",
+        "false_positive_notes": "Lay terminology misuse is common and not necessarily indicative of fraud; this is a low-weight credibility indicator only"
+      },
+      {
+        "rule_id": "LAB-004",
+        "name": "Accreditation Scope Covers Peptide Analysis",
+        "description": "The laboratory's accreditation scope must cover the analytical methods used (HPLC, MS) for peptide testing.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Lab accreditation scope includes HPLC purity analysis and/or mass spectrometry for pharmaceutical or peptide compounds",
+        "red_flags": [
+          "Lab accredited only for environmental testing or food safety",
+          "Accreditation scope does not include pharmaceutical or small molecule analysis",
+          "Scope of accreditation not disclosed or unverifiable"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Search accrediting body online database for lab's scope; verify it covers peptide analytical methods",
+        "false_positive_notes": "Scope databases may not be easily searchable by public; inability to verify scope online is not automatic disqualification"
+      },
+      {
+        "rule_id": "LAB-005",
+        "name": "Accreditation Body is Recognized and Verifiable",
+        "description": "The stated accreditation body must be a real, recognized national or international accreditation authority.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Recognized accreditation body: ANAB (US), A2LA (US), UKAS (UK), CNAS (China), DAkkS (Germany), COFRAC (France), NATA (Australia), or ILAC member body",
+        "red_flags": [
+          "Unknown accreditation body not appearing in ILAC membership directory",
+          "Body name that resembles but is not an official entity (e.g., 'World Accreditation Bureau')",
+          "Fabricated-sounding accreditation body"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Search for accreditation body name; verify it is a member of ILAC (International Laboratory Accreditation Cooperation)",
+        "false_positive_notes": "None — a fabricated or unrecognized accreditation body is an unambiguous red flag"
+      },
+      {
+        "rule_id": "LAB-006",
+        "name": "Lab Independently Discoverable via Web Search",
+        "description": "A legitimate analytical laboratory should be independently findable via web search with consistent identity information.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 8,
+        "expected_value": "Lab has established web presence; contact information consistent between COA and web presence",
+        "red_flags": [
+          "Lab name returns zero independent search results",
+          "Only results linking back to the vendor's own website",
+          "Lab website is newly created (no historical footprint)",
+          "Lab information inconsistent between COA and online presence"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Web search for lab name; verify independent existence; check Wayback Machine for historical presence if needed",
+        "false_positive_notes": "Small or specialized regional labs may have minimal web presence; absence alone is inconclusive — combine with LAB-007 direct contact verification"
+      },
+      {
+        "rule_id": "LAB-007",
+        "name": "Lab Verifies COA When Contacted Directly",
+        "description": "When contacted, the testing laboratory should be able to confirm the COA is genuine and that the report number exists in their system.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Lab confirms COA authenticity when contacted with report or task number",
+        "red_flags": [
+          "Lab states they have never worked with the named vendor",
+          "Lab has no record of the specified batch or task number",
+          "Lab denies ever issuing the document",
+          "Lab contact information is unreachable by any method"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide", "Reddit_r_PeptideProgress_COA_Beginners"],
+        "evaluation_method": "Contact lab via phone or email with COA report/task number; ask lab to confirm report existence (not necessarily vendor identity)",
+        "false_positive_notes": "Labs may not disclose client names under confidentiality agreements — they can confirm report number existence without naming the client"
+      },
+      {
+        "rule_id": "LAB-008",
+        "name": "Digital Verification Key or QR Code is Valid",
+        "description": "Some labs (notably Janoshik Analytical) provide digital verification keys or QR codes linking to an online database confirming COA authenticity.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 8,
+        "expected_value": "QR code or verification key links to lab verification system and displays test data matching the paper COA",
+        "red_flags": [
+          "QR code leads to vendor website rather than lab verification system",
+          "Verification key returns no result or server error",
+          "QR code links to a domain unrelated to the stated lab",
+          "Verification key format does not match lab's documented format"
+        ],
+        "source_article": ["HonestPeptide_How_to_Read_COA", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Scan QR code or enter verification key at lab verification URL (e.g., janoshik.com/verify); confirm all data matches paper COA",
+        "false_positive_notes": "Not all legitimate labs offer digital verification; absence of QR code or verification key is not a red flag unless the lab specifically claims to provide it"
+      },
+      {
+        "rule_id": "LAB-009",
+        "name": "Lab Has Established Track Record in Peptide Testing",
+        "description": "Testing by a laboratory with known history in peptide analytical testing provides higher confidence than an unknown lab.",
+        "check_type": "boolean",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "Testing performed by a recognized peptide testing laboratory: Janoshik Analytical (Slovakia; verify at janoshik.com/verify), Colmaric Analyticals (USA), Vanguard Laboratory (A2LA #6377.01.01), MZ Biolabs, Freedom Analytics Labs (USA), Novascreen Biosciences",
+        "red_flags": [
+          "Completely unknown lab with no verifiable history in peptide testing community"
+        ],
+        "source_article": ["Reddit_r_PeptideProgress_COA_Beginners", "TruPeptide_Fake_COA_Red_Flags", "SubQProtocol_COA_Verification_2026", "HonestPeptide_How_to_Read_COA"],
+        "evaluation_method": "Cross-reference lab name against known legitimate peptide testing laboratories; unknown labs require additional verification steps",
+        "false_positive_notes": "New or regional labs may be entirely legitimate; this is a trust-building indicator, not a disqualifying check in isolation"
+      },
+      {
+        "rule_id": "LAB-010",
+        "name": "Accreditation is Current (Not Expired)",
+        "description": "ISO 17025 accreditation must be current as of the analysis date. Expired accreditation provides no quality assurance.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Accreditation is current as of analysis date; any accreditation expiry shown on COA is after the analysis date",
+        "red_flags": [
+          "Accreditation expiry date shown is before COA analysis date",
+          "Accreditation certificate displayed on vendor site with past expiry date",
+          "Accreditation body database shows accreditation as lapsed"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check accreditation expiry date on COA or via accreditation body's online directory; compare to analysis date",
+        "false_positive_notes": "Most COAs do not list accreditation expiry; online accreditation body databases are the authoritative verification source"
+      }
+    ],
+    "formatting": [
+      {
+        "rule_id": "FMT-001",
+        "name": "Document Clarity and Professional Appearance",
+        "description": "Legitimate COAs are generated by professional laboratory information management systems and should be clear, readable, and professional in appearance.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "High-resolution, clearly legible text and graphics throughout the document",
+        "red_flags": [
+          "Blurry or pixelated overall document at normal reading zoom",
+          "Text that becomes unclear when zoomed to 150%",
+          "Obvious scan artifacts on a document that should be digitally native"
+        ],
+        "source_article": ["Reddit_r_PeptideProgress_COA_Beginners", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Zoom to 200% in PDF viewer; check for overall clarity and professional appearance across all sections",
+        "false_positive_notes": "Older labs may provide scanned paper copies; low resolution alone is not disqualifying if other elements are consistent and lab is verifiable"
+      },
+      {
+        "rule_id": "FMT-002",
+        "name": "Uniform Resolution Across All Document Sections",
+        "description": "All sections of a genuine digital COA should have consistent resolution. Mixed resolution between sections indicates image editing and content replacement.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 8,
+        "expected_value": "Consistent resolution and sharpness across all text, numbers, and graphics throughout the document",
+        "red_flags": [
+          "Some sections crisp while specific data fields appear pixelated",
+          "Numbers in result fields at visibly different resolution than surrounding text",
+          "Lab logo noticeably sharper or blurrier than document body text",
+          "Signature area at different resolution than surrounding content"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Compare resolution of key sections at same zoom level: logo area, result numbers, signatures, and body text",
+        "false_positive_notes": "Embedded raster graphics (e.g., lab logo as PNG) may naturally differ slightly from surrounding vector text — minor variation in logo area is acceptable"
+      },
+      {
+        "rule_id": "FMT-003",
+        "name": "Font Consistency Throughout Document",
+        "description": "A genuine lab document uses consistent fonts throughout. Data fields in a noticeably different font suggest content was inserted from another source.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Consistent font family, size, and style used for similar content types throughout the document",
+        "red_flags": [
+          "Purity or mass result fields in noticeably different font than column labels",
+          "Numbers in data fields at different typeface than surrounding text",
+          "Inconsistent character spacing or kerning specifically in numerical result fields"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Compare fonts used in result data fields against document template text and headers; flag obvious mismatches",
+        "false_positive_notes": "Multi-column lab software may use slightly different formatting for data vs. label fields by design; minor stylistic difference is not equivalent to different font family"
+      },
+      {
+        "rule_id": "FMT-004",
+        "name": "Text and Number Alignment Consistent with Template",
+        "description": "In a genuine lab-generated document, all data values align consistently with the document's column headers and template grid.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Numbers and text align properly with column headers and template structure",
+        "red_flags": [
+          "Numerical values that appear slightly offset from their labeled fields",
+          "Text baseline inconsistency within the same table row",
+          "Values that do not align with corresponding column headers above them"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check alignment of data values against template structure; zoom in to 200% to check baseline and column alignment",
+        "false_positive_notes": "OCR-extracted or reformatted documents may have minor alignment issues that are not intentional; pattern of misalignment is more significant than isolated instance"
+      },
+      {
+        "rule_id": "FMT-005",
+        "name": "No Clone-Stamp or Copy-Paste Artifacts Visible",
+        "description": "Photo editing tools leave detectable artifacts when content is cloned or copy-pasted over original content to alter numerical values.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "No repeating texture patterns, no visible seam lines, no areas of unusual uniformity in document background",
+        "red_flags": [
+          "Repeating texture or noise patterns in background regions near data fields",
+          "Visible straight-edge seam lines in background image areas",
+          "Background texture discontinuity immediately surrounding specific text or numbers",
+          "Areas of suspiciously uniform background where document texture should show natural variation"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Inspect background regions near key data fields for repeating patterns; check areas around numerical values for unusual uniformity inconsistent with rest of document",
+        "false_positive_notes": "Pure white or solid-color backgrounds will naturally appear uniform — look for texture inconsistencies specifically in scanned or printed documents with visible paper texture"
+      },
+      {
+        "rule_id": "FMT-006",
+        "name": "Signature Appears Natural and Unique",
+        "description": "If a handwritten or digital signature is present, it should appear natural and should vary across different documents if the analyst signs regularly.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Natural-looking signature with organic line quality; some variation present across multiple COAs from same analyst",
+        "red_flags": [
+          "Signature appears pixel-for-pixel identical across multiple COAs from different dates",
+          "Signature appears digitally drawn with perfectly uniform stroke weight",
+          "Signature shows jagged or pixelated edges inconsistent with surrounding document quality"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Compare signature across multiple COAs from same lab; check for organic variation; zoom in to examine stroke quality",
+        "false_positive_notes": "Electronic signature systems produce consistent signatures by design — identical electronic signatures across COAs from same analyst are normal; rule applies primarily to supposedly handwritten signatures"
+      },
+      {
+        "rule_id": "FMT-007",
+        "name": "Security Features Appear Integrated, Not Overlaid",
+        "description": "Security features (watermarks, QR codes, seals, stamps) should appear as integral document elements rather than obvious post-creation overlays.",
+        "check_type": "boolean",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Security features appear as embedded document elements with appropriate transparency and integration",
+        "red_flags": [
+          "QR code appears as a floating rectangular image overlay with visible white background box",
+          "Watermark with sharp distinct edges inconsistent with typical transparency",
+          "Lab seal or stamp that appears pasted with obvious rectangular boundary"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Examine security features for signs of post-creation insertion; check layer properties in PDF viewer if accessible",
+        "false_positive_notes": "Digital-native COAs may legitimately embed QR codes as image objects with white backgrounds — this is a weak indicator only"
+      },
+      {
+        "rule_id": "FMT-008",
+        "name": "Document Fully Downloadable and Accessible",
+        "description": "Legitimate COAs should be downloadable as full-resolution files. Non-downloadable or partial COA display prevents proper verification.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "COA available as downloadable PDF or high-resolution image with all content readable when zoomed",
+        "red_flags": [
+          "COA only viewable as embedded low-resolution thumbnail with no download option",
+          "Download button absent or non-functional",
+          "Content becomes unreadable when zoomed to normal inspection magnification",
+          "COA exists only as a non-zoomable screenshot on vendor website"
+        ],
+        "source_article": ["bestpepprices_COA_Guide"],
+        "evaluation_method": "Attempt to download COA; verify all content is readable at full resolution",
+        "false_positive_notes": "Some vendors provide COA by email on request rather than public posting — acceptable if provided promptly and completely on request"
+      }
+    ],
+    "metadata": [
+      {
+        "rule_id": "META-001",
+        "name": "PDF Creation Date Consistent with Analysis Date",
+        "description": "PDF document metadata creation date should be on or after the analysis date stated in the document body.",
+        "check_type": "cross_reference",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "PDF creation date >= analysis date stated in document",
+        "red_flags": [
+          "PDF creation date significantly predates the analysis date (document existed before testing occurred)",
+          "PDF creation date is years later than stated analysis date (old COA data repackaged in new document)"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Extract PDF metadata via File > Properties in Adobe Reader or exiftool; compare 'Creation Date' to analysis date in document",
+        "false_positive_notes": "Documents scanned to PDF, template-based generation, or system clock errors can cause date discrepancies — not automatically disqualifying but warrants investigation"
+      },
+      {
+        "rule_id": "META-002",
+        "name": "Authoring Software is Professional Lab or Document Tool",
+        "description": "PDF metadata should indicate the document was created by professional laboratory or office software, not image editing applications.",
+        "check_type": "pattern",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "PDF Producer or Creator field shows professional software: Adobe Acrobat, LIMS software, Empower, Chromeleon, LibreOffice, Microsoft Word converted to PDF",
+        "red_flags": [
+          "PDF created by Adobe Photoshop",
+          "PDF created by GIMP",
+          "PDF created by Microsoft Paint or any raster image editor",
+          "PDF created by any photo manipulation software"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check PDF metadata 'Producer' and 'Creator' fields; flag any image editing software as a strong forgery indicator",
+        "false_positive_notes": "Some labs scan paper COAs and convert to PDF using image-to-PDF tools — context matters; image-editor-originated PDFs are still a significant red flag requiring additional verification"
+      },
+      {
+        "rule_id": "META-003",
+        "name": "No Future-Dated Analysis",
+        "description": "Analysis date must not be in the future relative to the current date. Future-dated analysis is physically impossible.",
+        "check_type": "cross_reference",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Analysis date <= current date (2026-05-17 at time of this ruleset)",
+        "red_flags": [
+          "Analysis date set to any future date",
+          "Test date listed as upcoming",
+          "Any date field set to a future date"
+        ],
+        "source_article": ["SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Parse analysis date and compare to today's date; any future date is an automatic forgery indicator",
+        "false_positive_notes": "None — a future analysis date is physically impossible; constitutes clear evidence of document fabrication"
+      },
+      {
+        "rule_id": "META-004",
+        "name": "Document Modification History Clean",
+        "description": "PDF metadata should not show unexpected edits made long after the document was generated.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Modification date equals or is close to creation date; no extensive revision history",
+        "red_flags": [
+          "Document modified significantly (weeks or months) after initial creation",
+          "Multiple revision versions in PDF metadata history",
+          "Modification date much later than creation date without legitimate explanation"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Check PDF metadata 'Modified Date' vs 'Creation Date'; note gaps longer than a few hours",
+        "false_positive_notes": "PDF optimization, printing to new PDF, digital signature application, and accessibility tagging can all update modification date legitimately"
+      },
+      {
+        "rule_id": "META-005",
+        "name": "COA is Batch-Specific, Not Generic Template",
+        "description": "Each COA should contain unique batch-specific data indicating it was generated specifically for that production run, not reused from a template with only the product name changed.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "COA contains batch-specific values (unique lot number, specific purity percentage, test date for that batch) indicating it was generated fresh for this production run",
+        "red_flags": [
+          "Structurally identical COA documents across different batches with only product name changed",
+          "Same PDF metadata creation timestamp across COAs for supposedly different test events",
+          "Same analyst signature date appearing across COAs from different stated test dates",
+          "Purity values identical to decimal point across multiple supposedly independent batches"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Compare COAs for different products from same vendor; flag structurally and numerically identical content across chemically distinct products",
+        "false_positive_notes": "Template-generated COAs are legitimate when batch-specific data fields are properly populated with distinct values; flag only when identical content appears across supposedly different batches"
+      }
+    ],
+    "cross_reference": [
+      {
+        "rule_id": "XREF-001",
+        "name": "Batch Number Matches Product Vial",
+        "description": "The lot or batch number on the COA must exactly match the lot or batch number on the product vial label and packing slip.",
+        "check_type": "cross_reference",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Exact character-for-character match between COA batch number and vial/order documentation",
+        "red_flags": [
+          "Batch number on COA differs from batch number on vial",
+          "No batch number on vial to compare against",
+          "Vendor provides only a generic COA not specific to the received batch"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "PeptideRecon_Verify_COAs_Guide", "HonestPeptide_Complete_Guide_RUO", "Reddit_r_PeptideProgress_COA_Beginners"],
+        "evaluation_method": "Compare COA lot number field directly to vial label and packing slip; flag any discrepancy",
+        "false_positive_notes": "None — a batch number mismatch means the COA may not represent the product actually received"
+      },
+      {
+        "rule_id": "XREF-002",
+        "name": "Observed MS Mass Matches Theoretical for Named Peptide",
+        "description": "The observed molecular weight from MS must match the theoretical molecular weight calculated from the peptide's stated amino acid sequence within instrument tolerance.",
+        "check_type": "cross_reference",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Observed mass within instrument-appropriate tolerance of independently calculated theoretical mass for the named peptide sequence",
+        "red_flags": [
+          "Mass discrepancy > 1 Da between observed and theoretical",
+          "Theoretical mass not provided for comparison",
+          "Observed mass matches the theoretical mass of a different known peptide (wrong compound)"
+        ],
+        "source_article": ["Reddit_r_PeptideProgress_COA_Beginners", "PeptideRecon_Verify_COAs_Guide", "HonestPeptide_Complete_Guide_RUO"],
+        "evaluation_method": "Calculate theoretical MW from amino acid sequence independently; compare to observed MS value; flag discrepancies beyond instrument tolerance",
+        "false_positive_notes": "Counter-ion adducts (Na+22 Da, K+38 Da) can shift apparent mass in certain MS modes; ESI-MS shows charge-state-divided m/z values requiring deconvolution"
+      },
+      {
+        "rule_id": "XREF-003",
+        "name": "Vendor Name on COA Matches Known Vendor",
+        "description": "The client or submitter name on the COA should match the vendor from whom the product was purchased.",
+        "check_type": "cross_reference",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Client name on COA matches vendor's registered name, trade name, or known DBA",
+        "red_flags": [
+          "Client name on COA is a completely different unrelated company",
+          "Client listed as generic entity with no connection to vendor",
+          "No client name present preventing any vendor identity verification"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Cross-reference COA client name against vendor's registered business name, website name, and known trade names",
+        "false_positive_notes": "Vendors may test under parent company name, LLC name, or operating subsidiary — minor naming variants that are clearly related are acceptable"
+      },
+      {
+        "rule_id": "XREF-004",
+        "name": "All Dates Chronologically Plausible",
+        "description": "All dates on the COA must form a chronologically plausible sequence: sample receipt ≤ analysis date ≤ report date ≤ current date.",
+        "check_type": "cross_reference",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Sample receipt date ≤ analysis date ≤ report date; all dates in the past",
+        "red_flags": [
+          "Analysis date listed before sample receipt date",
+          "Report date listed before analysis date",
+          "Any date in the future (see also META-003)",
+          "Dates that are logically impossible as a sequence"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Extract all dates from COA; verify chronological sequence; flag any logical impossibility",
+        "false_positive_notes": "Time zone differences may cause minor apparent discrepancies of hours; report dates matching analysis dates exactly are common for same-day report generation"
+      },
+      {
+        "rule_id": "XREF-005",
+        "name": "ESI-MS Charge States Internally Consistent",
+        "description": "For ESI-MS data, multiple charge states should all independently calculate to the same monoisotopic or average mass.",
+        "check_type": "cross_reference",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Mass calculated independently from each charge state peak agrees with all others to within ±0.1 Da",
+        "red_flags": [
+          "Charge states calculating to significantly different masses (>0.5 Da difference)",
+          "One charge state consistent with expected peptide while others calculate to inconsistent values"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "For each charge state peak m/z: calculate mass = (m/z × z) − (z × 1.00728); verify all results agree to within tolerance",
+        "false_positive_notes": "Adduct peaks (Na+, K+) will calculate to different masses — ensure adducts are identified and excluded from mass calculation before evaluating consistency"
+      },
+      {
+        "rule_id": "XREF-006",
+        "name": "MS Adduct Peaks at Expected Mass Offsets",
+        "description": "If adduct peaks are present in the MS spectrum, they should appear at chemically predictable offsets from the main molecular ion peak.",
+        "check_type": "cross_reference",
+        "severity": "minor",
+        "weight": 4,
+        "expected_value": "Na+ adduct at M+22 Da; K+ adduct at M+38 Da; TFA adduct at M+114 Da from main ion peak",
+        "red_flags": [
+          "Peaks at unexpected offsets not corresponding to any known adduct or isotope",
+          "Satellite peaks claimed as adducts that do not match expected adduct masses"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Calculate expected adduct positions from main peak; verify any satellite peaks match known adduct masses",
+        "false_positive_notes": "Not all spectra show adduct peaks; absence of adduct peaks is entirely normal and not a red flag"
+      },
+      {
+        "rule_id": "XREF-007",
+        "name": "QR Code or Verification Key Data Matches Paper COA",
+        "description": "If a digital verification system is present, all data returned by the verification system must exactly match the paper COA content.",
+        "check_type": "cross_reference",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Online verification system returns identical compound name, batch number, purity, and dates as stated on paper COA",
+        "red_flags": [
+          "Online verification shows different purity value than paper COA",
+          "Online system shows different batch number than paper COA",
+          "Online system has no record of the verification key at all",
+          "QR code leads to a different lab's website than stated on COA"
+        ],
+        "source_article": ["HonestPeptide_How_to_Read_COA", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Scan QR code or enter verification key at lab's verification URL; compare every data field between online result and paper COA",
+        "false_positive_notes": "None — any discrepancy between digital verification and paper COA data is unambiguous evidence of document tampering"
+      },
+      {
+        "rule_id": "XREF-008",
+        "name": "HPLC and MS Data Reference Same Batch",
+        "description": "HPLC purity data and MS identity data on the same COA should both reference the same batch number and analysis date.",
+        "check_type": "cross_reference",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Same batch or lot number referenced in both HPLC purity section and MS identity section of the COA",
+        "red_flags": [
+          "HPLC and MS sections reference different batch numbers",
+          "Significantly different analysis dates for HPLC and MS sections without documented explanation"
+        ],
+        "source_article": ["HonestPeptide_Complete_Guide_RUO", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Compare batch numbers and dates in HPLC section vs MS section of the same COA document",
+        "false_positive_notes": "Some labs run HPLC and MS analyses on different instruments with slightly staggered dates — minor date difference (same day or next day) is acceptable if batch numbers match"
+      }
+    ],
+    "forgery_indicators": [
+      {
+        "rule_id": "FORG-001",
+        "name": "Suspiciously Round Purity Values",
+        "description": "Fabricated COAs frequently show exactly round purity values. Real HPLC instrument output produces specific decimal values.",
+        "check_type": "pattern",
+        "severity": "major",
+        "weight": 8,
+        "expected_value": "Purity values with specific non-round decimals (e.g., 98.3%, 99.1%, 97.8%)",
+        "red_flags": [
+          "Purity exactly 99.00%",
+          "Purity exactly 100.00%",
+          "All products from vendor showing identical purity to the decimal point",
+          "Purity value landing exactly on a common threshold (exactly 98.00%, exactly 99.00%)"
+        ],
+        "source_article": ["bestpepprices_COA_Guide", "TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Parse purity value; flag if exactly round (N.00%); evaluate cross-product pattern across vendor's catalog",
+        "false_positive_notes": "A single round number on a single COA is plausible; the critical indicator is the pattern of uniformly round numbers across a vendor's entire catalog"
+      },
+      {
+        "rule_id": "FORG-002",
+        "name": "Zero Impurity Peaks in Sub-100% Purity Claim",
+        "description": "A chromatogram showing zero secondary peaks while claiming purity below 100% is a physical impossibility and indicates fabrication.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Non-zero impurity peaks present in chromatogram when purity claimed is below 99.9%",
+        "red_flags": [
+          "Single perfect peak with zero secondary peaks while purity claimed at 98% or 99%",
+          "Integration table showing 100.00% area for main peak when purity is stated as 98% or 99%"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "If chromatogram is provided, check for at least minor impurity peaks; absence with <99.9% purity claim is a critical red flag",
+        "false_positive_notes": "Very high purity (>99.8%) may genuinely show visually negligible secondary peaks; image resolution limitations may make minor peaks invisible in small embedded images"
+      },
+      {
+        "rule_id": "FORG-003",
+        "name": "Exact Theoretical MS Match With Zero Error",
+        "description": "An observed MS mass exactly equal to the theoretical value with zero decimal deviation is suspicious. All real mass spectrometers have non-zero measurement error.",
+        "check_type": "numerical",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Non-zero mass error between 0.01 and 0.5 Da typical depending on instrument type",
+        "red_flags": [
+          "Observed mass exactly equals theoretical mass with zero difference to all decimal places reported",
+          "Mass error reported as exactly 0.000 Da on a high-precision instrument"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Calculate observed minus theoretical mass; flag if exactly zero with no decimal variation",
+        "false_positive_notes": "Some instrument software rounds reported mass to nearest whole Da — exact integer matches with MALDI-TOF are common; flag primarily when decimal precision is claimed alongside zero error"
+      },
+      {
+        "rule_id": "FORG-004",
+        "name": "Identical COA Structure Across Different Peptide Products",
+        "description": "Using the same base COA document for different peptide products — changing only the product name — is a definitively confirmed fraud pattern.",
+        "check_type": "pattern",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Distinct COA documents with different data values for each chemically distinct peptide product",
+        "red_flags": [
+          "Same COA template with only the compound name edited",
+          "Identical retention time values appearing for multiple chemically different peptides",
+          "Identical purity value to the decimal for multiple different peptide products",
+          "Same lot number appearing for supposedly different independent products",
+          "Same PDF metadata creation timestamp for COAs from supposedly different test events"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "SubQProtocol_COA_Verification_2026"],
+        "evaluation_method": "Compare COAs across vendor's product catalog; flag when data content is structurally identical across chemically distinct compounds",
+        "false_positive_notes": "Similar COA formatting and templates across a vendor's products is normal; identical numerical data content across different compounds is not"
+      },
+      {
+        "rule_id": "FORG-005",
+        "name": "Identical HPLC Retention Times Across Different Peptides",
+        "description": "Different peptides have different RP-HPLC retention times due to differing physicochemical properties. Identical retention times across products indicates fabricated data.",
+        "check_type": "pattern",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Different retention times for chemically distinct peptide products on the same HPLC method",
+        "red_flags": [
+          "Same retention time to the minute and second for multiple different peptides",
+          "Same chromatogram file reused across multiple products with only peak labels altered"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Compare reported peak retention times across vendor's different peptide COAs; flag exact matches between chemically distinct compounds",
+        "false_positive_notes": "Peptides of similar size and hydrophobicity may have similar but not identical retention times; flag only exact minute-and-second matches"
+      },
+      {
+        "rule_id": "FORG-006",
+        "name": "Blurry Official Stamps or Seals With Sharp Surrounding Text",
+        "description": "When lab stamps and seals appear blurry while surrounding document text is sharp, the official elements were inserted from a lower-resolution source image.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 8,
+        "expected_value": "Lab stamps, seals, and signatures at consistent resolution with surrounding document text",
+        "red_flags": [
+          "Lab stamp visibly blurrier than document body text at same zoom level",
+          "Official seal appears to be a photographed image inserted into digital document",
+          "Signature scan quality inconsistent with overall document quality"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Zoom to same magnification for stamp/seal areas and body text; compare relative sharpness",
+        "false_positive_notes": "Physical rubber stamps scanned to PDF may legitimately appear at lower resolution than surrounding digital text — evaluate in context of overall document origin"
+      },
+      {
+        "rule_id": "FORG-007",
+        "name": "Localized Pixelation in Specific Data Fields",
+        "description": "When only specific data fields (especially purity values or mass results) appear pixelated while surrounding text is clean, those values were digitally altered after document creation.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Uniform rendering quality for all text elements within each section of the results table",
+        "red_flags": [
+          "Purity number appears pixelated while column header directly above is crisp",
+          "MS mass value at visibly different resolution than surrounding results table text",
+          "Any individual data field showing localized pixelation while neighbors are sharp"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Zoom to 400% in each result field; compare rendering quality of data values to surrounding labels and headers in same table",
+        "false_positive_notes": "PDF rendering artifacts from certain low-quality PDF viewers can affect specific text glyphs; verify observation across multiple PDF readers before concluding"
+      },
+      {
+        "rule_id": "FORG-008",
+        "name": "Generic or Suspiciously Sequential Batch Numbers",
+        "description": "Legitimate batch numbers follow production-meaningful formats. Generic placeholder or trivially sequential batch numbers suggest data fabrication.",
+        "check_type": "pattern",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Batch numbers with date components, meaningful alphanumeric sequences, or other non-trivially-sequential formats",
+        "red_flags": [
+          "Batch numbers in simple sequential series like 'BATCH-001', 'BATCH-002', 'BATCH-003'",
+          "Single-digit batch numbers",
+          "Batch number identical to batch number on a different product's COA"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide"],
+        "evaluation_method": "Analyze batch number format; compare batch numbers across vendor's different products; flag obvious sequential counting patterns",
+        "false_positive_notes": "Simple sequential numbering is sometimes used by small legitimate vendors; evaluate in context of other indicators"
+      },
+      {
+        "rule_id": "FORG-009",
+        "name": "Entire Vendor Catalog Shows Consistently Perfect Purity",
+        "description": "A vendor's entire catalog showing 99%+ purity without any natural variation is statistically implausible. Real synthesis and testing produces natural variation across batches.",
+        "check_type": "pattern",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "Natural variation in purity across product catalog (typical range 97.5%–99.8%)",
+        "red_flags": [
+          "Every product across vendor's catalog shows exactly 99%+ purity",
+          "No product in catalog ever tests below 98.5%",
+          "Purity values suspiciously uniform across diverse peptides of different synthesis complexity"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "bestpepprices_COA_Guide"],
+        "evaluation_method": "Aggregate purity data across vendor's full catalog; calculate variance; flag near-zero variance as biologically implausible",
+        "false_positive_notes": "High-quality vendors with consistent manufacturing can legitimately achieve high average purity; evaluate variance in combination with other indicators"
+      },
+      {
+        "rule_id": "FORG-010",
+        "name": "COA Available Only After Purchase",
+        "description": "Legitimate vendors post COAs publicly or provide them pre-purchase on request. Withholding COA until after payment prevents pre-purchase verification.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 7,
+        "expected_value": "COA accessible pre-purchase: either posted publicly on product page or provided promptly on pre-purchase request",
+        "red_flags": [
+          "COA only provided after order is placed and paid",
+          "COA locked behind mandatory account creation requiring purchase",
+          "Vendor refuses or ignores pre-purchase COA requests"
+        ],
+        "source_article": ["PeptideRecon_Verify_COAs_Guide", "TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Attempt to access or request COA before placing any order; note whether request is fulfilled",
+        "false_positive_notes": "Some vendors require a simple email request to receive COA — acceptable if fulfilled promptly and completely without requiring purchase"
+      },
+      {
+        "rule_id": "FORG-011",
+        "name": "Vendor Discourages Direct Lab Contact",
+        "description": "A vendor who discourages or prevents buyers from contacting the testing laboratory directly is attempting to prevent authentic verification.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Vendor actively supports or at minimum does not obstruct direct lab verification",
+        "red_flags": [
+          "Vendor explicitly states 'do not contact the lab directly'",
+          "Vendor removes or obscures lab contact information from COA copies",
+          "Vendor response becomes defensive, evasive, or hostile when direct lab verification is requested"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "PeptideRecon_Verify_COAs_Guide", "Reddit_r_PeptideProgress_COA_Beginners"],
+        "evaluation_method": "Request lab contact information from vendor; note response character and whether lab contact is supported",
+        "false_positive_notes": "Labs may have confidentiality agreements preventing vendor identity disclosure — vendor can legitimately decline to share their client relationship while the lab can still confirm the report number independently"
+      },
+      {
+        "rule_id": "FORG-012",
+        "name": "Independent Community Testing Contradicts COA Claims",
+        "description": "When independent buyer or community retesting of a vendor's products consistently contradicts the COA purity claims, the COA is unreliable regardless of appearance.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 9,
+        "expected_value": "Independent community testing results consistent with COA purity claims",
+        "red_flags": [
+          "Multiple independent community tests finding substantially lower purity than COA states",
+          "Independent testing finding a different compound than what COA identifies",
+          "Multiple buyers reporting receiving mislabeled product despite plausible-looking COA"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags", "Reddit_r_PeptideProgress_COA_Beginners"],
+        "evaluation_method": "Search community testing databases and forums for independent test results for this specific vendor; require multiple consistent independent reports before treating as definitive",
+        "false_positive_notes": "Community testing quality varies; isolated reports may reflect storage or handling issues; require multiple consistent independent data points"
+      },
+      {
+        "rule_id": "FORG-013",
+        "name": "Lab Has No Record of Vendor or Batch When Contacted",
+        "description": "When the testing laboratory is contacted directly, they deny any knowledge of the vendor or the specific batch number on the COA.",
+        "check_type": "boolean",
+        "severity": "critical",
+        "weight": 10,
+        "expected_value": "Lab can locate and confirm the existence of the specified test report or task number",
+        "red_flags": [
+          "Lab states they have never worked with the named vendor",
+          "Lab has no record of the specified batch, task, or report number",
+          "Lab explicitly denies issuing the document"
+        ],
+        "source_article": ["TruPeptide_Fake_COA_Red_Flags"],
+        "evaluation_method": "Contact lab directly using information on COA; provide COA report/task number; ask lab to confirm existence of that specific report",
+        "false_positive_notes": "Labs may not disclose client identity lists but should be able to confirm or deny the existence of a specific report number in their system"
+      },
+      {
+        "rule_id": "FORG-014",
+        "name": "Vendor Marketing Contains RUO Compliance Red Flags",
+        "description": "Vendor marketing that makes therapeutic claims, provides dosing protocols, or sells injection supplies alongside RUO peptides indicates non-compliant operation that correlates with documentation fraud risk.",
+        "check_type": "boolean",
+        "severity": "major",
+        "weight": 6,
+        "expected_value": "Vendor uses strictly research-oriented language; no therapeutic or clinical claims; no human use implications",
+        "red_flags": [
+          "Anti-aging, fat-burning, or performance-enhancement language in product descriptions",
+          "Dosing protocols or cycle recommendations in product listings",
+          "Sells syringes, bacteriostatic water, or injection supplies as primary product bundling",
+          "Customer review section describing physiological effects in human users",
+          "Social media lifestyle marketing showing human use"
+        ],
+        "source_article": ["HonestPeptide_Vendor_Selection", "HonestPeptide_Complete_Guide_RUO"],
+        "evaluation_method": "Review vendor website language, product descriptions, and social media; flag therapeutic or human-use language",
+        "false_positive_notes": "Some vendors sell both RUO peptides and legitimate non-peptide products; evaluate specifically for therapeutic claims about the RUO peptides themselves"
+      },
+      {
+        "rule_id": "FORG-015",
+        "name": "Pricing Dramatically Below Market Rate",
+        "description": "Pricing significantly below the established market rate for verified vendors may indicate substandard, misrepresented, or counterfeit product.",
+        "check_type": "boolean",
+        "severity": "minor",
+        "weight": 5,
+        "expected_value": "Pricing within reasonable competitive range of comparable verified vendors (±40% of market median)",
+        "red_flags": [
+          "Price is 50%+ below the established market rate without any explained reason",
+          "Dramatically lower pricing combined with other COA red flags"
+        ],
+        "source_article": ["HonestPeptide_Vendor_Selection"],
+        "evaluation_method": "Compare price to established market rate from verified vendors on price-comparison platforms; flag significant deviations",
+        "false_positive_notes": "Legitimate discounts (bulk orders, promotional codes, new-vendor pricing) can explain price differences; pricing alone without other red flags is a very weak indicator"
+      }
+    ]
+  }
+}

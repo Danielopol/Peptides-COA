@@ -1,0 +1,48 @@
+# ===== Secrets (NEVER commit) =====
+.env
+backend/.env
+*.env.local
+*.local
+
+# ===== Python (backend) =====
+backend/.venv/
+.venv/
+**/__pycache__/
+*.py[cod]
+*$py.class
+backend/.pytest_cache/
+.pytest_cache/
+*.egg-info/
+
+# ===== Flutter / Dart (app) =====
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/.pub-cache/
+app/.pub/
+# (the Flutter-generated app/.gitignore covers the rest of the app/ tree)
+
+# ===== Editors / IDE =====
+.idea/
+app/.idea/
+.vscode/
+*.iml
+
+# ===== OS cruft =====
+.DS_Store
+Thumbs.db
+
+# ===== Tooling caches =====
+.playwright-mcp/
+
+# ===== Generated test artifacts (regenerable, dev-only) =====
+coa-faker/output/
+
+# ===== Dev-only sample corpora (not needed to build/run the app) =====
+coa-faker/input/
+coa-faker/input_smoke/
+COAs/
+FAKE/
+Rules/calibration/ocr_cache/

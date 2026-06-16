@@ -1,0 +1,640 @@
+{
+  "version": "2.0",
+  "last_updated": "2026-05-22",
+  "source": "peptide_testing_labs.xlsx",
+  "description": "Lab-centric registry generated from peptide_testing_labs.xlsx. 'coa_template_owner' labs have reference COAs under COAs/<coa_folder> for visual fingerprinting. Vendors are tracked separately if needed; current corpus is organized by issuing lab.",
+  "trust_levels": {
+    "high": "Widely used and trusted across the research-peptide community; public/QR-verifiable COAs, strong track record.",
+    "established_pharma_cro": "Reputable accredited contract labs oriented to manufacturers/regulatory work (cGMP/ICH).",
+    "established_cro": "Credible accredited analytical labs (e.g. ISO 17025), less community-facing.",
+    "moderate": "Recognized labs with a smaller or less-documented independent track record.",
+    "emerging": "Newer platforms / accreditation pending; promising but unproven.",
+    "untrusted": "Known bad actor."
+  },
+  "labs": [
+    {
+      "id": "acs_laboratory",
+      "name": "ACS Laboratory (ACS Lab)",
+      "aliases": [
+        "ACS Lab",
+        "ACS Laboratory"
+      ],
+      "type": "independent",
+      "website": "https://acslabtest.com/",
+      "accreditation": "Yes — ISO/IEC 17025:2017 accredited by A2LA; also CAP accredited, CLIA licensed, and DEA registered. acslab+1",
+      "trust": "high",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Independent US peptide testing lab offering HPLC purity analysis, ESI mass spectrometry identity confirmation, contaminant screening, and COA verification for 85+ peptides.",
+      "verification": null
+    },
+    {
+      "id": "colmaric",
+      "name": "Colmaric Analyticals",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.colmaricanalyticals.com/",
+      "accreditation": "ISO/IEC-certified testing lab",
+      "trust": "high",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "US (Florida) contract analytical lab for nutraceutical/dietary supplement/pharma industries; HPLC purity testing and detailed third-party peptide COAs.",
+      "verification": null
+    },
+    {
+      "id": "janoshik",
+      "name": "Janoshik Analytical",
+      "aliases": [
+        "Janoshik",
+        "Janoshik Analytical",
+        "Janoshík",
+        "Janosuik"
+      ],
+      "type": "independent",
+      "website": "https://janoshik.com/",
+      "accreditation": "Independent lab",
+      "trust": "high",
+      "coa_template_owner": true,
+      "coa_folder": "Janoshik_Tests",
+      "verification": {
+        "url": "https://janoshik.com/verification/",
+        "method": "sample ID + QR"
+      },
+      "description": "Popular for anabolic/peptide testing with verifiable COAs. High volume for research peptides."
+    },
+    {
+      "id": "krause_analytical",
+      "name": "Krause Analytical (Krause Labs)",
+      "aliases": [
+        "Krause Analytical",
+        "Krause Labs"
+      ],
+      "type": "independent",
+      "website": "https://www.krauselabs.com/peptides",
+      "accreditation": "Independent contract lab (FDA-registered facility)",
+      "trust": "moderate",
+      "caveat": "Downgraded from 'high' 2026-06-01: independent multi-lab comparison (graymarket, 'Testing the Peptide Testers') documented a ~15% mass discrepancy vs Janoshik (9 vials) and Chromate on the same batch (26mg vs ~30mg), with multiple further user-reported inconsistencies. A relative newcomer; not accused of fraud, but cross-check mass/purity against an established lab before relying on its numbers.",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Austin, TX contract research/testing lab offering peptide purity, potency, and identity testing by LC-MS, plus custom contaminant screening; verifiable COAs.",
+      "verification": null
+    },
+    {
+      "id": "mz_biolabs",
+      "name": "MZ Biolabs",
+      "aliases": [
+        "MZ Bio",
+        "MZ Biolabs",
+        "MZBiolabs"
+      ],
+      "type": "independent",
+      "website": "mzbiolabs.com",
+      "accreditation": "Not clearly verified in the search results I found; the site states it is DEA licensed. Mzbiolabs",
+      "trust": "high",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": null,
+      "description": "Specialty testing lab that offers peptide COA testing, purity analysis, and quantification for research compounds. mzbiolabs+1"
+    },
+    {
+      "id": "peptide_test",
+      "name": "Peptide Test",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://peptidetest.com/",
+      "accreditation": "USP <1225>-validated methods (partner QC lab)",
+      "trust": "high",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Analysis performed in Michigan by pharma QC scientists; HPLC and UV purity/potency testing with USP/NF-based method validation and per-peptide COAs.",
+      "verification": null
+    },
+    {
+      "id": "vanguard",
+      "name": "Vanguard Laboratory",
+      "aliases": [
+        "Vanguard",
+        "Vanguard Lab",
+        "Vanguard Laboratory"
+      ],
+      "type": "independent",
+      "website": "https://vanguardlaboratory.com/",
+      "accreditation": "ISO/IEC 17025 certified",
+      "trust": "high",
+      "coa_template_owner": true,
+      "coa_folder": "VANGUARD LABORATORY",
+      "verification": {
+        "url": "https://verifiedbyvanguard.com/search?query=V260316-18+004",
+        "method": "lab COA verification portal"
+      },
+      "description": "Comprehensive peptide testing including HPLC purity/quantity, identity, sterility, endotoxins, heavy metals. Quick turnaround."
+    },
+    {
+      "id": "arl_bio_pharma",
+      "name": "ARL Bio Pharma (Analytical Research Laboratories)",
+      "aliases": [
+        "ARL Bio Pharma",
+        "Analytical Research Laboratories"
+      ],
+      "type": "independent",
+      "website": "https://www.arlok.com/",
+      "accreditation": "ISO 17025:2017 accredited (scope-dependent); FDA-registered",
+      "trust": "established_pharma_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Contract lab for therapeutic/synthetic peptides (identity, purity, impurities). Supports pharma and research.",
+      "verification": null
+    },
+    {
+      "id": "biopharmaspec",
+      "name": "BioPharmaSpec",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://biopharmaspec.com/biopharmaceuticals/peptides/",
+      "accreditation": "Regulatory-grade (ICH Q6B aligned)",
+      "trust": "established_pharma_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Specialist peptide characterization lab (US/UK); higher-order structure, sequence, purity and impurity analysis suitable for IND/NDA/BLA submissions.",
+      "verification": null
+    },
+    {
+      "id": "charles_river_laboratories",
+      "name": "Charles River Laboratories",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.criver.com/products-services/biologics-testing-solutions/product-characterization/mass-spectrometry-services",
+      "accreditation": "cGMP/GLP-compliant; global accreditations",
+      "trust": "established_pharma_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Major global CRO offering biologics/peptide characterization: mass spectrometry identity, purity/impurity, sequence and higher-order structure analysis supporting regulatory submissions.",
+      "verification": null
+    },
+    {
+      "id": "eurofins_biopharma_product_testing",
+      "name": "Eurofins BioPharma Product Testing",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.eurofins.com/biopharma-services/product-testing/testing-services-by-modality/peptides/",
+      "accreditation": "cGMP-compliant; extensive global accreditations (ISO, etc.)",
+      "trust": "established_pharma_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Major global network offering comprehensive peptide testing (identity, purity, impurities, potency). GMP support.",
+      "verification": null
+    },
+    {
+      "id": "galab",
+      "name": "GALAB",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.galab.report/",
+      "accreditation": "cGMP-compliant; extensive global accreditations",
+      "trust": "established_pharma_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "ISO 17025-certified peptide analysis laboratory specializing in HPLC, LC-MS, ICP-MS, identity verification, and pharmaceutical-grade purity testing.",
+      "verification": {
+        "url": "https://www.galab.report/",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "wuxi_apptec",
+      "name": "WuXi AppTec (Lab Testing Division)",
+      "aliases": [
+        "Lab Testing Division",
+        "WuXi AppTec"
+      ],
+      "type": "independent",
+      "website": "https://labtesting.wuxiapptec.com/peptide/",
+      "accreditation": "cGMP-compliant; extensive global accreditations",
+      "trust": "established_pharma_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Global CRO offering comprehensive peptide testing (identity, purity, impurities, potency, bioanalysis) supporting CMC and regulatory programs.",
+      "verification": null
+    },
+    {
+      "id": "altabioscience",
+      "name": "AltaBioscience",
+      "aliases": [],
+      "type": "independent",
+      "website": "altabioscience.com",
+      "accreditation": "Yes — UKAS ISO 17025:2017 accredited for amino acid analysis and protein sequencing, with ISO 9001:2015 for other services. altabioscience",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "UK lab providing protein/peptide identification, sequencing, and analytical services. Altabioscience",
+      "verification": null
+    },
+    {
+      "id": "biosynth",
+      "name": "Biosynth",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.biosynth.com/peptides/peptide-manufacturing/analytics",
+      "accreditation": "GMP-capable; analytical labs in US/UK/Netherlands",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Manufacturer with dedicated analytical laboratories offering peptide QC, identity, purity, and analytical consultancy services.",
+      "verification": {
+        "url": "https://www.biosynth.com/peptide-tracking",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "mdx_bioanalytical_laboratory",
+      "name": "MDx BioAnalytical Laboratory",
+      "aliases": [],
+      "type": "independent",
+      "website": "mdxbiolabs.com",
+      "accreditation": "Yes — ISO/IEC 17025:2017 accredited by PJLA, according to the site. mdxbiolabs",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Offers peptide analysis and raw material testing using HPLC and mass spectrometry. mdxbiolabs",
+      "verification": null
+    },
+    {
+      "id": "novatia_llc",
+      "name": "Novatia, LLC",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.enovatia.com/",
+      "accreditation": "Independent MS lab (20+ yrs); cGMP/pharma support available",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "US analytical lab with Orbitrap, ion-trap and QToF mass spectrometers plus NMR; peptide/protein identity, purity and characterization by LC-MS with COAs. Long-standing academic/industry track record.",
+      "verification": null
+    },
+    {
+      "id": "pharmetric_laboratory",
+      "name": "Pharmetric Laboratory",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://pharmetriclab.com/",
+      "accreditation": "FDA-registered analytical lab; ISO 17025 accredited",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "St. Petersburg, FL lab performing sterility assurance, endotoxin, and method suitability testing (incl. peptides); fast turnaround with online COA/data portal.",
+      "verification": null
+    },
+    {
+      "id": "prime_analytical_laboratories",
+      "name": "Prime Analytical Laboratories (PAL)",
+      "aliases": [
+        "PAL",
+        "Prime Analytical Laboratories"
+      ],
+      "type": "independent",
+      "website": "https://primeanalyticallab.com/",
+      "accreditation": "ISO/IEC 17025:2017 (PJLA); FDA-registered; GMP/GLP",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Concord, CA analytical chemistry and microbiology lab serving pharma, compounding pharmacies, and peptide products; full COA testing.",
+      "verification": {
+        "url": "https://www.palab.app/verify/",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "resolvemass_laboratories",
+      "name": "ResolveMass Laboratories",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://peptidealliance.io/laval/resolvemass-laboratories-laval",
+      "accreditation": "Advanced MS/structural analysis for regulatory needs",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Canadian analytical CRO specializing in LC-MS/MS, peptide mapping, amino acid analysis, and advanced peptide characterization.",
+      "verification": null
+    },
+    {
+      "id": "vici_health_sciences",
+      "name": "Vici Health Sciences",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://vicihealthsciences.com/analytical-testing-for-peptide-formulations/",
+      "accreditation": "cGMP analytical/CRO services",
+      "trust": "established_cro",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "US analytical and formulation lab providing peptide formulation analytical testing, method development, and stability/QC for research and pharma.",
+      "verification": null
+    },
+    {
+      "id": "chromate",
+      "name": "Chromate",
+      "aliases": [],
+      "type": "independent",
+      "website": "chromate.org",
+      "accreditation": "Not clearly verified in the search results I found; the site states it is DEA licensed. Mzbiolabs",
+      "trust": "moderate",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Analytical services lab referenced in peptide-testing directories. chromate+1",
+      "verification": {
+        "url": "https://chromate.org/services",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "creative_proteomics",
+      "name": "Creative Proteomics",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.creative-proteomics.com/services/peptide-purity-analysis-2.htm",
+      "accreditation": "Contract analytical services lab",
+      "trust": "moderate",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Analytical CRO offering peptide purity assessment by HPLC and mass spectrometry, identity confirmation, and characterization reporting.",
+      "verification": null
+    },
+    {
+      "id": "ethos_analytics",
+      "name": "Ethos Analytics",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.ethosanalytics.io/",
+      "accreditation": "ISO/IEC 17025 Accredited (Acc# 117798)",
+      "trust": "moderate",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "ISO/IEC 17025-accredited analytical laboratory focused on peptide purity, quantitation, CRO services, and advanced analytical chemistry workflows.",
+      "verification": null
+    },
+    {
+      "id": "finnrick_analytics",
+      "name": "Finnrick Analytics",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.finnrick.com/",
+      "accreditation": "Independent testing/ratings platform (not an analytical lab itself)",
+      "trust": "moderate",
+      "caveat": "Aggregator/ratings platform that outsources the actual analysis to contract labs (reported to include Krause, whose accuracy is itself in question), not a primary analytical lab. Trustpilot reviews report slow turnaround and unresponsive communication, with some accusations of unreturned/untested samples (company attributes this to backlog). Treat its published numbers as only as reliable as the underlying lab; verify independently.",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": null,
+      "description": "Conducts large-scale independent testing for purity/potency and publishes rankings. Transparency-focused."
+    },
+    {
+      "id": "freedom_diagnostics",
+      "name": "Freedom Diagnostics Testing",
+      "aliases": [
+        "Freedom Diagnostic",
+        "Freedom Diagnostics",
+        "Freedom Diagnostics Testing"
+      ],
+      "type": "independent",
+      "website": "https://freedomdiagnosticstesting.com/",
+      "accreditation": "Not explicitly ISO-listed",
+      "trust": "moderate",
+      "coa_template_owner": true,
+      "coa_folder": "Freedom Diagnostic",
+      "verification": {
+        "url": "https://freedomdiagnosticstesting.com/search-for-your-coa-based-on-the-unique-accession-number/",
+        "method": "public accession-number lookup ('Searchable via FreedomDiagnosticsTesting.com')"
+      },
+      "description": "High-precision purity/identification and net peptide content testing. Fast turnaround, transparent COAs."
+    },
+    {
+      "id": "phoenix_pharmaceuticals",
+      "name": "Phoenix Pharmaceuticals",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.krauselabs.com/peptides",
+      "accreditation": "Peptide level determination services",
+      "trust": "moderate",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Peptide level determination/quantitation services for research/clinical use.",
+      "verification": null
+    },
+    {
+      "id": "testides",
+      "name": "Testides",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://testides.com/",
+      "accreditation": "Not ISO 17025 accredited (independent lab)",
+      "trust": "moderate",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": {
+        "url": "https://testides.com/",
+        "method": "public COA portal"
+      },
+      "description": "Canadian independent lab offering HPLC purity + mass spec identity confirmation on research peptides incl. GLP-1s (semaglutide, tirzepatide); publicly viewable COAs, 3-7 day turnaround. No endotoxin/heavy-metal/sterility panels."
+    },
+    {
+      "id": "veritas_analytic",
+      "name": "Veritas Analytic",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://veritasanalytic.com/",
+      "accreditation": "Independent third-party lab",
+      "trust": "moderate",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Full-service third-party supplement and chemical testing with ~4-5 day turnaround; Amazon-compliant testing and COAs covering peptide/research compounds.",
+      "verification": {
+        "url": "https://veritasanalytic.com/",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "accumark_labs",
+      "name": "AccuMark Labs",
+      "aliases": [
+        "AccuMark",
+        "AccuMark Labs",
+        "Accumark"
+      ],
+      "type": "independent",
+      "website": "https://accumarklabs.com/",
+      "accreditation": "ISO/IEC 17025 pending (not yet accredited)",
+      "trust": "emerging",
+      "coa_template_owner": true,
+      "coa_folder": "ACCUMARK LABS",
+      "verification": {
+        "url": "https://accumarklabs.com/verify/",
+        "method": "scan-to-verify cryptographically signed digital COA"
+      },
+      "description": "Anaheim, CA independent peptide testing lab. Core panel = HPLC identity/purity/quantity; add-on biosafety tests (endotoxin LAL, sterility PCR). Identity is HPLC-based only; LC-MS identity planned for ~June 2026. 48-72h turnaround with cryptographically signed, scan-to-verify digital COAs + PDF."
+    },
+    {
+      "id": "arq_biolabs",
+      "name": "ARQ Biolabs",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.arqbiolabs.com/",
+      "accreditation": "Independent third-party lab",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": null,
+      "description": "Independent European peptide testing lab using validated HPLC and LC-MS methods with ISO 9001 quality systems and digitally verifiable COAs."
+    },
+    {
+      "id": "bioviridian",
+      "name": "Bioviridian Inc.",
+      "aliases": [
+        "BIOVIRIDIAN",
+        "Bioviridian",
+        "Bioviridians"
+      ],
+      "type": "independent",
+      "website": "https://bioviridians.com/",
+      "accreditation": "cGMP-compliant; extensive global accreditations",
+      "trust": "emerging",
+      "coa_template_owner": true,
+      "coa_folder": "BIOVIRIDIAN",
+      "description": "Specialized synthetic peptide characterization laboratory using LC-MS, MALDI-MS, and HPLC workflows.",
+      "verification": {
+        "url": "https://bioviridians.com/coa-search.html",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "certiklabs",
+      "name": "CertikLabs",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://certiklabs.com/",
+      "accreditation": "Regulatory-grade (ICH Q6B aligned)",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": {
+        "url": "https://certiklabs.com/",
+        "method": "public batch verification"
+      },
+      "description": "Independent peptide verification platform with HPLC purity testing, LC-MS identity confirmation, and public batch verification."
+    },
+    {
+      "id": "elementrix_diagnostics",
+      "name": "Elementrix Diagnostics",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.elementrix.pro/",
+      "accreditation": "GMP-capable; analytical labs in US/UK/Netherlands",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Independent testing lab offering USP-style peptide testing workflows, HPLC and LC-MS verification, and COA validation.",
+      "verification": {
+        "url": "https://www.elementrix.pro/",
+        "method": "lab COA verification portal"
+      }
+    },
+    {
+      "id": "jrax_bio_solutions",
+      "name": "JRAX Bio Solutions",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://jraxbio.com/",
+      "accreditation": "cGMP analytical/CRO services",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": {
+        "url": "https://jraxbio.com/track",
+        "method": "public COA publishing"
+      },
+      "description": "Batch-verification peptide testing company offering HPLC and LC-ESI-MS testing with public COA publishing."
+    },
+    {
+      "id": "novacert",
+      "name": "NovaCert",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://novacert.org/",
+      "accreditation": "Contract analytical services lab",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": {
+        "url": "https://novacert.org/verify",
+        "method": "public batch verification"
+      },
+      "description": "Independent peptide certification and testing platform offering LC-MS/HPLC testing, tamper-evident COAs, and public verification systems."
+    },
+    {
+      "id": "peptegrity_australia",
+      "name": "PepTegrity Australia",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://www.peptegrity.com.au/",
+      "accreditation": "FDA-registered analytical lab; ISO 17025 accredited",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Australian peptide testing provider focused on GLP-1 and research peptide verification using HPLC and LC-MS methods.",
+      "verification": null
+    },
+    {
+      "id": "sp_bio_testing",
+      "name": "SP Bio Testing",
+      "aliases": [],
+      "type": "independent",
+      "website": "https://spbiotesting.com/",
+      "accreditation": "ISO/IEC 17025 pending (not yet accredited)",
+      "trust": "emerging",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": {
+        "url": "https://spbiotesting.com/lookup.php",
+        "method": "QR-verifiable reporting"
+      },
+      "description": "Independent peptide testing provider focused on LC-MS/MS verification and QR-verifiable reporting."
+    },
+    {
+      "id": "trustpointe_analytics",
+      "name": "TrustPointe Analytics",
+      "aliases": [
+        "TrustPointe",
+        "TrustPointe Analytics",
+        "Trustpointe Analytics LLC"
+      ],
+      "type": "independent",
+      "website": "https://trustpointeanalytics.com/",
+      "accreditation": "US (Michigan) QC lab founded by pharmaceutical-industry chemists; states methods are validated for accuracy, precision and linearity to USP standards. No ISO/A2LA accreditation stated on site.",
+      "trust": "high",
+      "caveat": "Community-recommended (frequently cited alongside Janoshik and Freedom Diagnostics) with USP-validated HPLC methods and a QR-verifiable COA portal. Has publicly acknowledged past COA-error incidents, so still verify the report on its portal.",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "verification": {
+        "url": "https://coa.trustpointeanalytics.com/",
+        "method": "online COA lookup + QR-verifiable link (tamper-protected)"
+      },
+      "description": "US analytical QC lab for research peptides and wellness products: HPLC potency/purity/ID, microbial and endotoxin testing, custom COAs, and an online COA verification portal."
+    },
+    {
+      "id": "analytical_formulations_inc",
+      "name": "Analytical Formulations Inc. (AFI)",
+      "aliases": [
+        "AFI",
+        "AFI Labs",
+        "Analytical Formulations",
+        "Analytical Formulations Inc"
+      ],
+      "type": "independent",
+      "website": "https://analyticalformulations.com/",
+      "accreditation": "Independent US lab; quantitation via UV/Vis Beer-Lambert assay (also offers HPLC/LC-MS services).",
+      "trust": "emerging",
+      "caveat": "Quantitative mass/potency results are reported via a UV/Vis Beer-Lambert assay, which cannot separate the target peptide from other UV-absorbing material the way HPLC/LC-MS can and can therefore over-report content; the community has reported inflated results on low/near-empty vials (not independently confirmed here). Cross-check potency against an HPLC/MS lab (e.g. Janoshik) before relying on it.",
+      "coa_template_owner": false,
+      "coa_folder": null,
+      "description": "Independent US analytical lab offering peptide testing and COAs; uses a UV/Vis Beer-Lambert quantitative assay alongside HPLC/LC-MS services."
+    }
+  ],
+  "vendors": []
+}

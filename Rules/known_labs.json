@@ -1,0 +1,71 @@
+{
+  "version": "0.1",
+  "last_updated": "2026-05-19",
+  "labs": [
+    {
+      "id": "janoshik",
+      "name": "Janoshik Analytical",
+      "aliases": ["Janoshik", "Janoshík"],
+      "country": "Czech Republic",
+      "verification_url": "https://janoshik.com/verify",
+      "verification_key_regex": "(?i)(?:verification\\s*key|task\\s*number|task\\s*#)\\s*[:#]?\\s*([A-Z0-9-]{4,})",
+      "trust": "high"
+    },
+    {
+      "id": "colmaric",
+      "name": "Colmaric Analyticals",
+      "aliases": ["Colmaric"],
+      "country": "Slovenia",
+      "trust": "high"
+    },
+    {
+      "id": "novascreen",
+      "name": "Novascreen Biosciences",
+      "aliases": ["Novascreen"],
+      "trust": "high"
+    },
+    {
+      "id": "mz_biolabs",
+      "name": "MZ Biolabs",
+      "aliases": ["MZBiolabs"],
+      "trust": "medium"
+    },
+    {
+      "id": "freedom_analytics",
+      "name": "Freedom Analytics Labs",
+      "aliases": ["Freedom Analytics"],
+      "trust": "medium"
+    },
+    {
+      "id": "vanguard",
+      "name": "Vanguard Laboratory",
+      "aliases": ["Vanguard Lab"],
+      "accreditation": "A2LA #6377.01.01",
+      "trust": "high"
+    },
+    {
+      "id": "elite_research_lab",
+      "name": "Elite Research Lab",
+      "aliases": ["EliteResearchLab", "ERL", "Elite Research"],
+      "type": "vendor_inhouse",
+      "trust": "medium",
+      "notes": "Verified from user's reference corpus 2026-05"
+    },
+    {
+      "id": "prime_peptides",
+      "name": "Prime Peptides",
+      "aliases": ["PrimePeptides"],
+      "type": "vendor_inhouse_or_3p",
+      "trust": "medium",
+      "notes": "Verified from user's reference corpus. Some Prime COAs are Janoshik-tested with Janoshik's template."
+    },
+    {
+      "id": "titan_peptides",
+      "name": "Titan Peptides",
+      "aliases": ["TitanPeptides"],
+      "type": "vendor_inhouse_or_3p",
+      "trust": "medium",
+      "notes": "Verified from user's reference corpus"
+    }
+  ]
+}
