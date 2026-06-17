@@ -4,6 +4,7 @@
     uvicorn app.main:app --reload
 """
 from __future__ import annotations
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -18,10 +19,17 @@ from .scan import run_scan  # noqa: E402  (after env load)
 MAX_BYTES = 20 * 1024 * 1024  # 20 MB
 ALLOWED_SUFFIXES = {".pdf", ".png", ".jpg", ".jpeg", ".webp"}
 
+# Allowed browser origins. Comma-separated list via the ALLOWED_ORIGINS env var
+# (set in Railway). Defaults to the Vercel production domain. Add a custom
+# domain by appending it, e.g.
+#   ALLOWED_ORIGINS=https://peptides-coa.vercel.app,https://app.yourdomain.com
+_origins = os.environ.get("ALLOWED_ORIGINS", "https://peptides-coa.vercel.app")
+ALLOWED_ORIGINS = [o.strip() for o in _origins.split(",") if o.strip()]
+
 app = FastAPI(title="Peptide COA Scanner — Backend", version="0.1.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
