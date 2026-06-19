@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/auth.dart';
 import '../../core/config.dart';
 import '../../core/payments.dart';
 import '../../core/theme.dart';
@@ -76,6 +77,30 @@ class HomeScreen extends ConsumerWidget {
             tooltip: 'How it works',
             icon: const Icon(Icons.info_outline),
             onPressed: () => context.go('/about'),
+          ),
+          PopupMenuButton<String>(
+            tooltip: 'Account',
+            icon: const Icon(Icons.account_circle_outlined),
+            onSelected: (v) async {
+              if (v == 'signout') {
+                // Router's auth redirect sends us to /sign-in.
+                await ref.read(authControllerProvider).signOut();
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem<String>(
+                enabled: false,
+                child: Text(
+                  ref.read(currentUserProvider)?.email ?? 'Signed in',
+                  style: TextStyle(fontSize: 12, color: c.ink3),
+                ),
+              ),
+              const PopupMenuDivider(),
+              const PopupMenuItem<String>(
+                value: 'signout',
+                child: Text('Sign out'),
+              ),
+            ],
           ),
         ],
       ),

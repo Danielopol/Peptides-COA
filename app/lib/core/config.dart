@@ -17,6 +17,19 @@ class AppConfig {
   /// Defaults to false so the app talks to the real local backend.
   static const bool useMock = bool.fromEnvironment('USE_MOCK', defaultValue: false);
 
+  /// Supabase project URL + anon (public) key. Safe to ship in the client — the
+  /// anon key is designed to be public and is gated by Row Level Security.
+  /// Overridable via --dart-define for other environments.
+  static const String supabaseUrl = String.fromEnvironment(
+    'SUPABASE_URL',
+    defaultValue: 'https://cbqkdlnehslhaoclyqsn.supabase.co',
+  );
+  static const String supabaseAnonKey = String.fromEnvironment(
+    'SUPABASE_ANON_KEY',
+    defaultValue:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNicWtkbG5laHNsaGFvY2x5cXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4ODkzNTIsImV4cCI6MjA5NzQ2NTM1Mn0.fQN3XwkJMhy1qMW-H1rJYL4rjWqgslybEjJcl-K4BHY',
+  );
+
   /// Client-side upload guard (the server enforces its own 20 MB limit).
   static const int maxUploadBytes = 20 * 1024 * 1024;
 

@@ -1,0 +1,57 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+/// Convenience accessor for the singleton Supabase client.
+SupabaseClient get supabase => Supabase.instance.client;
+
+/// Emits on every auth change (sign-in, sign-out, token refresh).
+final authStateProvider = StreamProvider<AuthState>((ref) {
+  return supabase.auth.onAuthStateChange;
+});
+
+/// The current signed-in user, or null. Rebuilds when [authStateProvider] ticks.
+final currentUserProvider = Provider<User?>((ref) {
+  ref.watch(authStateProvider);
+  return supabase.auth.currentUser;
+});
+
+/// Auth actions. Methods throw [AuthException] on failure — surface
+/// `e.message` to the user.
+class AuthController {
+  Future<void> signInWithPassword(String email, String password) =>
+      supabase.auth.signInWithPassword(email: email.trim(), password: password);
+
+  Future<AuthResponse> signUp(String email, String password) =>
+      supabase.auth.signUp(email: email.trim(), password: password);
+
+  /// Web: redirects back to the current origin. Native: uses a custom scheme
+  /// (wire the deep link when a mobile build ships).
+  Future<void> signInWithGoogle() => supabase.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: kIsWeb ? Uri.base.origin : 'io.peptidestrust://login-callback',
+      );
+
+  Future<void> signOut() => supabase.auth.signOut();
+}
+
+final authControllerProvider = Provider<AuthController>((ref) => AuthController());
+
+/// Adapts a [Stream] into a [Listenable] so GoRouter can re-run its redirect
+/// whenever auth state changes.
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _sub = stream.asBroadcastStream().listen((_) => notifyListeners());
+  }
+
+  late final StreamSubscription<dynamic> _sub;
+
+  @override
+  void dispose() {
+    _sub.cancel();
+    super.dispose();
+  }
+}
