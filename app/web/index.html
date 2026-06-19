@@ -31,6 +31,13 @@
 
   <title>coa_scanner</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Passkeys Web SDK (corbado) — required by the passkeys_web plugin pulled in
+       transitively via supabase_flutter. Must load before Flutter boots so the
+       PasskeyAuthenticator global exists when the plugin registers; without it
+       PasskeyAuthenticator.init() throws and the app renders a blank screen.
+       Self-hosted (see web/bundle.js) to avoid GitHub's octet-stream MIME. -->
+  <script src="bundle.js"></script>
 </head>
 <body>
   <!--
