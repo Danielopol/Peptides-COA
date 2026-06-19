@@ -23,7 +23,12 @@ ALLOWED_SUFFIXES = {".pdf", ".png", ".jpg", ".jpeg", ".webp"}
 # (set in Railway). Defaults to the Vercel production domain. Add a custom
 # domain by appending it, e.g.
 #   ALLOWED_ORIGINS=https://peptides-coa.vercel.app,https://app.yourdomain.com
-_origins = os.environ.get("ALLOWED_ORIGINS", "https://peptides-coa.vercel.app")
+_DEFAULT_ORIGINS = ",".join([
+    "https://peptidestrust.com",
+    "https://www.peptidestrust.com",
+    "https://peptides-coa.vercel.app",
+])
+_origins = os.environ.get("ALLOWED_ORIGINS", _DEFAULT_ORIGINS)
 ALLOWED_ORIGINS = [o.strip() for o in _origins.split(",") if o.strip()]
 
 app = FastAPI(title="Peptide COA Scanner — Backend", version="0.1.0")
