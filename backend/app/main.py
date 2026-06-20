@@ -4,6 +4,7 @@
     uvicorn app.main:app --reload
 """
 from __future__ import annotations
+import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
@@ -190,10 +191,13 @@ async def stripe_webhook(request: Request) -> dict:
     payload = await request.body()
     sig = request.headers.get("stripe-signature")
     try:
-        event = stripe.Webhook.construct_event(payload, sig, STRIPE_WEBHOOK_SECRET)
+        stripe.Webhook.construct_event(payload, sig, STRIPE_WEBHOOK_SECRET)
     except Exception:
         raise HTTPException(400, "Invalid signature")
 
+    # Use the raw JSON (plain dicts) rather than the verified StripeObject —
+    # newer stripe-python StripeObjects don't support .get().
+    event = json.loads(payload)
     etype = event["type"]
     obj = event["data"]["object"]
 
