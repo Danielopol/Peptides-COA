@@ -17,9 +17,10 @@ import '../shared/widgets/ludic_widgets.dart';
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
-/// Fires the post-checkout handling once per page load (client-side nav back to
-/// home shouldn't re-trigger it).
+/// These fire once per page load (client-side nav back to home shouldn't
+/// re-trigger them); the launch params are captured in main().
 bool _checkoutSuccessHandled = false;
+bool _fromRedirectHandled = false;
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -32,8 +33,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Returning from Google OAuth with a saved destination (e.g. the trust
+    // profile teaser): route there instead of leaving the user on the scanner.
+    if (!_fromRedirectHandled) {
+      final from = launchFromParam;
+      if (from != null && from.isNotEmpty && from != '/') {
+        _fromRedirectHandled = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) context.go(from);
+        });
+      }
+    }
+
     // Returning from Stripe Checkout (success_url = /?checkout=success).
-    if (!_checkoutSuccessHandled && Uri.base.queryParameters['checkout'] == 'success') {
+    if (!_checkoutSuccessHandled && launchCheckoutParam == 'success') {
       _checkoutSuccessHandled = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;

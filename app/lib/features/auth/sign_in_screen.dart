@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -68,7 +69,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       _info = null;
     });
     try {
-      await ref.read(authControllerProvider).signInWithGoogle();
+      // Preserve the return location (e.g. the trust profile) through OAuth.
+      final from = GoRouterState.of(context).uri.queryParameters['from'];
+      await ref.read(authControllerProvider).signInWithGoogle(returnTo: from);
       // Web redirects away; nothing more to do here.
     } on AuthException catch (e) {
       if (mounted) setState(() => _error = e.message);

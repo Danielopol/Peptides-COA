@@ -7,6 +7,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// Convenience accessor for the singleton Supabase client.
 SupabaseClient get supabase => Supabase.instance.client;
 
+/// Query params captured in main() BEFORE `Supabase.initialize` rewrites the URL
+/// while detecting the OAuth session (which strips the query). Consumed once by
+/// the home screen to handle a post-checkout / post-OAuth return.
+String? launchFromParam;
+String? launchCheckoutParam;
+
 /// Emits on every auth change (sign-in, sign-out, token refresh).
 final authStateProvider = StreamProvider<AuthState>((ref) {
   return supabase.auth.onAuthStateChange;
@@ -27,12 +33,21 @@ class AuthController {
   Future<AuthResponse> signUp(String email, String password) =>
       supabase.auth.signUp(email: email.trim(), password: password);
 
-  /// Web: redirects back to the current origin. Native: uses a custom scheme
-  /// (wire the deep link when a mobile build ships).
-  Future<void> signInWithGoogle() => supabase.auth.signInWithOAuth(
-        OAuthProvider.google,
-        redirectTo: kIsWeb ? Uri.base.origin : 'io.peptidestrust://login-callback',
-      );
+  /// Web: redirects back to the current origin (optionally with `?from=` so the
+  /// app can return the user to where they started, e.g. the trust profile).
+  /// Native: uses a custom scheme (wire the deep link when a mobile build ships).
+  Future<void> signInWithGoogle({String? returnTo}) {
+    String redirect;
+    if (kIsWeb) {
+      redirect = Uri.base.origin;
+      if (returnTo != null && returnTo.isNotEmpty) {
+        redirect = '$redirect/?from=${Uri.encodeComponent(returnTo)}';
+      }
+    } else {
+      redirect = 'io.peptidestrust://login-callback';
+    }
+    return supabase.auth.signInWithOAuth(OAuthProvider.google, redirectTo: redirect);
+  }
 
   Future<void> signOut() => supabase.auth.signOut();
 }

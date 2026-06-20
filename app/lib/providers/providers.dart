@@ -92,9 +92,9 @@ class ScanController extends Notifier<ScanState> {
       );
       switch (outcome) {
         case ScanSuccess(:final result):
-          ref.read(historyProvider.notifier).add(result);
-          // A completed scan consumed a free scan or a credit server-side —
-          // refresh the entitlement so the UI reflects the new balance.
+          // History + entitlement live server-side now; the backend recorded
+          // this scan and consumed a free scan/credit — refetch both.
+          ref.invalidate(historyProvider);
           ref.invalidate(entitlementProvider);
           state = ScanDone(result);
         case ScanNotACoaOutcome(:final info):
@@ -118,19 +118,31 @@ final scanControllerProvider =
     NotifierProvider<ScanController, ScanState>(ScanController.new);
 
 // ---------------------------------------------------------------------------
-// Local, in-memory history (MVP: not persisted, no backend)
+// Scan history — persisted server-side in the Supabase `scans` table (RLS
+// returns only the signed-in user's rows). Survives sign-out / reload / device.
 // ---------------------------------------------------------------------------
 
-class HistoryNotifier extends Notifier<List<ScanResult>> {
-  @override
-  List<ScanResult> build() => const [];
-
-  void add(ScanResult r) => state = [r, ...state];
-  void clear() => state = const [];
-}
-
-final historyProvider =
-    NotifierProvider<HistoryNotifier, List<ScanResult>>(HistoryNotifier.new);
+final historyProvider = FutureProvider<List<ScanResult>>((ref) async {
+  ref.watch(authStateProvider);
+  if (supabase.auth.currentSession == null) return const [];
+  final rows = await supabase
+      .from('scans')
+      .select('result')
+      .order('created_at', ascending: false)
+      .limit(100);
+  final out = <ScanResult>[];
+  for (final row in rows as List) {
+    final res = row['result'];
+    if (res is Map) {
+      try {
+        out.add(ScanResult.fromJson(Map<String, dynamic>.from(res)));
+      } catch (_) {
+        // Skip any row whose stored payload doesn't parse.
+      }
+    }
+  }
+  return out;
+});
 
 /// The result currently being viewed on the results screen.
 class SelectedResultNotifier extends Notifier<ScanResult?> {

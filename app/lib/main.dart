@@ -10,6 +10,12 @@ import 'features/onboarding/onboarding_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Capture launch query params before Supabase.initialize rewrites the URL
+  // during OAuth session detection (it strips the query string).
+  launchFromParam = Uri.base.queryParameters['from'];
+  launchCheckoutParam = Uri.base.queryParameters['checkout'];
+
   await Supabase.initialize(
     url: AppConfig.supabaseUrl,
     anonKey: AppConfig.supabaseAnonKey,
