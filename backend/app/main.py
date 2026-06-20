@@ -28,13 +28,14 @@ APP_URL = os.environ.get("APP_URL", "https://www.peptidestrust.com").rstrip("/")
 if STRIPE_SECRET_KEY:
     stripe.api_key = STRIPE_SECRET_KEY
 
-# Frontend sends a plan key; the backend maps it to a Stripe price (price IDs
-# stay server-side). Packs are one-time; monthly/yearly are subscriptions.
+# Frontend sends a plan key; the backend maps it to a Stripe price. Price IDs
+# are env-overridable so switching test->live is just a Railway change (defaults
+# are the current sandbox/test prices). Packs are one-time; subs are recurring.
 PRICE_BY_PLAN = {
-    "monthly": "price_1TkLjWJDZavg79YTnhIr0MCs",
-    "yearly": "price_1TkLkrJDZavg79YTmqDgt4VK",
-    "pack3": "price_1TkLlsJDZavg79YT5WcFUsTR",
-    "pack10": "price_1TkLmMJDZavg79YTvv8CqlLU",
+    "monthly": os.environ.get("STRIPE_PRICE_MONTHLY", "price_1TkLjWJDZavg79YTnhIr0MCs"),
+    "yearly": os.environ.get("STRIPE_PRICE_YEARLY", "price_1TkLkrJDZavg79YTmqDgt4VK"),
+    "pack3": os.environ.get("STRIPE_PRICE_PACK3", "price_1TkLlsJDZavg79YT5WcFUsTR"),
+    "pack10": os.environ.get("STRIPE_PRICE_PACK10", "price_1TkLmMJDZavg79YTvv8CqlLU"),
 }
 SUBSCRIPTION_PLANS = {"monthly", "yearly"}
 PACK_CREDITS = {"pack3": 3, "pack10": 10}
