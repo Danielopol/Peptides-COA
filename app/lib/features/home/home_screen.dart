@@ -17,6 +17,10 @@ import '../shared/widgets/ludic_widgets.dart';
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
+/// Fires the post-checkout handling once per page load (client-side nav back to
+/// home shouldn't re-trigger it).
+bool _checkoutSuccessHandled = false;
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -29,14 +33,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     // Returning from Stripe Checkout (success_url = /?checkout=success).
-    if (Uri.base.queryParameters['checkout'] == 'success') {
+    if (!_checkoutSuccessHandled && Uri.base.queryParameters['checkout'] == 'success') {
+      _checkoutSuccessHandled = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
-        ref.invalidate(entitlementProvider);
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Payment successful — your plan is active. Happy scanning!'),
+          content: Text('Payment successful — activating your scans…'),
         ));
+        _refreshAfterCheckout();
       });
+    }
+  }
+
+  /// The Stripe webhook can land a moment after the redirect, so poll the
+  /// entitlement a few times until the purchase shows up — no manual reload.
+  Future<void> _refreshAfterCheckout() async {
+    for (var i = 0; i < 6; i++) {
+      ref.invalidate(entitlementProvider);
+      Entitlement? ent;
+      try {
+        ent = await ref.read(entitlementProvider.future);
+      } catch (_) {
+        ent = null;
+      }
+      if (!mounted) return;
+      if (ent != null && ent.canScan) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Your scans are ready.')));
+        return;
+      }
+      await Future<void>.delayed(const Duration(milliseconds: 1500));
     }
   }
 
