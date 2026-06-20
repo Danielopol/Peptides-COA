@@ -16,15 +16,12 @@ import '../features/results/results_screen.dart';
 import '../features/results/share_card.dart';
 import '../features/scanning/scanning_screen.dart';
 
-/// Routes that don't require a signed-in session. Everything else (the scanner,
-/// results, history, paywall, achievements) redirects to /sign-in when signed
-/// out. The onboarding "trust guide" and About stay public so users can explore
-/// before creating an account.
-const _publicPrefixes = ['/sign-in', '/onboarding', '/about'];
-
-bool _isPublic(String loc) =>
-    _publicPrefixes.any((p) => loc == p || loc.startsWith('$p/'));
-
+/// The app is public — anyone can browse, run the trust guide, and (for now)
+/// scan. Sign-in is offered, not forced; the entitlement gate (free scan /
+/// credits / subscription) is enforced later, together with Stripe. The only
+/// redirect: after signing in, return the user to wherever they came from
+/// (`?from=`), so the upcoming "sign in to reveal / to scan" prompts feel
+/// seamless.
 final routerProvider = Provider<GoRouter>((ref) {
   final seen = ref.watch(onboardingSeenProvider);
   final refresh = GoRouterRefreshStream(supabase.auth.onAuthStateChange);
@@ -34,9 +31,10 @@ final routerProvider = Provider<GoRouter>((ref) {
     refreshListenable: refresh,
     redirect: (context, state) {
       final loggedIn = supabase.auth.currentSession != null;
-      final loc = state.matchedLocation;
-      if (!loggedIn && !_isPublic(loc)) return '/sign-in';
-      if (loggedIn && loc == '/sign-in') return '/';
+      if (loggedIn && state.matchedLocation == '/sign-in') {
+        final from = state.uri.queryParameters['from'];
+        return (from != null && from.isNotEmpty) ? from : '/';
+      }
       return null;
     },
     routes: [

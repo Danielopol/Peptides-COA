@@ -8,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/auth.dart';
 import '../../core/config.dart';
-import '../../core/payments.dart';
 import '../../core/theme.dart';
 import '../onboarding/onboarding_controller.dart';
 import '../../providers/providers.dart';
@@ -21,13 +20,8 @@ class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   Future<void> _pick(BuildContext context, WidgetRef ref, Future<PickedFile?> Function() picker) async {
-    // Paywall gate (SIMULATED): the trust guide is free, scanning is not.
-    // Pressing "check a COA" without credits or an active plan opens the
-    // plan picker instead of the file picker.
-    if (!ref.read(paymentsProvider).canScan) {
-      context.go('/paywall');
-      return;
-    }
+    // Scanning is open for now. The entitlement gate (free scan / credits /
+    // subscription) is enforced later, together with Stripe.
     try {
       final file = await picker();
       if (file == null) return; // cancelled
@@ -78,30 +72,31 @@ class HomeScreen extends ConsumerWidget {
             icon: const Icon(Icons.info_outline),
             onPressed: () => context.go('/about'),
           ),
-          PopupMenuButton<String>(
-            tooltip: 'Account',
-            icon: const Icon(Icons.account_circle_outlined),
-            onSelected: (v) async {
-              if (v == 'signout') {
-                // Router's auth redirect sends us to /sign-in.
-                await ref.read(authControllerProvider).signOut();
-              }
-            },
-            itemBuilder: (context) => [
-              PopupMenuItem<String>(
-                enabled: false,
-                child: Text(
-                  ref.read(currentUserProvider)?.email ?? 'Signed in',
-                  style: TextStyle(fontSize: 12, color: c.ink3),
+          Consumer(builder: (context, ref, _) {
+            final user = ref.watch(currentUserProvider);
+            if (user == null) {
+              return TextButton(
+                onPressed: () => context.go('/sign-in'),
+                child: const Text('Sign in'),
+              );
+            }
+            return PopupMenuButton<String>(
+              tooltip: 'Account',
+              icon: const Icon(Icons.account_circle_outlined),
+              onSelected: (v) async {
+                if (v == 'signout') await ref.read(authControllerProvider).signOut();
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem<String>(
+                  enabled: false,
+                  child: Text(user.email ?? 'Signed in',
+                      style: TextStyle(fontSize: 12, color: c.ink3)),
                 ),
-              ),
-              const PopupMenuDivider(),
-              const PopupMenuItem<String>(
-                value: 'signout',
-                child: Text('Sign out'),
-              ),
-            ],
-          ),
+                const PopupMenuDivider(),
+                const PopupMenuItem<String>(value: 'signout', child: Text('Sign out')),
+              ],
+            );
+          }),
         ],
       ),
       body: MoleculeBackground(
@@ -130,8 +125,6 @@ class HomeScreen extends ConsumerWidget {
                 onPickFile: () => _pick(context, ref, FileInput.pickDocument),
                 onPickPhoto: kIsWeb ? null : () => _pick(context, ref, FileInput.pickPhoto),
               ),
-              const SizedBox(height: 10),
-              const _PlanStatusRow(),
               const SizedBox(height: 14),
               const StreakBar(),
               const SizedBox(height: 24),
@@ -241,35 +234,6 @@ class _DashedBorderPainter extends CustomPainter {
   @override
   bool shouldRepaint(_DashedBorderPainter old) =>
       old.color != color || old.radius != radius;
-}
-
-/// Plan / credits status under the scan card (SIMULATED payments). Tappable —
-/// opens the paywall to buy, switch, or reset the plan.
-class _PlanStatusRow extends ConsumerWidget {
-  const _PlanStatusRow();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = HelixColors.of(context);
-    final pay = ref.watch(paymentsProvider);
-    final (Color color, String label) = switch (pay.plan) {
-      Plan.payPerScan when pay.credits > 0 => (
-          c.vGreen,
-          '● ${pay.credits} SCAN CREDIT${pay.credits == 1 ? '' : 'S'} LEFT'
-        ),
-      Plan.monthly when pay.subscriptionActive => (c.vGreen, '● MONTHLY ACTIVE · UNLIMITED SCANS'),
-      Plan.yearly when pay.subscriptionActive => (c.vGreen, '● YEARLY ACTIVE · UNLIMITED SCANS'),
-      _ => (c.ink3, 'SCANS REQUIRE A PLAN · FROM \$${Pricing.perScanUsd.toStringAsFixed(0)} →'),
-    };
-    return InkWell(
-      borderRadius: BorderRadius.circular(6),
-      onTap: () => context.go('/paywall'),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Center(child: Text(label, style: HelixText.microtag(color, size: 10))),
-      ),
-    );
-  }
 }
 
 /// Mono instrument footer: SERVICE ONLINE dot (live backend health, tap to

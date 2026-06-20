@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show Supabase;
 
 import '../models/models.dart';
 import 'api_client.dart';
 
-/// Real backend client over `dio`. No auth header (MVP has no auth).
+/// Real backend client over `dio`. Attaches the signed-in user's Supabase
+/// access token when present (the backend uses it for the entitlement gate).
 ///
 /// `validateStatus` is permissive so 4xx/413 responses don't throw — we read
 /// the body and map to a friendly [ApiException] ourselves.
@@ -19,6 +21,14 @@ class HttpApiClient implements ApiClient {
 
   final Dio _dio;
   final String _baseUrl;
+
+  /// Bearer token of the current Supabase session, or null when signed out.
+  String? get _token => Supabase.instance.client.auth.currentSession?.accessToken;
+
+  Options? _authOptions() {
+    final t = _token;
+    return t == null ? null : Options(headers: {'Authorization': 'Bearer $t'});
+  }
 
   @override
   Future<bool> health() async {
@@ -50,6 +60,7 @@ class HttpApiClient implements ApiClient {
         data: form,
         onSendProgress: onProgress,
         cancelToken: cancelToken,
+        options: _authOptions(),
       );
     } on DioException catch (e) {
       if (CancelToken.isCancel(e)) throw const ScanCancelled();
@@ -80,6 +91,10 @@ class HttpApiClient implements ApiClient {
     switch (code) {
       case 400:
         return detail ?? 'This file could not be processed (wrong type or too small).';
+      case 401:
+        return detail ?? 'Please sign in to scan.';
+      case 402:
+        return detail ?? 'No scans remaining — choose a plan to continue.';
       case 413:
         return 'That file is over the 20 MB limit. Try a smaller file.';
       default:
