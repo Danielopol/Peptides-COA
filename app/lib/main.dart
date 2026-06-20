@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app.dart';
+import 'core/auth.dart';
 import 'core/config.dart';
 import 'features/onboarding/onboarding_controller.dart';
 
@@ -13,6 +14,25 @@ Future<void> main() async {
     url: AppConfig.supabaseUrl,
     anonKey: AppConfig.supabaseAnonKey,
   );
+
+  // Ensure a `profiles` row exists for the signed-in user. This replaces the
+  // auth.users DB trigger (which the SQL editor can't create due to auth-schema
+  // permissions). Idempotent — runs on sign-in, initial session, and updates.
+  supabase.auth.onAuthStateChange.listen((data) {
+    final user = data.session?.user;
+    if (user == null) return;
+    if (data.event == AuthChangeEvent.signedIn ||
+        data.event == AuthChangeEvent.initialSession ||
+        data.event == AuthChangeEvent.userUpdated) {
+      supabase
+          .from('profiles')
+          .upsert({'id': user.id, 'email': user.email}).then(
+        (_) {},
+        onError: (Object _) {}, // best-effort; never block startup
+      );
+    }
+  });
+
   final prefs = await SharedPreferences.getInstance();
   final seen = prefs.getBool('onboarding_seen') ?? false;
   runApp(
