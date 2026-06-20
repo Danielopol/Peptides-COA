@@ -167,3 +167,47 @@ async def record_scan(user_id: str, result: dict, filename: str, origin: str,
                 )
     except httpx.HTTPError:
         pass
+
+
+# --- Stripe webhook writes (service role) -------------------------------------
+
+async def ledger_reason_exists(reason: str) -> bool:
+    """Idempotency guard: has this exact ledger reason already been recorded?"""
+    async with httpx.AsyncClient(timeout=_TIMEOUT) as c:
+        r = await c.get(
+            f"{SUPABASE_URL}/rest/v1/credit_ledger",
+            headers=_rest_headers(),
+            params={"reason": f"eq.{reason}", "select": "id", "limit": "1"},
+        )
+    return bool(r.json()) if r.status_code == 200 else False
+
+
+async def add_credits(user_id: str, delta: int, reason: str) -> None:
+    async with httpx.AsyncClient(timeout=_TIMEOUT) as c:
+        await c.post(
+            f"{SUPABASE_URL}/rest/v1/credit_ledger",
+            headers=_rest_headers(),
+            json={"user_id": user_id, "delta": delta, "reason": reason},
+        )
+
+
+async def upsert_subscription(user_id: str, plan: str, status: str,
+                              current_period_end: str | None,
+                              customer_id: str | None,
+                              subscription_id: str | None) -> None:
+    """Insert/update the user's subscription row (PK = user_id)."""
+    row = {
+        "user_id": user_id,
+        "plan": plan,
+        "status": status,
+        "current_period_end": current_period_end,
+        "stripe_customer_id": customer_id,
+        "stripe_subscription_id": subscription_id,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+    async with httpx.AsyncClient(timeout=_TIMEOUT) as c:
+        await c.post(
+            f"{SUPABASE_URL}/rest/v1/subscriptions",
+            headers={**_rest_headers(), "Prefer": "resolution=merge-duplicates"},
+            json=row,
+        )

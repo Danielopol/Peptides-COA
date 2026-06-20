@@ -5,10 +5,13 @@
 """
 from __future__ import annotations
 import os
+from datetime import datetime, timezone
 from pathlib import Path
 
+import stripe
 from dotenv import load_dotenv
-from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
+from fastapi import (Body, FastAPI, File, Form, Header, HTTPException, Request,
+                     UploadFile)
 from fastapi.middleware.cors import CORSMiddleware
 
 # Load backend/.env before anything reads os.environ (GEMINI_API_KEY, ENABLE_LLM...)
@@ -16,6 +19,36 @@ load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 from . import supa  # noqa: E402
 from .scan import run_scan  # noqa: E402  (after env load)
+
+# --- Stripe config -----------------------------------------------------------
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+APP_URL = os.environ.get("APP_URL", "https://www.peptidestrust.com").rstrip("/")
+if STRIPE_SECRET_KEY:
+    stripe.api_key = STRIPE_SECRET_KEY
+
+# Frontend sends a plan key; the backend maps it to a Stripe price (price IDs
+# stay server-side). Packs are one-time; monthly/yearly are subscriptions.
+PRICE_BY_PLAN = {
+    "monthly": "price_1TkLjWJDZavg79YTnhIr0MCs",
+    "yearly": "price_1TkLkrJDZavg79YTmqDgt4VK",
+    "pack3": "price_1TkLlsJDZavg79YT5WcFUsTR",
+    "pack10": "price_1TkLmMJDZavg79YTvv8CqlLU",
+}
+SUBSCRIPTION_PLANS = {"monthly", "yearly"}
+PACK_CREDITS = {"pack3": 3, "pack10": 10}
+
+
+def _sub_period_end(sub: dict) -> int | None:
+    """Subscription period end (epoch s). Top-level in older API versions,
+    on the first item in newer ones."""
+    cpe = sub.get("current_period_end")
+    if not cpe:
+        try:
+            cpe = sub["items"]["data"][0]["current_period_end"]
+        except (KeyError, IndexError, TypeError):
+            cpe = None
+    return cpe
 
 MAX_BYTES = 20 * 1024 * 1024  # 20 MB
 ALLOWED_SUFFIXES = {".pdf", ".png", ".jpg", ".jpeg", ".webp"}
@@ -111,3 +144,83 @@ async def scan(
         await supa.record_scan(user["id"], result, file.filename,
                                "self" if origin == "self" else "vendor", billed_as)
     return result
+
+
+@app.post("/api/checkout")
+async def checkout(payload: dict = Body(default={}),
+                   authorization: str | None = Header(default=None)) -> dict:
+    """Create a Stripe Checkout Session for the given plan and return its URL."""
+    if not STRIPE_SECRET_KEY or not supa.configured():
+        raise HTTPException(503, "Payments not configured")
+    user = await supa.verify_user(_bearer(authorization))
+    if not user:
+        raise HTTPException(401, "Sign in to purchase")
+    plan = (payload or {}).get("plan")
+    price = PRICE_BY_PLAN.get(plan)
+    if not price:
+        raise HTTPException(400, "Unknown plan")
+
+    mode = "subscription" if plan in SUBSCRIPTION_PLANS else "payment"
+    kwargs = dict(
+        mode=mode,
+        line_items=[{"price": price, "quantity": 1}],
+        success_url=f"{APP_URL}/?checkout=success",
+        cancel_url=f"{APP_URL}/?checkout=cancel",
+        client_reference_id=user["id"],
+        customer_email=user.get("email"),
+        metadata={"user_id": user["id"], "plan": plan},
+    )
+    if mode == "subscription":
+        # Carry user_id/plan onto the Subscription so its lifecycle webhooks
+        # can map back to the user without an extra lookup.
+        kwargs["subscription_data"] = {"metadata": {"user_id": user["id"], "plan": plan}}
+    try:
+        session = stripe.checkout.Session.create(**kwargs)
+    except stripe.StripeError as e:
+        raise HTTPException(502, f"Stripe error: {e.user_message or 'checkout failed'}")
+    return {"url": session.url}
+
+
+@app.post("/api/webhooks/stripe")
+async def stripe_webhook(request: Request) -> dict:
+    """Stripe-authenticated source of truth for entitlements: grants credits on
+    pack purchases and writes subscription state on lifecycle events."""
+    if not STRIPE_WEBHOOK_SECRET:
+        raise HTTPException(503, "Webhook not configured")
+    payload = await request.body()
+    sig = request.headers.get("stripe-signature")
+    try:
+        event = stripe.Webhook.construct_event(payload, sig, STRIPE_WEBHOOK_SECRET)
+    except Exception:
+        raise HTTPException(400, "Invalid signature")
+
+    etype = event["type"]
+    obj = event["data"]["object"]
+
+    if etype == "checkout.session.completed" and obj.get("mode") == "payment":
+        meta = obj.get("metadata") or {}
+        uid = obj.get("client_reference_id") or meta.get("user_id")
+        plan = meta.get("plan")
+        credits = PACK_CREDITS.get(plan)
+        if uid and credits:
+            reason = f"purchase:{plan}:{obj.get('id')}"
+            if not await supa.ledger_reason_exists(reason):  # idempotent
+                await supa.add_credits(uid, credits, reason)
+
+    elif etype in ("customer.subscription.created",
+                   "customer.subscription.updated",
+                   "customer.subscription.deleted"):
+        meta = obj.get("metadata") or {}
+        uid = meta.get("user_id")
+        if uid:
+            plan = meta.get("plan") or "monthly"
+            status = "canceled" if etype.endswith("deleted") else (
+                "active" if obj.get("status") in ("active", "trialing") else obj.get("status")
+            )
+            cpe = _sub_period_end(obj)
+            cpe_iso = (datetime.fromtimestamp(cpe, tz=timezone.utc).isoformat()
+                       if cpe else None)
+            await supa.upsert_subscription(uid, plan, status, cpe_iso,
+                                           obj.get("customer"), obj.get("id"))
+
+    return {"received": True}
