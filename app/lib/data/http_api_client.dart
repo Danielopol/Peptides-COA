@@ -87,6 +87,37 @@ class HttpApiClient implements ApiClient {
     throw ApiException(statusCode: code, message: _mapError(code, detail));
   }
 
+  @override
+  Future<Map<String, dynamic>> me() async {
+    final Response r;
+    try {
+      r = await _dio.get('/api/me', options: _authOptions());
+    } on DioException {
+      throw ApiException(message: "Can't reach the backend.", statusCode: null);
+    }
+    if (r.statusCode == 200 && r.data is Map) {
+      return Map<String, dynamic>.from(r.data as Map);
+    }
+    throw ApiException(statusCode: r.statusCode, message: _mapError(r.statusCode ?? 0, _detail(r.data)));
+  }
+
+  @override
+  Future<String> createCheckout(String plan) async {
+    final Response r;
+    try {
+      r = await _dio.post('/api/checkout', data: {'plan': plan}, options: _authOptions());
+    } on DioException {
+      throw ApiException(message: "Can't reach the backend.", statusCode: null);
+    }
+    if (r.statusCode == 200 && r.data is Map && (r.data as Map)['url'] is String) {
+      return (r.data as Map)['url'] as String;
+    }
+    throw ApiException(statusCode: r.statusCode, message: _mapError(r.statusCode ?? 0, _detail(r.data)));
+  }
+
+  String? _detail(Object? data) =>
+      (data is Map && data['detail'] is String) ? data['detail'] as String : null;
+
   String _mapError(int code, String? detail) {
     switch (code) {
       case 400:

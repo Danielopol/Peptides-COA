@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../core/payments.dart';
 import '../../core/theme.dart';
+import '../../models/models.dart' show ApiException;
+import '../../providers/providers.dart';
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
-/// SIMULATED paywall — shown the moment the user presses "check a COA" without
-/// an active plan or credits. Three swipeable screens, one per option:
-/// pay-per-scan $2 · monthly $7 · yearly $50 (orientative amounts).
-/// The trust guide, trust profile and achievements stay free; only the scan
-/// itself is gated. No real payment is processed at this stage.
+/// Paywall — shown when a signed-in user is out of scans (no free scan this
+/// month, no credits, no active subscription). Four options; each starts a real
+/// Stripe Checkout session and redirects the browser to Stripe.
 class PaywallScreen extends ConsumerStatefulWidget {
   const PaywallScreen({super.key});
 
@@ -23,8 +23,9 @@ class PaywallScreen extends ConsumerStatefulWidget {
 }
 
 class _PaywallScreenState extends ConsumerState<PaywallScreen> {
-  final _controller = PageController();
+  final _controller = PageController(viewportFraction: 0.92);
   int _page = 0;
+  String? _busyPlan;
 
   @override
   void dispose() {
@@ -32,114 +33,91 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     super.dispose();
   }
 
-  void _goTo(int page) => _controller.animateToPage(
-        page,
-        duration: const Duration(milliseconds: 280),
-        curve: Curves.easeOutCubic,
-      );
+  void _goTo(int page) => _controller.animateToPage(page,
+      duration: const Duration(milliseconds: 280), curve: Curves.easeOutCubic);
 
-  Future<void> _checkout(_PlanSpec spec) async {
-    final c = HelixColors.of(context);
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: c.surface2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-          side: BorderSide(color: c.line),
-        ),
-        title: Text('Simulated checkout',
-            style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w700, fontSize: 19, color: c.ink)),
-        content: Text(
-          '${spec.title} — ${spec.priceLabel}.\n\n'
-          'This is a payment simulation: no real charge is made and no card is '
-          'required. It only activates the plan inside the app.',
-          style: TextStyle(fontSize: 13.5, height: 1.5, color: c.ink2),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancel')),
-          FilledButton(
-            style: FilledButton.styleFrom(minimumSize: const Size(0, 44)),
-            onPressed: () => Navigator.pop(ctx, true),
-            child: Text('Pay ${spec.priceLabel} (simulated)'),
-          ),
-        ],
-      ),
-    );
-    if (confirmed != true || !mounted) return;
-
-    final payments = ref.read(paymentsProvider.notifier);
-    switch (spec.plan) {
-      case Plan.payPerScan:
-        payments.buyScanCredit();
-      case Plan.monthly:
-      case Plan.yearly:
-        payments.subscribe(spec.plan);
-      case Plan.none:
-        break;
+  Future<void> _checkout(String plan) async {
+    setState(() => _busyPlan = plan);
+    try {
+      final url = await ref.read(apiClientProvider).createCheckout(plan);
+      // Same-tab redirect to Stripe Checkout (web).
+      await launchUrl(Uri.parse(url), webOnlyWindowName: '_self');
+    } on ApiException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Could not start checkout. Please try again.')));
+      }
+    } finally {
+      if (mounted) setState(() => _busyPlan = null);
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${spec.title} active (simulated) — you can scan now.')),
-    );
-    context.go('/');
   }
 
   @override
   Widget build(BuildContext context) {
     final c = HelixColors.of(context);
-    final state = ref.watch(paymentsProvider);
-
-    final specs = [
+    const specs = [
       _PlanSpec(
-        plan: Plan.payPerScan,
-        tag: 'OPTION 1 · PAY PER SCAN',
-        title: 'Pay per scan',
-        price: '\$${Pricing.perScanUsd.toStringAsFixed(0)}',
-        unit: '/ scan',
-        priceLabel: '\$${Pricing.perScanUsd.toStringAsFixed(0)}',
-        blurb: 'One credit, one full verification. The credit is only used when '
-            'a scan completes — rejected files don’t burn it.',
-        features: const [
+        plan: 'pack3',
+        tag: 'PAY AS YOU GO',
+        title: '3-Scan Pack',
+        price: '\$5.99',
+        unit: '3 scans',
+        blurb: 'Three full verifications. Credits never expire and are only used '
+            'when a scan completes — rejected files don’t burn one.',
+        features: [
+          '3 COA scans',
+          'Credits never expire',
           'Full authenticity + completeness verdict',
-          'Findings with rule-level detail',
-          'Lab verification link when available',
-          'Credit never expires until used',
         ],
-        cta: 'Continue — one scan',
+        cta: 'Buy 3 scans',
       ),
       _PlanSpec(
-        plan: Plan.monthly,
-        tag: 'OPTION 2 · MONTHLY',
+        plan: 'pack10',
+        tag: 'PAY AS YOU GO',
+        title: '10-Scan Pack',
+        price: '\$17.99',
+        unit: '10 scans',
+        blurb: 'Ten verifications at the best per-scan price. Credits never expire.',
+        features: [
+          '10 COA scans',
+          'Best per-scan value',
+          'Credits never expire',
+        ],
+        cta: 'Buy 10 scans',
+      ),
+      _PlanSpec(
+        plan: 'monthly',
+        tag: 'SUBSCRIPTION',
         title: 'Monthly',
-        price: '\$${Pricing.monthlyUsd.toStringAsFixed(0)}',
+        price: '\$6.99',
         unit: '/ month',
-        priceLabel: '\$${Pricing.monthlyUsd.toStringAsFixed(0)} / month',
-        blurb: 'Unlimited scans while active. Made for an active research cycle '
-            'with several vendors and batches to compare.',
-        features: const [
+        blurb: 'Unlimited scans while active. For an active research cycle with '
+            'several vendors and batches to compare.',
+        features: [
           'Unlimited COA scans',
-          'Everything in pay-per-scan',
-          'Scan history across the period',
-          'Cancel anytime (simulated)',
+          'Auto-renews monthly',
+          'Cancel anytime',
         ],
         cta: 'Start monthly',
       ),
       _PlanSpec(
-        plan: Plan.yearly,
-        tag: 'OPTION 3 · YEARLY',
+        plan: 'yearly',
+        tag: 'SUBSCRIPTION',
         title: 'Yearly',
-        price: '\$${Pricing.yearlyUsd.toStringAsFixed(0)}',
+        price: '\$49.99',
         unit: '/ year',
-        priceLabel: '\$${Pricing.yearlyUsd.toStringAsFixed(0)} / year',
-        blurb: 'The diligence habit, funded for a year — about '
-            '\$${(Pricing.yearlyUsd / 12).toStringAsFixed(2)}/month.',
-        features: const [
-          'Unlimited COA scans for 12 months',
-          'Everything in monthly',
-          'Best value vs \$${84} of monthly renewals',
+        blurb: 'Unlimited scans for a year — about \$4.17/month.',
+        features: [
+          'Unlimited COA scans',
+          'Auto-renews yearly',
+          'Best value vs monthly',
         ],
         cta: 'Start yearly',
-        badge: 'BEST VALUE · SAVE 40%',
+        badge: 'BEST VALUE',
       ),
     ];
 
@@ -147,18 +125,6 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.close), onPressed: () => context.go('/')),
         title: const Text('HELIX'),
-        actions: [
-          if (state.plan != Plan.none)
-            TextButton(
-              onPressed: () {
-                ref.read(paymentsProvider.notifier).clear();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Simulation reset — plan cleared.')),
-                );
-              },
-              child: const Text('Reset (sim)'),
-            ),
-        ],
       ),
       body: MoleculeBackground(
         child: Column(
@@ -168,47 +134,40 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('UNLOCK SCANNING · PAYMENT SIMULATION', style: HelixText.microtag(c.accent)),
+                  Text('UNLOCK SCANNING', style: HelixText.microtag(c.accent)),
                   const SizedBox(height: 8),
-                  Text('The trust guide is free.\nScanning a COA is not.',
+                  Text('You’re out of scans.\nChoose how to continue.',
                       style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(height: 6),
                   Text(
-                    'Pick how you want to pay for verification. Amounts are orientative — '
-                    'no real charge is made in this preview.',
+                    'Everyone gets 1 free scan a month. For more, grab a credit pack '
+                    'or go unlimited with a subscription.',
                     style: TextStyle(fontSize: 13, height: 1.5, color: c.ink2),
                   ),
-                  if (state.canScan) ...[
-                    const SizedBox(height: 10),
-                    _CurrentPlanChip(state: state),
-                  ],
                 ],
               ),
             ),
             Expanded(
-              // Mouse-drag swiping is off by default on Flutter web — enable
-              // it so desktop users can move between the three plan screens.
               child: ScrollConfiguration(
-                behavior: const MaterialScrollBehavior().copyWith(
-                  dragDevices: {
-                    PointerDeviceKind.touch,
-                    PointerDeviceKind.mouse,
-                    PointerDeviceKind.trackpad,
-                    PointerDeviceKind.stylus,
-                  },
-                ),
+                behavior: const MaterialScrollBehavior().copyWith(dragDevices: {
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.mouse,
+                  PointerDeviceKind.trackpad,
+                  PointerDeviceKind.stylus,
+                }),
                 child: PageView.builder(
                   controller: _controller,
                   itemCount: specs.length,
                   onPageChanged: (i) => setState(() => _page = i),
                   itemBuilder: (context, i) => _PlanPage(
                     spec: specs[i],
-                    onCheckout: () => _checkout(specs[i]),
+                    busy: _busyPlan == specs[i].plan,
+                    anyBusy: _busyPlan != null,
+                    onCheckout: () => _checkout(specs[i].plan),
                   ),
                 ),
               ),
             ),
-            // pager: chevrons + tappable dots
             Padding(
               padding: const EdgeInsets.only(bottom: 14),
               child: Row(
@@ -233,9 +192,6 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                           decoration: BoxDecoration(
                             color: active ? c.accent : c.surface3,
                             borderRadius: BorderRadius.circular(4),
-                            boxShadow: active && c.isDark
-                                ? [BoxShadow(color: c.accentGlow, blurRadius: 8, spreadRadius: -2)]
-                                : null,
                           ),
                         ),
                       ),
@@ -263,19 +219,17 @@ class _PlanSpec {
     required this.title,
     required this.price,
     required this.unit,
-    required this.priceLabel,
     required this.blurb,
     required this.features,
     required this.cta,
     this.badge,
   });
 
-  final Plan plan;
+  final String plan; // 'pack3' | 'pack10' | 'monthly' | 'yearly'
   final String tag;
   final String title;
   final String price;
   final String unit;
-  final String priceLabel;
   final String blurb;
   final List<String> features;
   final String cta;
@@ -283,9 +237,16 @@ class _PlanSpec {
 }
 
 class _PlanPage extends StatelessWidget {
-  const _PlanPage({required this.spec, required this.onCheckout});
+  const _PlanPage({
+    required this.spec,
+    required this.busy,
+    required this.anyBusy,
+    required this.onCheckout,
+  });
 
   final _PlanSpec spec;
+  final bool busy;
+  final bool anyBusy;
   final VoidCallback onCheckout;
 
   @override
@@ -293,12 +254,13 @@ class _PlanPage extends StatelessWidget {
     final c = HelixColors.of(context);
     return PageBody(
       maxWidth: 480,
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+      padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 children: [
@@ -321,14 +283,11 @@ class _PlanPage extends StatelessWidget {
                 children: [
                   Text(spec.price,
                       style: GoogleFonts.spaceGrotesk(
-                          fontSize: 54,
+                          fontSize: 48,
                           fontWeight: FontWeight.w700,
                           height: 1,
                           letterSpacing: -1,
-                          color: c.ink,
-                          shadows: c.isDark
-                              ? [Shadow(color: c.accentGlow, blurRadius: 18)]
-                              : null)),
+                          color: c.ink)),
                   const SizedBox(width: 8),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 6),
@@ -368,22 +327,17 @@ class _PlanPage extends StatelessWidget {
                     ),
                   )),
               const SizedBox(height: 8),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: c.isDark
-                      ? [BoxShadow(color: c.accentGlow, blurRadius: 22, spreadRadius: -4)]
-                      : null,
-                ),
-                child: FilledButton(
-                  style: FilledButton.styleFrom(minimumSize: const Size(double.infinity, 52)),
-                  onPressed: onCheckout,
-                  child: Text(spec.cta),
-                ),
+              FilledButton(
+                style: FilledButton.styleFrom(minimumSize: const Size(double.infinity, 52)),
+                onPressed: anyBusy ? null : onCheckout,
+                child: busy
+                    ? const SizedBox(
+                        width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                    : Text(spec.cta),
               ),
               const SizedBox(height: 10),
               Center(
-                child: Text('SIMULATION · NO REAL CHARGE', style: HelixText.microtag(c.ink3, size: 9.5)),
+                child: Text('SECURE CHECKOUT VIA STRIPE', style: HelixText.microtag(c.ink3, size: 9.5)),
               ),
             ],
           ),
@@ -391,35 +345,4 @@ class _PlanPage extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Small status chip shown when something is already active (also reused on home).
-class _CurrentPlanChip extends StatelessWidget {
-  const _CurrentPlanChip({required this.state});
-  final PaymentsState state;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = HelixColors.of(context);
-    final label = switch (state.plan) {
-      Plan.payPerScan => '${state.credits} SCAN CREDIT${state.credits == 1 ? '' : 'S'} LEFT',
-      Plan.monthly => 'MONTHLY ACTIVE · UNTIL ${_d(state.expiry)}',
-      Plan.yearly => 'YEARLY ACTIVE · UNTIL ${_d(state.expiry)}',
-      Plan.none => '',
-    };
-    if (label.isEmpty) return const SizedBox.shrink();
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-      decoration: BoxDecoration(
-        color: c.wash(c.vGreen),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: c.vGreen),
-      ),
-      child: Text(label, style: HelixText.microtag(c.vGreen, size: 9.5)),
-    );
-  }
-
-  static String _d(DateTime? d) => d == null
-      ? '—'
-      : '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 }

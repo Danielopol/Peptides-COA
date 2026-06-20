@@ -52,6 +52,19 @@ class MockApiClient implements ApiClient {
     return _success(kFixtureAuthentic);
   }
 
+  @override
+  Future<Map<String, dynamic>> me() async => {
+        'email': 'mock@example.com',
+        'subscription': null,
+        'credits': 0,
+        'free_scan_available': true,
+        'can_scan': true,
+      };
+
+  @override
+  Future<String> createCheckout(String plan) async =>
+      throw const ApiException(message: 'Checkout is unavailable in mock mode.', statusCode: 501);
+
   ScanSuccess _success(String fixture) {
     final json = jsonDecode(fixture) as Map<String, dynamic>;
     json['filename'] = json['filename']; // keep fixture's own name

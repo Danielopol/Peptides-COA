@@ -1,7 +1,10 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/auth.dart';
 import '../../core/ludic.dart';
 import '../../core/theme.dart';
 import '../shared/widgets/disclaimer.dart';
@@ -89,7 +92,11 @@ class _OnboardingSummaryScreenState extends ConsumerState<OnboardingSummaryScree
                 style: TextStyle(fontSize: 13.5, height: 1.5, color: c.ink2),
               ),
               const SizedBox(height: 16),
-              TrustProfileCard(profile: profile),
+              // Auth wall at the value moment: signed-out users see a blurred
+              // teaser and sign in to reveal the full profile.
+              ref.watch(currentUserProvider) != null
+                  ? TrustProfileCard(profile: profile)
+                  : _TrustProfileTeaser(profile: profile),
               const SizedBox(height: 18),
               const Center(
                 child: AchievementBadge(
@@ -142,6 +149,58 @@ class _OnboardingSummaryScreenState extends ConsumerState<OnboardingSummaryScree
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Blurred trust-profile card with a "sign in to reveal" overlay — the auth wall
+/// at the end of the onboarding journey.
+class _TrustProfileTeaser extends StatelessWidget {
+  const _TrustProfileTeaser({required this.profile});
+
+  final TrustProfile profile;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = HelixColors.of(context);
+    return Stack(
+      children: [
+        ImageFiltered(
+          imageFilter: ui.ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+          child: IgnorePointer(child: TrustProfileCard(profile: profile)),
+        ),
+        Positioned.fill(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: c.surface.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.lock_outline, color: c.accent, size: 26),
+                    const SizedBox(height: 8),
+                    Text('Sign in to reveal your trust profile',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: c.ink)),
+                    const SizedBox(height: 4),
+                    Text('Free — built from your answers',
+                        style: TextStyle(fontSize: 12.5, color: c.ink2)),
+                    const SizedBox(height: 14),
+                    FilledButton(
+                      onPressed: () => context.go('/sign-in?from=/onboarding/summary'),
+                      child: const Text('Sign in to reveal'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

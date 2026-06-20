@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/auth.dart';
 import '../../core/config.dart';
+import '../../core/entitlement.dart';
 import '../../core/theme.dart';
 import '../onboarding/onboarding_controller.dart';
 import '../../providers/providers.dart';
@@ -16,12 +17,47 @@ import '../shared/widgets/ludic_widgets.dart';
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
-  Future<void> _pick(BuildContext context, WidgetRef ref, Future<PickedFile?> Function() picker) async {
-    // Scanning is open for now. The entitlement gate (free scan / credits /
-    // subscription) is enforced later, together with Stripe.
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Returning from Stripe Checkout (success_url = /?checkout=success).
+    if (Uri.base.queryParameters['checkout'] == 'success') {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ref.invalidate(entitlementProvider);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Payment successful — your plan is active. Happy scanning!'),
+        ));
+      });
+    }
+  }
+
+  Future<void> _pick(Future<PickedFile?> Function() picker) async {
+    // Must be signed in to scan.
+    if (ref.read(currentUserProvider) == null) {
+      context.go('/sign-in?from=/');
+      return;
+    }
+    // Entitlement gate: free monthly scan / credits / active subscription.
+    Entitlement? ent;
+    try {
+      ent = await ref.read(entitlementProvider.future);
+    } catch (_) {
+      ent = null;
+    }
+    if (!mounted) return;
+    if (ent == null || !ent.canScan) {
+      context.go('/paywall');
+      return;
+    }
     try {
       final file = await picker();
       if (file == null) return; // cancelled
@@ -31,16 +67,16 @@ class HomeScreen extends ConsumerWidget {
           ? 'self'
           : 'vendor';
       ref.read(scanControllerProvider.notifier).scan(bytes: file.bytes, filename: file.name, origin: origin);
-      if (context.mounted) context.go('/scanning');
+      if (mounted) context.go('/scanning');
     } on FileInputException catch (e) {
-      if (context.mounted) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
       }
     }
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final c = HelixColors.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -122,9 +158,11 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               _ScanCard(
-                onPickFile: () => _pick(context, ref, FileInput.pickDocument),
-                onPickPhoto: kIsWeb ? null : () => _pick(context, ref, FileInput.pickPhoto),
+                onPickFile: () => _pick(FileInput.pickDocument),
+                onPickPhoto: kIsWeb ? null : () => _pick(FileInput.pickPhoto),
               ),
+              const SizedBox(height: 10),
+              const _EntitlementStatus(),
               const SizedBox(height: 14),
               const StreakBar(),
               const SizedBox(height: 24),
@@ -234,6 +272,42 @@ class _DashedBorderPainter extends CustomPainter {
   @override
   bool shouldRepaint(_DashedBorderPainter old) =>
       old.color != color || old.radius != radius;
+}
+
+/// Scan entitlement status under the scan card — free scan / credits /
+/// subscription. Tappable → paywall. Hidden when signed out.
+class _EntitlementStatus extends ConsumerWidget {
+  const _EntitlementStatus();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = HelixColors.of(context);
+    if (ref.watch(currentUserProvider) == null) return const SizedBox.shrink();
+    final (Color color, String label) = ref.watch(entitlementProvider).when(
+      data: (e) {
+        if (e == null) return (c.ink3, '');
+        if (e.subscriptionActive) {
+          return (c.vGreen, '● ${(e.plan ?? 'PLAN').toUpperCase()} ACTIVE · UNLIMITED SCANS');
+        }
+        if (e.credits > 0) {
+          return (c.vGreen, '● ${e.credits} SCAN CREDIT${e.credits == 1 ? '' : 'S'} LEFT');
+        }
+        if (e.freeScanAvailable) return (c.vGreen, '● 1 FREE SCAN THIS MONTH');
+        return (c.ink3, 'NO SCANS LEFT · CHOOSE A PLAN →');
+      },
+      loading: () => (c.ink3, '…'),
+      error: (_, _) => (c.ink3, ''),
+    );
+    if (label.isEmpty) return const SizedBox.shrink();
+    return InkWell(
+      borderRadius: BorderRadius.circular(6),
+      onTap: () => context.go('/paywall'),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Center(child: Text(label, style: HelixText.microtag(color, size: 10))),
+      ),
+    );
+  }
 }
 
 /// Mono instrument footer: SERVICE ONLINE dot (live backend health, tap to

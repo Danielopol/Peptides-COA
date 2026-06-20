@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/auth.dart';
 import '../core/config.dart';
+import '../core/entitlement.dart';
 import '../data/api_client.dart';
 import '../data/http_api_client.dart';
 import '../data/mock_api_client.dart';
@@ -15,6 +17,15 @@ final apiClientProvider = Provider<ApiClient>((ref) {
 /// Backend reachability. Refresh by invalidating this provider.
 final healthProvider = FutureProvider<bool>((ref) async {
   return ref.watch(apiClientProvider).health();
+});
+
+/// The signed-in user's scan entitlement (null when signed out). Refetches on
+/// auth change; invalidate after a scan or a successful purchase to refresh.
+final entitlementProvider = FutureProvider<Entitlement?>((ref) async {
+  ref.watch(authStateProvider);
+  if (supabase.auth.currentSession == null) return null;
+  final raw = await ref.watch(apiClientProvider).me();
+  return Entitlement.fromJson(raw);
 });
 
 // ---------------------------------------------------------------------------
@@ -82,6 +93,9 @@ class ScanController extends Notifier<ScanState> {
       switch (outcome) {
         case ScanSuccess(:final result):
           ref.read(historyProvider.notifier).add(result);
+          // A completed scan consumed a free scan or a credit server-side —
+          // refresh the entitlement so the UI reflects the new balance.
+          ref.invalidate(entitlementProvider);
           state = ScanDone(result);
         case ScanNotACoaOutcome(:final info):
           state = ScanNotCoa(info);
