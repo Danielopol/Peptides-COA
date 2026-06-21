@@ -11,7 +11,7 @@ class CoaScannerApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
-      title: 'HELIX — Peptide COA Scanner',
+      title: 'Pep Trust — Peptide COA Scanner',
       debugShowCheckedModeBanner: false,
       theme: HelixTheme.light(),
       darkTheme: HelixTheme.dark(),

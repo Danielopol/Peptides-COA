@@ -134,7 +134,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Icon(Icons.qr_code_scanner, size: 12, color: c.accent),
             ),
             const SizedBox(width: 9),
-            const Text('HELIX'),
+            const Text('Pep Trust'),
           ],
         ),
         actions: [

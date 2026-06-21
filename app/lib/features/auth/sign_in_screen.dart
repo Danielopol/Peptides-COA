@@ -98,7 +98,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text('HELIX',
+                    Text('Pep Trust',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spaceGrotesk(
                             fontSize: 30,

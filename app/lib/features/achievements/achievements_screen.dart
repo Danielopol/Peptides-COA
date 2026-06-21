@@ -68,7 +68,7 @@ class AchievementsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/')),
-        title: const Text('HELIX'),
+        title: const Text('Pep Trust'),
       ),
       body: MoleculeBackground(
         child: PageBody(

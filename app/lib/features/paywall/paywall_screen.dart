@@ -125,7 +125,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.close), onPressed: () => context.go('/')),
-        title: const Text('HELIX'),
+        title: const Text('Pep Trust'),
       ),
       body: MoleculeBackground(
         child: Column(
