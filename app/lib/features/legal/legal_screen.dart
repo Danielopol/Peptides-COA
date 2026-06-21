@@ -3,11 +3,12 @@ import 'package:go_router/go_router.dart';
 
 import '../shared/widgets/page_body.dart';
 
-/// Operator / contact details surfaced in the legal docs. Update these to your
-/// full registered legal entity (name + address) and a monitored support inbox.
-const String kOperatorName = 'PeptidesTrust';
+/// Operator / contact details surfaced in the legal docs.
+const String kServiceName = 'PeptidesTrust';
+const String kOperatorName = 'Valentin Daniel Marin';
 const String kOperatorLocation = 'Romania (EU)';
-const String kContactEmail = 'support@peptidestrust.com';
+const String kContactEmail = 'valentin.marin83@gmail.com';
+const String kContactPhone = '+40 728 083 312';
 const String kLastUpdated = 'June 21, 2026';
 
 class LegalDoc {
@@ -74,11 +75,13 @@ final Map<String, LegalDoc> _docs = {
   'terms': const LegalDoc('Terms of Service', [
     (
       '1. About the Service',
-      '$kOperatorName (“we”, “us”, “the Service”) operates a web-based software tool '
-          'that analyses uploaded Certificates of Analysis (COAs) for research-use-only '
-          'laboratory peptides and returns an automated authenticity and completeness '
-          'assessment. The Service is operated from $kOperatorLocation. By creating an '
-          'account or using the Service you agree to these Terms.'
+      '$kServiceName (the “Service”) is operated by $kOperatorName, an individual based '
+          'in $kOperatorLocation (the “Operator”, “we”, “us”). The Service is a web-based '
+          'software tool that analyses uploaded Certificates of Analysis (COAs) for '
+          'research-use-only laboratory peptides and returns an automated authenticity and '
+          'completeness assessment. It is available to users worldwide. Contact: '
+          '$kContactEmail, $kContactPhone. By creating an account or using the Service you '
+          'agree to these Terms.'
     ),
     (
       '2. Informational use — no guarantee',
@@ -157,15 +160,18 @@ final Map<String, LegalDoc> _docs = {
     ),
     (
       '12. Contact',
-      'Questions about these Terms: $kContactEmail.'
+      'Questions about these Terms: $kContactEmail / $kContactPhone.'
     ),
   ]),
   'privacy': const LegalDoc('Privacy Policy', [
     (
       '1. Who we are',
-      '$kOperatorName ($kOperatorLocation) is the controller of personal data processed '
-          'through the Service. Contact: $kContactEmail. This policy explains what we '
-          'collect, why, and your rights under the GDPR.'
+      'The Service ($kServiceName) is operated by $kOperatorName, an individual based in '
+          '$kOperatorLocation, who is the controller of personal data processed through '
+          'the Service. Contact: $kContactEmail, $kContactPhone. We serve users worldwide: '
+          'if you are in the EU/EEA the GDPR applies, and we extend the same core '
+          'protections to users elsewhere. This policy explains what we collect, why, and '
+          'your rights.'
     ),
     (
       '2. Data we collect',
@@ -238,7 +244,7 @@ final Map<String, LegalDoc> _docs = {
     (
       '12. Changes & contact',
       'We may update this policy and will note the “last updated” date above. Questions: '
-          '$kContactEmail.'
+          '$kContactEmail / $kContactPhone.'
     ),
   ]),
   'refund': const LegalDoc('Refund & Cancellation Policy', [
