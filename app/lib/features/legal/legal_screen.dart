@@ -7,7 +7,7 @@ import '../shared/widgets/page_body.dart';
 const String kServiceName = 'PeptidesTrust';
 const String kOperatorName = 'Valentin Daniel Marin';
 const String kOperatorLocation = 'Romania (EU)';
-const String kContactEmail = 'valentin.marin83@gmail.com';
+const String kContactEmail = 'support@peptidestrust.com';
 const String kContactPhone = '+40 728 083 312';
 const String kLastUpdated = 'June 21, 2026';
 
