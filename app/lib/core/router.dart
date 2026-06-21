@@ -22,14 +22,16 @@ import '../features/scanning/scanning_screen.dart';
 /// redirect: after signing in, return the user to wherever they came from
 /// (`?from=`), so the upcoming "sign in to reveal / to scan" prompts feel
 /// seamless.
-/// Where the app opens. Always start with the onboarding trust guide (it's
-/// skippable on every screen), except when returning from Google OAuth (honor
-/// the saved destination) or from Stripe Checkout (land on home for the toast).
+/// Where the app opens:
+/// - Returning from Google OAuth → the saved destination (`?from=`).
+/// - Returning from Stripe Checkout → home (for the success toast).
+/// - Signed-in returning users → the scanner (home).
+/// - Everyone else (signed out) → the onboarding trust guide.
 String _initialLocation() {
   final from = launchFromParam;
   if (from != null && from.isNotEmpty && from != '/') return from;
   if (launchCheckoutParam == 'success') return '/';
-  return '/onboarding';
+  return supabase.auth.currentSession != null ? '/' : '/onboarding';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
