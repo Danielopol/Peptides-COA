@@ -123,16 +123,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 22,
-              height: 22,
-              decoration: BoxDecoration(
-                color: c.accentDim,
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: c.accent),
-              ),
-              child: Icon(Icons.qr_code_scanner, size: 12, color: c.accent),
-            ),
+            Image.asset('assets/logo.png', width: 26, height: 26),
             const SizedBox(width: 9),
             const Text('Pep Trust'),
           ],

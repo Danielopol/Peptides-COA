@@ -98,6 +98,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    Image.asset('assets/logo.png', height: 84),
+                    const SizedBox(height: 10),
                     Text('Pep Trust',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spaceGrotesk(
