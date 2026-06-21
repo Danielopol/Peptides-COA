@@ -8,7 +8,6 @@ import '../features/auth/sign_in_screen.dart';
 import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/legal/legal_screen.dart';
-import '../features/onboarding/onboarding_controller.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/onboarding/prepurchase_checklist_screen.dart';
 import '../features/onboarding/summary_screen.dart';
@@ -23,12 +22,21 @@ import '../features/scanning/scanning_screen.dart';
 /// redirect: after signing in, return the user to wherever they came from
 /// (`?from=`), so the upcoming "sign in to reveal / to scan" prompts feel
 /// seamless.
+/// Where the app opens. Always start with the onboarding trust guide (it's
+/// skippable on every screen), except when returning from Google OAuth (honor
+/// the saved destination) or from Stripe Checkout (land on home for the toast).
+String _initialLocation() {
+  final from = launchFromParam;
+  if (from != null && from.isNotEmpty && from != '/') return from;
+  if (launchCheckoutParam == 'success') return '/';
+  return '/onboarding';
+}
+
 final routerProvider = Provider<GoRouter>((ref) {
-  final seen = ref.watch(onboardingSeenProvider);
   final refresh = GoRouterRefreshStream(supabase.auth.onAuthStateChange);
   ref.onDispose(refresh.dispose);
   return GoRouter(
-    initialLocation: seen ? '/' : '/onboarding',
+    initialLocation: _initialLocation(),
     refreshListenable: refresh,
     redirect: (context, state) {
       final loggedIn = supabase.auth.currentSession != null;
