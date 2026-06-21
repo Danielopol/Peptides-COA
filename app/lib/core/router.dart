@@ -7,6 +7,7 @@ import '../features/achievements/achievements_screen.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/legal/legal_screen.dart';
 import '../features/onboarding/onboarding_controller.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/onboarding/prepurchase_checklist_screen.dart';
@@ -50,6 +51,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/history', builder: (context, state) => const HistoryScreen()),
       GoRoute(path: '/achievements', builder: (context, state) => const AchievementsScreen()),
       GoRoute(path: '/about', builder: (context, state) => const AboutScreen()),
+      GoRoute(path: '/terms', builder: (context, state) => const LegalScreen(docKey: 'terms')),
+      GoRoute(path: '/privacy', builder: (context, state) => const LegalScreen(docKey: 'privacy')),
+      GoRoute(path: '/refund', builder: (context, state) => const LegalScreen(docKey: 'refund')),
     ],
   );
 });

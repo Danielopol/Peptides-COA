@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/auth.dart';
 import '../../core/theme.dart';
+import '../legal/legal_screen.dart' show legalLink;
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
@@ -186,6 +187,18 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       child: Text(_isSignUp
                           ? 'Already have an account? Sign in'
                           : "Don't have an account? Create one"),
+                    ),
+                    const SizedBox(height: 4),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text('By continuing you agree to our ',
+                            style: TextStyle(fontSize: 11.5, color: c.ink3)),
+                        legalLink(context, 'Terms', '/terms', c.accent),
+                        Text(' & ', style: TextStyle(fontSize: 11.5, color: c.ink3)),
+                        legalLink(context, 'Privacy Policy', '/privacy', c.accent),
+                      ],
                     ),
                   ],
                 ),

@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/theme.dart';
 import '../../models/models.dart' show ApiException;
 import '../../providers/providers.dart';
+import '../legal/legal_screen.dart' show legalLink;
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
@@ -202,6 +203,20 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                         color: _page < specs.length - 1 ? c.ink2 : c.surface3),
                     onPressed: _page < specs.length - 1 ? () => _goTo(_page + 1) : null,
                   ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 14, left: 16, right: 16),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text('By purchasing you agree to the ',
+                      style: TextStyle(fontSize: 11.5, color: c.ink3)),
+                  legalLink(context, 'Terms', '/terms', c.accent),
+                  Text(' & ', style: TextStyle(fontSize: 11.5, color: c.ink3)),
+                  legalLink(context, 'Refund Policy', '/refund', c.accent),
                 ],
               ),
             ),

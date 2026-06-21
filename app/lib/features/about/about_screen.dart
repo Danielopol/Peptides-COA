@@ -77,6 +77,21 @@ class AboutScreen extends StatelessWidget {
             ..._safety.map((s) => _Bullet(text: s)),
 
             const SizedBox(height: 24),
+            Text('Legal',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+            const SizedBox(height: 4),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Wrap(
+                spacing: 16,
+                children: [
+                  TextButton(onPressed: () => context.go('/terms'), child: const Text('Terms of Service')),
+                  TextButton(onPressed: () => context.go('/privacy'), child: const Text('Privacy Policy')),
+                  TextButton(onPressed: () => context.go('/refund'), child: const Text('Refund Policy')),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
             const DisclaimerBanner(),
             const SizedBox(height: 16),
           ],
