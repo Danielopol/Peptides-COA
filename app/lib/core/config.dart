@@ -17,6 +17,13 @@ class AppConfig {
   /// Defaults to false so the app talks to the real local backend.
   static const bool useMock = bool.fromEnvironment('USE_MOCK', defaultValue: false);
 
+  /// DEV ONLY: skip the sign-in + entitlement/paywall gates so scanning works
+  /// against a local backend (which has REQUIRE_AUTH=false) without Supabase auth
+  /// or Stripe. Defaults to false — production builds are unaffected. Enable with
+  /// `--dart-define=DEV_BYPASS_PAYWALL=true`.
+  static const bool devBypassPaywall =
+      bool.fromEnvironment('DEV_BYPASS_PAYWALL', defaultValue: false);
+
   /// Supabase project URL + anon (public) key. Safe to ship in the client — the
   /// anon key is designed to be public and is gated by Row Level Security.
   /// Overridable via --dart-define for other environments.

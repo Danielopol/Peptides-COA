@@ -45,16 +45,71 @@ LIMITATIONS = [
 
 
 def _infer_ms_technique(text: str) -> str | None:
+    # Word boundaries are required: a bare-substring "esi" matches inside ordinary
+    # words (e.g. "design" / "designer"), which manufactured a phantom "ESI-MS"
+    # technique on non-COA screenshots and lit the identity checklist row green.
     low = (text or "").lower()
-    if "maldi" in low:
+    if re.search(r"\bmaldi", low):
         return "MALDI-TOF"
-    if "esi" in low and "tof" in low:
+    if re.search(r"\besi\b", low) and re.search(r"\btof\b", low):
         return "ESI-TOF"
-    if "esi" in low:
+    if re.search(r"\besi\b", low):
         return "ESI-MS"
-    if "q-tof" in low or "qtof" in low:
+    if re.search(r"\bq-?tof\b", low):
         return "Q-TOF"
     return None
+
+
+# A document explicitly framing itself as a certificate/analytical report. Any
+# one of these is a STRONG signal that the input is a COA.
+_COA_PHRASE = re.compile(
+    r"certificate\s+of\s+analysis|certificate\s+of\s+conformance|"
+    r"\bc\.?\s*o\.?\s*a\.?\b|analytical\s+report|test\s+report",
+    re.I,
+)
+
+
+def coa_signals(ocr_text: str, peptide_name: str | None, ms_technique: str | None,
+                hard_checks: dict) -> dict:
+    """Decide whether the input even looks like a COA, BEFORE scoring it.
+
+    Every downstream check is a COA-conditional discriminator ("given a COA, is it
+    forged / complete?") — none establishes that the input is a COA at all. On
+    out-of-distribution input (a random screenshot) the forgery checks fail open
+    to "pass" and a few loose matchers manufacture phantom "present" fields, so
+    the result reads like a half-valid COA. This gate stops that: it requires
+    real COA markers and otherwise short-circuits to the not-a-COA verdict.
+
+    Conservative by design — it must never reject a genuine (even sparse) COA:
+    a COA is accepted on ANY single strong marker, or any TWO weak markers.
+    """
+    hc = hard_checks or {}
+    strong: list[str] = []
+    weak: list[str] = []
+
+    if peptide_name:
+        strong.append("peptide_identified")
+    if _COA_PHRASE.search(ocr_text or ""):
+        strong.append("coa_header")
+
+    if hc.get("purity_sanity", {}).get("status") not in (None, "not_applicable"):
+        weak.append("purity")
+    _am = hc.get("assay_mass", {})
+    if _am.get("labeled_mg") is not None or _am.get("measured_mg") is not None:
+        weak.append("assay_mass")
+    if hc.get("known_lab", {}).get("status") in ("pass", "unrecognized_named"):
+        weak.append("lab_named")
+    if hc.get("methods", {}).get("status") in ("multi", "single"):
+        weak.append("analytical_method")
+    if ms_technique:
+        weak.append("ms_technique")
+    if semantic_enrich.detect_batch(ocr_text):
+        weak.append("batch_lot")
+    if hc.get("mw_table", {}).get("claimed_mw") is not None:
+        weak.append("molecular_weight")
+
+    is_coa = len(strong) >= 1 or len(weak) >= 2
+    return {"is_coa": is_coa, "strong": strong, "weak": weak}
 
 
 # Tesseract reads small text poorly below ~300 DPI. A low-resolution image
@@ -340,6 +395,27 @@ def run_scan(file_bytes: bytes, filename: str, origin: str = "vendor") -> dict:
             except OSError:
                 pass
 
+    # ---- COA-ness gate -----------------------------------------------------
+    # Short-circuit BEFORE scoring if the input doesn't look like a COA at all.
+    # OCR read plenty of text (we're past the <100-char guard) but none of the
+    # markers a certificate carries are present, so the scoring path would just
+    # report fail-open "passes" as if it were a half-valid COA. Reuse the
+    # existing input_not_coa contract the frontend already renders.
+    _sig = coa_signals(ocr_text, peptide_name, ms_technique, hard_checks)
+    if not _sig["is_coa"]:
+        return {
+            "filename": filename,
+            "error": "input_not_coa",
+            "message": (
+                "We read the text on this file, but it's missing the fields a "
+                "Certificate of Analysis contains (no peptide identity, purity, "
+                "testing lab, mass, or analytical results were found). It doesn't "
+                "look like a COA."
+            ),
+            "ocr_chars": len(ocr_text.strip()),
+            "coa_signals": _sig,
+        }
+
     # Lab-identity reconciliation: if the visual template confidently matches a
     # known lab but the text matcher didn't independently find that issuer
     # (e.g. the name is readable only in a stylized logo OCR can't parse, with
@@ -536,7 +612,14 @@ def run_scan(file_bytes: bytes, filename: str, origin: str = "vendor") -> dict:
         llm_out = llm_client.assess(ocr_text=ocr_text, image_png=png)
         verdict = llm_out.get("verdict")
         conf = float(llm_out.get("confidence") or 0)
-        if verdict == "likely_forged" and conf >= 0.6:
+        if verdict == "not_a_coa" and conf >= 0.6:
+            # Vision agrees this isn't a COA (the deterministic gate let it through
+            # on a borderline marker). Downward-only, like the other LLM verdicts.
+            agg["authenticity"]["score"] = min(agg["authenticity"]["score"], 30)
+            agg["authenticity"]["copy"] = (
+                "Visual review: this does not appear to be a certificate of analysis."
+            )
+        elif verdict == "likely_forged" and conf >= 0.6:
             agg["authenticity"]["score"] = min(agg["authenticity"]["score"], 28)
             agg["authenticity"]["copy"] = (
                 "Visual review found tampering: " + (llm_out.get("summary") or "altered fields detected") + "."

@@ -25,8 +25,13 @@ class NotACoaView extends ConsumerWidget {
               style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: 10),
           Text(
-            "We couldn't read enough text from this file to analyze it. Make sure the "
-            "certificate is in focus and not blank, then try again.",
+            // Backend tailors this: "<100 chars" (blank/unreadable) vs the
+            // semantic gate (text read, but no COA fields). Fall back to the
+            // unreadable-scan copy if the backend sent nothing specific.
+            info.message.isNotEmpty
+                ? info.message
+                : "We couldn't read enough text from this file to analyze it. Make "
+                    "sure the certificate is in focus and not blank, then try again.",
             textAlign: TextAlign.center,
             style: TextStyle(color: scheme.onSurfaceVariant, height: 1.4),
           ),

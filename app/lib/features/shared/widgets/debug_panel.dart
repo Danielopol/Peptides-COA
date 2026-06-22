@@ -21,9 +21,13 @@ class DebugPanel extends StatelessWidget {
       child: ExpansionTile(
         leading: const Icon(Icons.terminal),
         title: const Text('Advanced / technical detail'),
+        // A "pass" means a rule did not fire — NOT that a field was verified.
+        // Most rules are forgery detectors, so a clean non-COA trips none of them
+        // and racks up a high "pass" count. Label it so it can't be read as trust.
         subtitle: Text(
-          'passed ${counts['pass'] ?? 0} · did not pass ${counts['fired'] ?? 0} · '
-          'n/a ${counts['not_applicable'] ?? 0} · err ${counts['error'] ?? 0}',
+          '${counts['pass'] ?? 0} forgery checks didn’t trip · '
+          '${counts['fired'] ?? 0} flagged · n/a ${counts['not_applicable'] ?? 0} · '
+          'err ${counts['error'] ?? 0}',
           style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant),
         ),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),

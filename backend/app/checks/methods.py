@@ -21,7 +21,9 @@ _FAMILIES = {
         re.I,
     ),
     "MS": re.compile(
-        r"\bms\b|mass\s*spec|lc-?ms|gc-?ms|esi|maldi|q-?tof|orbitrap|triple\s*quad|\bm/?z\b",
+        # Short tokens are boundary-anchored so "esi" can't match inside "design".
+        r"\bms\b|mass\s*spec|\blc-?ms\b|\bgc-?ms\b|\besi\b|\bmaldi\b|\bq-?tof\b|"
+        r"\borbitrap\b|triple\s*quad|\bm/?z\b",
         re.I,
     ),
     "NMR": re.compile(r"\bnmr\b|nuclear\s+magnetic", re.I),

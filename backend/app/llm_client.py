@@ -16,7 +16,13 @@ LEAN_PROMPT = """You are a forensic reviewer of peptide Certificates of Analysis
 You are given a COA image and its OCR text. Automated rule checks have ALREADY run;
 your job is to catch VISUAL tampering and inconsistencies that automated rules miss.
 
-Look specifically for:
+FIRST decide whether this image is a peptide COA at all. If it is clearly NOT a
+certificate of analysis (e.g. a screenshot of a website, an app, source code, a
+chat, an invoice, or any unrelated document), return verdict "not_a_coa" — do not
+judge tampering on a non-COA. "authentic" means a genuine, untampered COA, NOT
+merely "an image with no edits".
+
+If it IS a COA, look specifically for:
 - Fields that appear blurred, smudged, erased, whited-out, or pasted over — especially
   the lab/issuer name, task/report number, client name, QR code, verification key, dates, results
 - Text with mismatched fonts, sizes, weights, or alignment that suggests edits
@@ -26,7 +32,7 @@ Look specifically for:
 
 Respond with ONLY a JSON object, no prose:
 {
-  "verdict": "authentic" | "suspicious" | "likely_forged",
+  "verdict": "authentic" | "suspicious" | "likely_forged" | "not_a_coa",
   "confidence": 0.0-1.0,
   "visual_tampering": true | false,
   "lab_name_altered": true | false,
@@ -36,7 +42,8 @@ Respond with ONLY a JSON object, no prose:
 
 Be conservative: only "likely_forged" when there is CLEAR visual evidence of tampering
 (e.g. a field deliberately blurred or pasted over). A low-quality or sparse but
-untampered scan is "authentic" or "suspicious", never "likely_forged"."""
+untampered COA is "authentic" or "suspicious", never "likely_forged". Use
+"not_a_coa" only when the document is plainly not a certificate of analysis."""
 
 
 def llm_enabled() -> bool:

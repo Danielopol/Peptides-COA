@@ -75,6 +75,10 @@ _DEFAULT_ORIGINS = ",".join([
     "https://peptidestrust.com",
     "https://www.peptidestrust.com",
     "https://peptides-coa.vercel.app",
+    # Local dev (flutter run -d web-server --web-port=8087). Harmless in prod —
+    # a browser can only send these origins from the user's own machine.
+    "http://localhost:8087",
+    "http://127.0.0.1:8087",
 ])
 _origins = os.environ.get("ALLOWED_ORIGINS", _DEFAULT_ORIGINS)
 ALLOWED_ORIGINS = [o.strip() for o in _origins.split(",") if o.strip()]

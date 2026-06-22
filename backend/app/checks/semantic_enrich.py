@@ -34,9 +34,11 @@ _BATCH_TOKEN = re.compile(
     r"(?<![A-Za-z0-9])(?:[A-Z]{1,3}\d{2,6}[A-Z]{1,3}\d{0,4}|[A-Z]{2,4}\d{4,8})(?![A-Za-z0-9])"
 )
 
+# Word boundaries on the short tokens (esi/tof/mz/lc-ms): without them a bare
+# "esi" matches inside "design" etc., falsely confirming MS identity on non-COAs.
 _MS_CUES = re.compile(
-    r"mass\s*(?:spec\w*|identif\w*)|\bm\s*/?\s*z\b|\bmz\b|esi|maldi|q-?tof|orbitrap|"
-    r"lc-?ms|tof|triple\s*quad",
+    r"mass\s*(?:spec\w*|identif\w*)|\bm\s*/?\s*z\b|\bmz\b|\besi\b|\bmaldi\b|\bq-?tof\b|"
+    r"\borbitrap\b|\blc-?ms\b|\btof\b|triple\s*quad",
     re.I,
 )
 _HPLC_CUES = re.compile(

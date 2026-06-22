@@ -81,22 +81,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> _pick(Future<PickedFile?> Function() picker) async {
-    // Must be signed in to scan.
-    if (ref.read(currentUserProvider) == null) {
-      context.go('/sign-in?from=/');
-      return;
-    }
-    // Entitlement gate: free monthly scan / credits / active subscription.
-    Entitlement? ent;
-    try {
-      ent = await ref.read(entitlementProvider.future);
-    } catch (_) {
-      ent = null;
-    }
-    if (!mounted) return;
-    if (ent == null || !ent.canScan) {
-      context.go('/paywall');
-      return;
+    // DEV bypass: skip sign-in + paywall entirely for local backend testing.
+    if (!AppConfig.devBypassPaywall) {
+      // Must be signed in to scan.
+      if (ref.read(currentUserProvider) == null) {
+        context.go('/sign-in?from=/');
+        return;
+      }
+      // Entitlement gate: free monthly scan / credits / active subscription.
+      Entitlement? ent;
+      try {
+        ent = await ref.read(entitlementProvider.future);
+      } catch (_) {
+        ent = null;
+      }
+      if (!mounted) return;
+      if (ent == null || !ent.canScan) {
+        context.go('/paywall');
+        return;
+      }
     }
     try {
       final file = await picker();

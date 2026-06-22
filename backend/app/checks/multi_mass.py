@@ -28,11 +28,14 @@ def check(ocr_text: str) -> dict:
         return {"status": "not_applicable", "reason": "no text"}
 
     offenders = []
+    saw_mass = False  # did the document contain ANY measured mass to check?
     for raw in ocr_text.splitlines():
         line = raw.strip()
         if not line:
             continue
         masses = [float(m) for m in _MASS_RE.findall(line)]
+        if masses:
+            saw_mass = True
         if len(masses) < 2:
             continue
         # combo products use '+' to join distinct peptides — not an offense
@@ -75,4 +78,11 @@ def check(ocr_text: str) -> dict:
             "offending_lines": offenders[:6],
             "message": "A result line lists multiple masses for one entry — review manually.",
         }
+    # No measured mass anywhere -> nothing to cross-check. Report this as
+    # not_applicable (hidden / greyed) rather than a confident green PASS: the
+    # absence of the replicate-padding signature is not positive evidence of
+    # mass consistency, and rendering it as "Pass" misled on non-COA inputs.
+    if not saw_mass:
+        return {"status": "not_applicable", "rule_id": "FORG-017",
+                "reason": "no measured masses on the document to cross-check"}
     return {"status": "pass", "rule_id": "FORG-017"}
