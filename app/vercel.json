@@ -1,5 +1,6 @@
 {
   "framework": null,
-  "buildCommand": "git clone https://github.com/flutter/flutter.git -b stable --depth 1 && flutter/bin/flutter build web --release --dart-define=API_BASE_URL=https://peptides-coa-production.up.railway.app --dart-define=USE_MOCK=false",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- .",
+  "buildCommand": "git clone https://github.com/flutter/flutter.git -b stable --depth 1 && flutter/bin/flutter build web --release --dart2js-optimization=O2 --no-source-maps --no-tree-shake-icons --dart-define=API_BASE_URL=https://peptides-coa-production.up.railway.app --dart-define=USE_MOCK=false",
   "outputDirectory": "build/web"
 }
