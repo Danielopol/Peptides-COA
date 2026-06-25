@@ -1,0 +1,65 @@
+name: Deploy web to Vercel
+
+# Builds the Flutter web app in CI (free GitHub-hosted runner, with the Flutter
+# SDK cached between runs) and ships the prebuilt static output to Vercel via the
+# CLI. This keeps the heavy dart2js compile OFF Vercel's build meter — Vercel only
+# receives finished static files, so its build CPU usage drops to ~zero.
+#
+# Runs only when something under app/ changes (backend / docs commits don't
+# rebuild the frontend). Trigger a deploy by hand from the Actions tab with
+# "Run workflow".
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# Never run two deploys at once; cancel an in-progress one if a newer commit lands.
+concurrency:
+  group: vercel-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter (SDK cached between runs)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build web (release, cheaper compile)
+        working-directory: app
+        run: |
+          flutter build web --release \
+            --dart2js-optimization=O2 \
+            --no-source-maps \
+            --no-tree-shake-icons \
+            --dart-define=API_BASE_URL=https://peptides-coa-production.up.railway.app \
+            --dart-define=USE_MOCK=false
+
+      - name: Assemble Vercel prebuilt output (Build Output API v3)
+        working-directory: app
+        run: |
+          rm -rf .vercel/output
+          mkdir -p .vercel/output/static
+          cp -r build/web/. .vercel/output/static/
+          echo '{"version":3}' > .vercel/output/config.json
+
+      - name: Deploy prebuilt to Vercel (production)
+        working-directory: app
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm i -g vercel@latest
+          vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
