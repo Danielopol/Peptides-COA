@@ -56,8 +56,11 @@ jobs:
           cp -r build/web/. .vercel/output/static/
           echo '{"version":3}' > .vercel/output/config.json
 
+      # Run from the repo ROOT, not app/. The Vercel project's Root Directory is
+      # "app", and the CLI appends it to the working dir — running inside app/
+      # resolves to app/app (the error we hit). From the root it resolves to app,
+      # and the prebuilt output is read from app/.vercel/output.
       - name: Deploy prebuilt to Vercel (production)
-        working-directory: app
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
