@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- .",
+  "ignoreCommand": "exit 0",
   "buildCommand": "bash build.sh",
   "outputDirectory": "build/web"
 }
