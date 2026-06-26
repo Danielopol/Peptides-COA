@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/auth.dart';
+import '../features/onboarding/onboarding_controller.dart';
 import '../features/about/about_screen.dart';
 import '../features/achievements/achievements_screen.dart';
 import '../features/auth/sign_in_screen.dart';
@@ -11,6 +12,8 @@ import '../features/legal/legal_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/onboarding/prepurchase_checklist_screen.dart';
 import '../features/onboarding/summary_screen.dart';
+import '../features/onboarding/trust_profile_screen.dart';
+import '../features/onboarding/welcome_screen.dart';
 import '../features/paywall/paywall_screen.dart';
 import '../features/results/results_screen.dart';
 import '../features/results/share_card.dart';
@@ -26,19 +29,21 @@ import '../features/scanning/scanning_screen.dart';
 /// - Returning from Google OAuth → the saved destination (`?from=`).
 /// - Returning from Stripe Checkout → home (for the success toast).
 /// - Signed-in returning users → the scanner (home).
-/// - Everyone else (signed out) → the onboarding trust guide.
-String _initialLocation() {
+/// - First-time signed-out users → the welcome explainer (shown once).
+/// - Returning signed-out users → the onboarding trust guide.
+String _initialLocation(bool onboardingSeen) {
   final from = launchFromParam;
   if (from != null && from.isNotEmpty && from != '/') return from;
   if (launchCheckoutParam == 'success') return '/';
-  return supabase.auth.currentSession != null ? '/' : '/onboarding';
+  if (supabase.auth.currentSession != null) return '/';
+  return onboardingSeen ? '/onboarding' : '/welcome';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = GoRouterRefreshStream(supabase.auth.onAuthStateChange);
   ref.onDispose(refresh.dispose);
   return GoRouter(
-    initialLocation: _initialLocation(),
+    initialLocation: _initialLocation(ref.read(onboardingSeenProvider)),
     refreshListenable: refresh,
     redirect: (context, state) {
       final loggedIn = supabase.auth.currentSession != null;
@@ -50,10 +55,12 @@ final routerProvider = Provider<GoRouter>((ref) {
     },
     routes: [
       GoRoute(path: '/sign-in', builder: (context, state) => const SignInScreen()),
+      GoRoute(path: '/welcome', builder: (context, state) => const WelcomeScreen()),
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
       GoRoute(path: '/onboarding/summary', builder: (context, state) => const OnboardingSummaryScreen()),
       GoRoute(path: '/onboarding/checklist', builder: (context, state) => const PrePurchaseChecklistScreen()),
+      GoRoute(path: '/trust-profile', builder: (context, state) => const TrustProfileScreen()),
       GoRoute(path: '/paywall', builder: (context, state) => const PaywallScreen()),
       GoRoute(path: '/scanning', builder: (context, state) => const ScanningScreen()),
       GoRoute(path: '/results', builder: (context, state) => const ResultsScreen()),

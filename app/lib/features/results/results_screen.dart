@@ -45,7 +45,7 @@ class ResultsScreen extends ConsumerWidget {
   }
 }
 
-/// HELIX wordmark: accent scan plate + Space Grotesk title.
+/// App wordmark: logo + Space Grotesk title.
 class _HelixBrand extends StatelessWidget {
   const _HelixBrand();
 
@@ -55,18 +55,9 @@ class _HelixBrand extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          width: 22,
-          height: 22,
-          decoration: BoxDecoration(
-            color: c.accentDim,
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(color: c.accent),
-          ),
-          child: Icon(Icons.qr_code_scanner, size: 12, color: c.accent),
-        ),
+        Image.asset('assets/logo.png', width: 22, height: 22),
         const SizedBox(width: 9),
-        Text('HELIX',
+        Text('Pep Trust',
             style: GoogleFonts.spaceGrotesk(
                 fontSize: 15.5, fontWeight: FontWeight.w700, letterSpacing: 0.3, color: c.ink)),
       ],

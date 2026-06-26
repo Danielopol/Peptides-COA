@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -133,6 +132,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         actions: [
           IconButton(
+            tooltip: 'Trust profile',
+            icon: const Icon(Icons.shield_outlined),
+            onPressed: () => context.go('/trust-profile'),
+          ),
+          IconButton(
             tooltip: 'History',
             icon: const Icon(Icons.history),
             onPressed: () => context.go('/history'),
@@ -240,7 +244,9 @@ class _ScanCard extends StatelessWidget {
                     ? [BoxShadow(color: c.accentGlow, blurRadius: 22, spreadRadius: -6)]
                     : null,
               ),
-              child: Icon(Icons.qr_code_scanner, size: 22, color: c.accent),
+              child: Center(
+                child: Image.asset('assets/logo.png', width: 26, height: 26),
+              ),
             ),
             const SizedBox(height: 12),
             Text('Scan a COA',
@@ -344,64 +350,15 @@ class _EntitlementStatus extends ConsumerWidget {
   }
 }
 
-/// Mono instrument footer: SERVICE ONLINE dot (live backend health, tap to
-/// re-check) + RESEARCH USE ONLY. Same data as the old status pill.
+/// Mono instrument footer: a centered RESEARCH USE ONLY tag.
 class _StatusFooter extends ConsumerWidget {
   const _StatusFooter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = HelixColors.of(context);
-    final health = ref.watch(healthProvider);
-    final (ui.Color dot, String text, bool spin) = health.when(
-      data: (ok) => ok ? (c.vGreen, 'SERVICE ONLINE', false) : (c.vRed, 'SERVICE UNREACHABLE', false),
-      loading: () => (c.ink3, 'CHECKING SERVICE…', true),
-      error: (_, _) => (c.vRed, 'SERVICE UNREACHABLE', false),
-    );
-    final label = AppConfig.useMock ? 'MOCK MODE (NO BACKEND)' : text;
-    final dotColor = AppConfig.useMock ? c.vAmber : dot;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              borderRadius: BorderRadius.circular(6),
-              onTap: () => ref.invalidate(healthProvider),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (spin)
-                    const SizedBox(
-                        width: 10, height: 10, child: CircularProgressIndicator(strokeWidth: 2))
-                  else
-                    Container(
-                      width: 7,
-                      height: 7,
-                      decoration: BoxDecoration(
-                        color: dotColor,
-                        shape: BoxShape.circle,
-                        boxShadow: c.isDark
-                            ? [BoxShadow(color: dotColor.withValues(alpha: 0.6), blurRadius: 8)]
-                            : null,
-                      ),
-                    ),
-                  const SizedBox(width: 7),
-                  Text(label, style: HelixText.microtag(c.ink3, size: 10.5)),
-                  const SizedBox(width: 5),
-                  Icon(Icons.refresh, size: 12, color: c.ink3),
-                ],
-              ),
-            ),
-            Text('RESEARCH USE ONLY', style: HelixText.microtag(c.ink3, size: 10.5)),
-          ],
-        ),
-        const SizedBox(height: 6),
-        Text(AppConfig.useMock ? '' : AppConfig.apiBaseUrl,
-            style: HelixText.data(c.ink3, size: 10)),
-      ],
+    return Center(
+      child: Text('RESEARCH USE ONLY', style: HelixText.microtag(c.ink3, size: 10.5)),
     );
   }
 }
