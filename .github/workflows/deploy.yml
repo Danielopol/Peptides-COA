@@ -48,12 +48,14 @@ jobs:
             --dart-define=API_BASE_URL=https://peptides-coa-production.up.railway.app \
             --dart-define=USE_MOCK=false
 
+      # Assemble at the REPO ROOT: the deploy step runs from the root, and
+      # `--prebuilt` reads .vercel/output relative to the current dir. (Project
+      # lookup separately applies the "app" Root Directory — see the deploy step.)
       - name: Assemble Vercel prebuilt output (Build Output API v3)
-        working-directory: app
         run: |
           rm -rf .vercel/output
           mkdir -p .vercel/output/static
-          cp -r build/web/. .vercel/output/static/
+          cp -r app/build/web/. .vercel/output/static/
           echo '{"version":3}' > .vercel/output/config.json
 
       # Run from the repo ROOT, not app/. The Vercel project's Root Directory is
