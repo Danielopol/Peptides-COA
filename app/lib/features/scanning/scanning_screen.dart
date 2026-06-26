@@ -231,8 +231,13 @@ class _BeamRitualState extends ConsumerState<_BeamRitual>
           OutlinedButton.icon(
             icon: const Icon(Icons.close, size: 16),
             label: const Text('Cancel'),
+            // Stop the in-flight scan, clear the state machine, and return to the
+            // scanner — otherwise cancelling leaves the state at ScanIdle, which
+            // falls through to the beam ritual and looks like nothing happened.
             onPressed: () {
               ref.read(scanControllerProvider.notifier).cancel();
+              ref.read(scanControllerProvider.notifier).reset();
+              context.go('/');
             },
           ),
         ],
