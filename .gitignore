@@ -50,3 +50,5 @@ coa-faker/input_smoke/
 COAs/
 FAKE/
 Rules/calibration/ocr_cache/
+.vercel
+.env*
