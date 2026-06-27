@@ -18,6 +18,9 @@ backend/.pytest_cache/
 .vercel/
 app/.vercel/
 
+# ===== Local static-layout preview (throwaway) =====
+_localsite/
+
 # ===== Flutter / Dart (app) =====
 app/build/
 app/.dart_tool/

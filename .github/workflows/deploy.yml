@@ -38,10 +38,12 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Build web (release, cheaper compile)
+      # App is served under /app/ (the static marketing landing owns /).
+      - name: Build web (release, cheaper compile, base /app/)
         working-directory: app
         run: |
           flutter build web --release \
+            --base-href=/app/ \
             --dart2js-optimization=O2 \
             --no-source-maps \
             --no-tree-shake-icons \
@@ -51,11 +53,17 @@ jobs:
       # Assemble at the REPO ROOT: the deploy step runs from the root, and
       # `--prebuilt` reads .vercel/output relative to the current dir. (Project
       # lookup separately applies the "app" Root Directory — see the deploy step.)
+      # Layout: static landing + SEO files at /, Flutter app under /app/.
       - name: Assemble Vercel prebuilt output (Build Output API v3)
         run: |
           rm -rf .vercel/output
-          mkdir -p .vercel/output/static
-          cp -r app/build/web/. .vercel/output/static/
+          mkdir -p .vercel/output/static/app
+          cp -r app/build/web/. .vercel/output/static/app/
+          cp web-landing/index.html   .vercel/output/static/index.html
+          cp web-landing/robots.txt   .vercel/output/static/robots.txt
+          cp web-landing/sitemap.xml  .vercel/output/static/sitemap.xml
+          cp app/assets/logo.png      .vercel/output/static/logo.png
+          cp app/web/favicon.png      .vercel/output/static/favicon.png
           echo '{"version":3}' > .vercel/output/config.json
 
       # Run from the repo ROOT, not app/. The Vercel project's Root Directory is

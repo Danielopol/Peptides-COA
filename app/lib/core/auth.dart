@@ -39,9 +39,13 @@ class AuthController {
   Future<void> signInWithGoogle({String? returnTo}) {
     String redirect;
     if (kIsWeb) {
-      redirect = Uri.base.origin;
+      // Production serves the app under /app/ (the static landing owns /); local
+      // dev (debug) serves it at the origin root. Either way OAuth must return
+      // to the app, not the marketing page. The matching URL(s) must be on the
+      // Supabase redirect allowlist or Supabase falls back to its Site URL.
+      redirect = kReleaseMode ? '${Uri.base.origin}/app/' : '${Uri.base.origin}/';
       if (returnTo != null && returnTo.isNotEmpty) {
-        redirect = '$redirect/?from=${Uri.encodeComponent(returnTo)}';
+        redirect = '$redirect?from=${Uri.encodeComponent(returnTo)}';
       }
     } else {
       redirect = 'io.peptidestrust://login-callback';

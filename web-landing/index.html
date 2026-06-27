@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pep Trust — Verify a Peptide COA (Certificate of Analysis)</title>
+  <meta name="description" content="Pep Trust scans a peptide Certificate of Analysis (COA) and scores how authentic and complete it is — cross-checking the testing lab, molecular weights and forgery markers, with plain-language red flags. Your first scan is free.">
+  <meta name="keywords" content="peptide COA, certificate of analysis, COA verification, fake COA, peptide purity, research peptides, HPLC purity, mass spectrometry, third-party lab testing">
+  <link rel="canonical" href="https://www.peptidestrust.com/">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pep Trust">
+  <meta property="og:title" content="Pep Trust — Verify a Peptide COA">
+  <meta property="og:description" content="Scan a peptide Certificate of Analysis and get an authenticity + completeness score, with plain-language red flags. First scan free.">
+  <meta property="og:url" content="https://www.peptidestrust.com/">
+  <meta property="og:image" content="https://www.peptidestrust.com/logo.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pep Trust — Verify a Peptide COA">
+  <meta name="twitter:description" content="Scan a peptide COA for authenticity and completeness, with plain-language red flags. First scan free.">
+  <meta name="twitter:image" content="https://www.peptidestrust.com/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050D18; --surface: #0A1726; --surface2: #0F1F33; --line: #1B3450;
+      --ink: #E8F4FC; --ink2: #8FABC4; --ink3: #557396;
+      --accent: #2BE4FF; --accent-ink: #04131E; --accent-dim: rgba(43,228,255,0.12);
+      --teal: #46D6C4; --lime: #C0FF4D; --red: #FF5468; --amber: #FFC247;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+    .mono { font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase; font-size: 11px; color: var(--ink3); }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; color: var(--ink); line-height: 1.15; margin: 0; }
+
+    header.site { border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(5,13,24,0.85); backdrop-filter: blur(8px); z-index: 10; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; }
+    .brand img { width: 26px; height: 26px; }
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--accent-ink);
+      font-weight: 600; padding: 12px 22px; border-radius: 10px; font-size: 15px;
+      transition: transform .08s ease, box-shadow .15s ease;
+      box-shadow: 0 0 24px -6px rgba(43,228,255,0.5);
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); box-shadow: none; padding: 11px 20px; }
+
+    .hero { padding: 84px 0 64px; text-align: center; }
+    .hero h1 { font-size: clamp(32px, 6vw, 52px); letter-spacing: -0.5px; }
+    .hero .lead { color: var(--ink2); font-size: clamp(16px, 2.4vw, 20px); max-width: 640px; margin: 18px auto 0; }
+    .hero .cta { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero .sub { margin-top: 16px; color: var(--ink3); font-size: 13px; }
+
+    section { padding: 52px 0; border-top: 1px solid var(--line); }
+    section h2 { font-size: clamp(24px, 4vw, 34px); text-align: center; }
+    section .intro { color: var(--ink2); text-align: center; max-width: 620px; margin: 14px auto 0; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 38px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .card .step { font-family: 'IBM Plex Mono', monospace; color: var(--accent); font-size: 13px; }
+    .card h3 { font-size: 18px; margin: 10px 0 8px; }
+    .card p { color: var(--ink2); margin: 0; font-size: 14.5px; }
+
+    .scores { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 36px; }
+    .score { flex: 1 1 260px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .score .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .score h3 { font-size: 19px; margin: 8px 0; }
+    .score p { color: var(--ink2); font-size: 14.5px; margin: 0; }
+
+    .faq { max-width: 760px; margin: 36px auto 0; }
+    .faq details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); margin-bottom: 12px; padding: 4px 18px; }
+    .faq summary { cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 17px; padding: 14px 0; list-style: none; color: var(--ink); }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; float: right; color: var(--accent); font-size: 22px; line-height: 1; }
+    .faq details[open] summary::after { content: '–'; }
+    .faq p { color: var(--ink2); margin: 0 0 16px; font-size: 14.5px; }
+
+    .cta-band { text-align: center; }
+    .cta-band h2 { margin-bottom: 22px; }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--ink3); font-size: 13px; }
+    footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+    footer a { color: var(--ink2); }
+    .ruo { font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase; font-size: 11px; color: var(--ink3); }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="/"><img src="/logo.png" alt="Pep Trust logo"> Pep Trust</a>
+      <a class="btn ghost" href="/app/">Launch app</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="border-top:none">
+      <div class="wrap">
+        <p class="mono">Peptide COA verification</p>
+        <h1>Know what's really in the vial</h1>
+        <p class="lead">Pep Trust reads a peptide Certificate of Analysis (COA) and tells you, in plain language, how authentic and how complete it is — cross-checking the testing lab, the molecular weights, and known forgery markers.</p>
+        <div class="cta">
+          <a class="btn" href="/app/">Verify a COA — free</a>
+          <a class="btn ghost" href="#how">How it works</a>
+        </div>
+        <p class="sub">Your first scan is free · Research use only</p>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="wrap">
+        <h2>Why a COA isn't enough on its own</h2>
+        <p class="intro">The research-peptide market is largely unregulated, and a Certificate of Analysis is the main objective evidence that what's in the vial matches the label. But COAs can be outdated, generic, reused across products, or outright forged — and most buyers have no way to read one critically. Pep Trust is that second pair of eyes.</p>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <div class="grid">
+          <div class="card">
+            <span class="step">01</span>
+            <h3>Upload the COA</h3>
+            <p>Drop in a PDF or photo of the certificate. No account needed to start — your first scan is free.</p>
+          </div>
+          <div class="card">
+            <span class="step">02</span>
+            <h3>We cross-check it</h3>
+            <p>Dozens of checks run automatically: the testing lab, the claimed molecular weight vs. the real peptide, purity sanity, and visual forgery markers like pasted-over or pixelated fields.</p>
+          </div>
+          <div class="card">
+            <span class="step">03</span>
+            <h3>Get a clear verdict</h3>
+            <p>Two scores plus a plain-language breakdown of every red flag — so you understand the result even without a chemistry background.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="wrap">
+        <h2>What you get back</h2>
+        <div class="scores">
+          <div class="score">
+            <span class="tag" style="color:var(--accent)">Authenticity</span>
+            <h3>Is this document genuine?</h3>
+            <p>Whether the COA looks real or shows signs of tampering, template reuse, an untraceable lab, or a mismatched molecular weight.</p>
+          </div>
+          <div class="score">
+            <span class="tag" style="color:var(--teal)">Completeness</span>
+            <h3>How thorough is the testing?</h3>
+            <p>Which sections a strong COA should contain are actually present — identity, purity, mass, contaminant testing — and which are missing.</p>
+          </div>
+        </div>
+        <p class="intro" style="margin-top:28px">Every flagged item is explained in plain English (for example, "Laboratory address is missing" or "Molecular weight doesn't match the named peptide"), so you know exactly what to ask the vendor for.</p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details open>
+            <summary>How can I tell if a peptide COA is fake?</summary>
+            <p>Common red flags include no testing-laboratory name, a layout reused across different products, blurred or pasted-over fields (lab name, batch number, QR code), a molecular weight that doesn't match the named peptide, a suspiciously perfect 100% purity, and no way to verify the report with the lab. Pep Trust checks for all of these automatically and explains what it finds.</p>
+          </details>
+          <details>
+            <summary>What is a Certificate of Analysis (COA) for peptides?</summary>
+            <p>A COA is a lab report stating what a specific batch was tested for and the results — typically identity (by mass spectrometry), purity (by HPLC), and sometimes contaminant testing. It's the main objective evidence that the contents match the label, which matters most in an unregulated market.</p>
+          </details>
+          <details>
+            <summary>What should a legitimate peptide COA include?</summary>
+            <p>At minimum: the product/peptide name, a batch or lot number, the analysis date, the testing laboratory's name and contact details, a numeric purity result, mass-spectrometry identity confirmation, and ideally a way to verify the report with the lab. A thorough COA also includes a chromatogram and contaminant testing. Pep Trust shows you which of these are present and which are missing.</p>
+          </details>
+          <details>
+            <summary>Does a high purity number mean the peptide is safe?</summary>
+            <p>No. Purity is not safety, and it's not potency. A COA usually doesn't test for sterility, bacterial endotoxins, heavy metals, or residual solvents — and a peptide can be highly pure yet degraded or misfolded. A COA also only describes the sample that was tested, not necessarily the vial you received. The only way to know what's in your vial is independent testing of that vial.</p>
+          </details>
+          <details>
+            <summary>Is my first scan really free?</summary>
+            <p>Yes — you can run your first COA scan at no cost and see the full diagnostic before deciding anything.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <h2>Check a COA before you trust it</h2>
+        <a class="btn" href="/app/">Verify a COA — free</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap row">
+      <span class="ruo">Research use only</span>
+      <span>
+        <a href="/app/">Open the app</a> ·
+        <a href="/app/#/terms">Terms</a> ·
+        <a href="/app/#/privacy">Privacy</a>
+      </span>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Pep Trust",
+        "url": "https://www.peptidestrust.com/",
+        "logo": "https://www.peptidestrust.com/logo.png"
+      },
+      {
+        "@type": "WebSite",
+        "name": "Pep Trust",
+        "url": "https://www.peptidestrust.com/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How can I tell if a peptide COA is fake?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Common red flags include no testing-laboratory name, a layout reused across different products, blurred or pasted-over fields, a molecular weight that doesn't match the named peptide, a suspiciously perfect 100% purity, and no way to verify the report with the lab. Pep Trust checks for all of these automatically and explains what it finds." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a Certificate of Analysis (COA) for peptides?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A COA is a lab report stating what a specific batch was tested for and the results — typically identity by mass spectrometry, purity by HPLC, and sometimes contaminant testing. It is the main objective evidence that the contents match the label." }
+          },
+          {
+            "@type": "Question",
+            "name": "What should a legitimate peptide COA include?",
+            "acceptedAnswer": { "@type": "Answer", "text": "At minimum the product name, a batch or lot number, the analysis date, the testing laboratory's name and contact details, a numeric purity result, mass-spectrometry identity confirmation, and ideally a way to verify the report with the lab. A thorough COA also includes a chromatogram and contaminant testing." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a high purity number mean the peptide is safe?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Purity is not safety and not potency. A COA usually does not test for sterility, endotoxins, heavy metals, or residual solvents, and it only describes the sample that was tested. The only way to know what is in your vial is independent testing of that vial." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my first scan really free?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can run your first COA scan at no cost and see the full diagnostic before deciding anything." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</body>
+</html>
