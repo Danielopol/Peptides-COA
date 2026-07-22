@@ -14,6 +14,7 @@ on:
     branches: [main]
     paths:
       - 'app/**'
+      - 'web-landing/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -62,6 +63,7 @@ jobs:
           cp web-landing/index.html   .vercel/output/static/index.html
           cp web-landing/robots.txt   .vercel/output/static/robots.txt
           cp web-landing/sitemap.xml  .vercel/output/static/sitemap.xml
+          cp -r web-landing/blog       .vercel/output/static/blog
           cp app/assets/logo.png      .vercel/output/static/logo.png
           cp app/web/favicon.png      .vercel/output/static/favicon.png
           echo '{"version":3}' > .vercel/output/config.json

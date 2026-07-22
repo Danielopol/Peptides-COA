@@ -59,6 +59,10 @@
     }
     .btn:hover { transform: translateY(-1px); }
     .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); box-shadow: none; padding: 11px 20px; }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links a.navlink { color: var(--ink2); font-size: 15px; font-weight: 500; }
+    .nav-links a.navlink:hover { color: var(--ink); }
+    @media (max-width: 520px) { .nav-links a.navlink { display: none; } }
 
     .hero { padding: 84px 0 64px; text-align: center; }
     .hero h1 { font-size: clamp(32px, 6vw, 52px); letter-spacing: -0.5px; }
@@ -103,7 +107,10 @@
   <header class="site">
     <div class="wrap nav">
       <a class="brand" href="/"><img src="/logo.png" alt="Pep Trust logo"> Pep Trust</a>
-      <a class="btn ghost" href="/app/">Launch app</a>
+      <div class="nav-links">
+        <a class="navlink" href="/blog/">Blog</a>
+        <a class="btn ghost" href="/app/">Launch app</a>
+      </div>
     </div>
   </header>
 
@@ -210,6 +217,7 @@
     <div class="wrap row">
       <span class="ruo">Research use only</span>
       <span>
+        <a href="/blog/">Blog</a> ·
         <a href="/app/">Open the app</a> ·
         <a href="/app/#/terms">Terms</a> ·
         <a href="/app/#/privacy">Privacy</a>
