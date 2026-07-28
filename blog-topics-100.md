@@ -27,7 +27,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 
 1. ✅ **How to Read a Peptide COA: A Beginner's Guide** — KW: "how to read a peptide COA" · Intent: learn to interpret a certificate. *(published)*
 2. ✅ **What Is a Certificate of Analysis (COA)?** — KW: "what is a certificate of analysis peptides" · Intent: definition + why it matters. *(published)*
-3. **What Should a Legitimate Peptide COA Include? (Checklist)** — KW: "what should a peptide COA include" · Intent: field-by-field checklist. Pillar.
+3. ✅ **What Should a Legitimate Peptide COA Include? (Checklist)** — KW: "what should a peptide COA include" · Intent: field-by-field checklist. Pillar. *(published)*
 4. **Third-Party vs In-House COA: Why the Difference Matters** — KW: "third party vs in house COA" · Intent: trust hierarchy.
 5. **Does "COA Available" Actually Mean Anything?** — KW: "COA available meaning" · Intent: skepticism, buyer question.
 6. **How Often Should a COA Be Re-Tested? (COA Age & Expiry)** — KW: "how old can a COA be" · Intent: freshness rule.

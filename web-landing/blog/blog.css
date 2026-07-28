@@ -108,6 +108,10 @@ article.post { padding-top: 10px; }
 .post-body th { color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-weight: 600; background: var(--surface); }
 .post-body td { color: var(--ink2); }
 
+/* FAQ block inside an article (pairs with FAQPage schema) */
+.faq-block h3 { font-size: 18px; margin: 26px 0 6px; }
+.faq-block p { color: var(--ink2); margin: 0; font-size: 15.5px; }
+
 /* Table of contents */
 .toc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; margin: 28px 0; }
 .toc .label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); }
