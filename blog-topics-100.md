@@ -67,7 +67,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 
 ## Cluster 4 — Purity, potency & the numbers (myth-busting)
 
-34. **Purity vs Net Peptide Content: The Difference That Costs You** — KW: "net peptide content vs purity" · Intent: the big misunderstanding. Pillar.
+34. ✅ **Purity vs Net Peptide Content: The Difference That Costs You** — KW: "net peptide content vs purity" · Intent: the big misunderstanding. Pillar. *(published)*
 35. **What Does 99% Purity Actually Mean?** — KW: "99% peptide purity meaning" · Intent: interpret the headline number.
 36. **Why Purity Is Not Safety and Not Potency** — KW: "is high purity peptide safe" · Intent: correct a common belief.
 37. **How to Calculate the Real Amount of Peptide in Your Vial** — KW: "net peptide content calculation" · Intent: label mg vs actual mg.
