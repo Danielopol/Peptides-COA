@@ -118,7 +118,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 72. **How to Read a Thymosin Alpha-1 COA** — KW: "thymosin alpha 1 COA" · Intent: specific peptide.
 73. **How to Read a Glutathione COA** — KW: "glutathione COA" · Intent: adjacent compound.
 74. **How to Read an NAD+ COA** — KW: "NAD+ COA" · Intent: adjacent, high volume.
-75. **Peptide Molecular Weight Reference Table (with COA use)** — KW: "peptide molecular weight table" · Intent: evergreen reference. Pillar/link magnet.
+75. ✅ **Peptide Molecular Weight Reference Table (with COA use)** — KW: "peptide molecular weight table" · Intent: evergreen reference. Pillar/link magnet. *(published — generated from `Rules/peptide_mw_table.json`; regenerate with `scratchpad/gen_mw_post.py` when that table changes)*
 76. **"Blends" and Stacked Peptides: Why Their COAs Are Harder to Verify** — KW: "peptide blend COA" · Intent: multi-component caution.
 
 ## Cluster 8 — Storage, handling & reconstitution (high-volume, RUO-safe)

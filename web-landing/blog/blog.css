@@ -108,6 +108,15 @@ article.post { padding-top: 10px; }
 .post-body th { color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-weight: 600; background: var(--surface); }
 .post-body td { color: var(--ink2); }
 
+/* Molecular-weight reference table */
+.mw-table td:nth-child(3), .mw-table td:nth-child(4),
+.mw-table th:nth-child(3), .mw-table th:nth-child(4) {
+  text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.mw-formula { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--ink3); white-space: nowrap; }
+.mw-note { color: var(--accent); font-weight: 600; }
+.post-body p.mw-footnote { color: var(--ink3); font-size: 13.5px; margin-top: -8px; }
+
 /* FAQ block inside an article (pairs with FAQPage schema) */
 .faq-block h3 { font-size: 18px; margin: 26px 0 6px; }
 .faq-block p { color: var(--ink2); margin: 0; font-size: 15.5px; }
