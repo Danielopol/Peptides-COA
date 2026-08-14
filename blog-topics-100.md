@@ -104,7 +104,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 58. **How to Read a BPC-157 COA (Expected Molecular Weight & Purity)** — KW: "BPC-157 COA" · Intent: verify a specific peptide.
 59. **How to Read a TB-500 COA** — KW: "TB-500 COA molecular weight" · Intent: same, TB-500.
 60. **How to Read a GHK-Cu COA** — KW: "GHK-Cu COA" · Intent: copper-peptide identity.
-61. **How to Read a Semaglutide COA (Identity & Purity Checks)** — KW: "semaglutide COA" · Intent: very high volume.
+61. ✅ **How to Read a Semaglutide COA (Identity & Purity Checks)** — KW: "semaglutide COA" · Intent: very high volume. *(published)*
 62. **How to Read a Tirzepatide COA** — KW: "tirzepatide COA" · Intent: high volume.
 63. **How to Read a Retatrutide COA** — KW: "retatrutide COA" · Intent: trending compound.
 64. **How to Read an Ipamorelin COA** — KW: "ipamorelin COA" · Intent: GH-secretagogue identity.
@@ -118,7 +118,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 72. **How to Read a Thymosin Alpha-1 COA** — KW: "thymosin alpha 1 COA" · Intent: specific peptide.
 73. **How to Read a Glutathione COA** — KW: "glutathione COA" · Intent: adjacent compound.
 74. **How to Read an NAD+ COA** — KW: "NAD+ COA" · Intent: adjacent, high volume.
-75. ✅ **Peptide Molecular Weight Reference Table (with COA use)** — KW: "peptide molecular weight table" · Intent: evergreen reference. Pillar/link magnet. *(published — generated from `Rules/peptide_mw_table.json`; regenerate with `scratchpad/gen_mw_post.py` when that table changes)*
+75. ✅ **Peptide Molecular Weight Reference Table (with COA use)** — KW: "peptide molecular weight table" · Intent: evergreen reference. Pillar/link magnet. *(published — generated from `Rules/peptide_mw_table.json`. Do not edit the HTML directly: change `tools/mw_post_template.html` and re-run `python tools/gen_mw_post.py`)*
 76. **"Blends" and Stacked Peptides: Why Their COAs Are Harder to Verify** — KW: "peptide blend COA" · Intent: multi-component caution.
 
 ## Cluster 8 — Storage, handling & reconstitution (high-volume, RUO-safe)
