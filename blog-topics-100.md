@@ -41,7 +41,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 11. ✅ **How to Spot a Fake Peptide COA: 12 Red Flags** — KW: "fake peptide COA" · Intent: fraud detection. *(published)*
 12. **How to Tell if a COA Is Photoshopped** — KW: "photoshopped COA" · Intent: image-forgery signs.
 13. **Reused Chromatograms: The Most Common COA Fraud** — KW: "reused COA chromatogram" · Intent: template-fraud pattern.
-14. **Why 100% Purity on a COA Is a Red Flag** — KW: "100% purity peptide fake" · Intent: too-good-to-be-true.
+14. ✅ **Why 100% Purity on a COA Is a Red Flag** — KW: "100% purity peptide fake" · Intent: too-good-to-be-true. *(published)*
 15. **Fake Testing Labs: How to Check a Lab Actually Exists** — KW: "verify peptide testing lab" · Intent: lab legitimacy.
 16. **QR Codes on COAs: Real Verification or Fake Link?** — KW: "COA QR code verification" · Intent: scan-and-check.
 17. **The "Generic COA" Scam (One Document, Many Batches)** — KW: "generic COA peptide" · Intent: recognizing reuse.

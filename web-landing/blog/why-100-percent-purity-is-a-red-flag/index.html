@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why "100% Purity" on a Peptide COA Is a Red Flag</title>
+  <meta name="description" content="A peptide COA showing exactly 100% purity isn't a sign of exceptional quality — it's a sign the number wasn't measured. Here's the chemistry and instrumentation behind why real HPLC results never land on 100%, and what to check instead.">
+  <meta name="keywords" content="100% purity peptide fake, peptide COA 100 percent purity, is 100% purity possible, HPLC purity limits, fake peptide purity red flag">
+  <link rel="canonical" href="https://www.peptidestrust.com/blog/why-100-percent-purity-is-a-red-flag/">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pep Trust">
+  <meta property="og:title" content="Why 100% Purity on a Peptide COA Is a Red Flag">
+  <meta property="og:description" content="Real HPLC results never land on exactly 100%. Here's the chemistry and instrumentation behind why, and what a genuine purity figure looks like instead.">
+  <meta property="og:url" content="https://www.peptidestrust.com/blog/why-100-percent-purity-is-a-red-flag/">
+  <meta property="og:image" content="https://www.peptidestrust.com/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Why 100% Purity Is a Red Flag">
+  <meta name="twitter:description" content="Real HPLC results never land on exactly 100%. Here's why, and what a genuine figure looks like.">
+  <meta name="twitter:image" content="https://www.peptidestrust.com/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="/"><img src="/logo.png" alt="Pep Trust logo"> Pep Trust</a>
+      <div class="nav-links">
+        <a class="navlink" href="/blog/">Blog</a>
+        <a class="btn ghost" href="/app/">Launch app</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap narrow">
+    <p class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Why 100% purity is a red flag</p>
+
+    <article class="post">
+      <div class="post-head">
+        <span class="kicker">Red flag, explained</span>
+        <h1>Why "100% Purity" on a COA Is a Red Flag</h1>
+        <p class="dek">It reads like the best possible result. It's actually the strongest sign the number wasn't measured at all — it was typed in.</p>
+        <div class="meta">
+          <span>August 21, 2026</span><span class="dot">·</span><span>5 min read</span><span class="dot">·</span><span class="ruo">Research use only</span>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <p>A purity figure of exactly 100% is the single most common "too good to be true" number on a fabricated Certificate of Analysis, because it's the intuitive choice for someone who doesn't understand how the measurement actually works. To a non-chemist, 100% sounds like the best possible result. To anyone who has run an HPLC assay, it's close to a tell on its own.</p>
+
+        <h2 id="why-impossible">Why 100% doesn't happen</h2>
+        <p>HPLC purity is calculated by comparing the area under your target peak to the total area under every peak in the chromatogram:</p>
+        <blockquote>Purity (%) = (target peak area &divide; total peak area) &times; 100</blockquote>
+        <p>For this to equal exactly 100.00%, every other peak in the trace would need to have zero area — meaning absolutely nothing else in the sample. That doesn't happen, for a few independent reasons:</p>
+        <ul>
+          <li><strong>Synthesis always produces by-products.</strong> Solid-phase peptide synthesis generates deletion sequences (a residue skipped), truncated chains (synthesis stopped early), and minor oxidized or modified forms. Purification removes most of this, not all of it.</li>
+          <li><strong>Instruments have a detection floor, not a zero.</strong> HPLC UV detectors register a baseline noise level. Anything above that floor integrates as a peak, however small. A perfectly flat baseline with literally nothing else present isn't a sign of a clean sample — it's a sign nothing was actually injected and measured.</li>
+          <li><strong>Integration software reports what it sees.</strong> Real chromatography software finds and integrates minor peaks automatically. Suppressing every one of them to land on a round number is something a person does after the fact, not something an instrument does during a run.</li>
+        </ul>
+        <p>Vendors who run genuine HPLC on genuinely high-purity material still see trace impurity peaks in the 0.1–1% range. That's not a quality problem — it's what real data looks like.</p>
+
+        <h2 id="looks-like">What a real result looks like instead</h2>
+        <p>Genuine purity values carry decimal precision that reflects an actual peak-area calculation, not a marketing decision:</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Type of value</th><th>Example</th><th>What it suggests</th></tr></thead>
+            <tbody>
+              <tr><td>Realistic, measured</td><td>98.37%, 97.84%, 99.12%</td><td>Consistent with an actual peak-area integration</td></tr>
+              <tr><td>Suspicious, rounded</td><td>98%, 99%, 99.5%</td><td>Could be genuine but rounded for display — check for a chromatogram</td></tr>
+              <tr><td>Implausible</td><td>99.9%, 100%, 100.00%</td><td>No supporting chromatogram is credible at this value</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The giveaway isn't just the number on its own — it's the number combined with everything else on the page. A genuine 98.37% sitting next to a real chromatogram, a named method, and visible integration lines is unremarkable. A round 100% with no chromatogram, or a chromatogram with a single impossibly clean peak and a flat, featureless baseline, is a document built backward from a headline number rather than forward from a measurement.</p>
+
+        <div class="callout warn">
+          <span class="label">The pattern to watch for</span>
+          <p>One suspiciously perfect number on one product is worth a second look. The same 99.9%–100% figure appearing across a vendor's <em>entire</em> catalog — different peptides, different batches, all reporting the same implausible purity — is close to conclusive. Real manufacturing varies batch to batch. A catalog where nothing varies is a catalog where the numbers weren't measured.</p>
+        </div>
+
+        <h2 id="net-content">A related trap: 100% doesn't apply to net peptide content either</h2>
+        <p>The same instinct sometimes shows up as a claimed net peptide content near or above 95–100%. That's arguably even less plausible than 100% HPLC purity, because net peptide content has to account for bound water and counterions (TFA or acetate) that are chemically present in essentially every lyophilized peptide salt. A vial that is genuinely 100% peptide by weight, with zero counterion and zero moisture, isn't realistic lyophilized chemistry. See <a href="/blog/purity-vs-net-peptide-content/">purity vs net peptide content</a> for the full explanation of why these numbers diverge and what real ranges look like.</p>
+
+        <div class="cta-inline">
+          <h3>Let the check run itself</h3>
+          <p>Pep Trust flags implausible purity figures automatically, alongside the rest of a COA's authenticity and completeness — with every red flag explained in plain language.</p>
+          <a class="btn" href="/app/">Verify a COA — free</a>
+        </div>
+
+        <h2 id="not-only">100% purity isn't the only red flag — it's one signal</h2>
+        <p>A single suspicious number is a reason to look closer, not necessarily a reason to walk away outright — but it should never stand alone. Check it against the rest of the document: is there an actual chromatogram, a named testing method, a real lab with contact details, and a batch number that matches your vial? A COA that fails on 100% purity <em>and</em> is missing several of those is not an edge case worth debating.</p>
+        <p>For the complete list of forgery markers — reused chromatograms, photoshopped fields, fake labs, broken QR verification — see <a href="/blog/how-to-spot-a-fake-peptide-coa/">how to spot a fake peptide COA</a>. For what a complete, trustworthy COA should contain field by field, see the <a href="/blog/what-should-a-peptide-coa-include/">COA checklist</a>.</p>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="faq-block">
+          <h3>Is 100% purity possible for a peptide?</h3>
+          <p>Not in practice. Peptide synthesis produces trace by-products such as deletion and truncated sequences, and HPLC detectors register a baseline noise floor rather than an absolute zero. Genuine high-purity peptides still show impurity peaks in the 0.1&ndash;1% range, so a chromatogram with literally nothing else present is not credible.</p>
+          <h3>What purity number should I actually expect?</h3>
+          <p>A genuine result carries decimal precision reflecting a real peak-area calculation &mdash; values like 98.37% or 97.84%, not round numbers like 98% or 100%. Research-grade material is typically specified at &ge;98%, supported by an actual chromatogram with a named method.</p>
+          <h3>Is 99.9% purity also a red flag?</h3>
+          <p>It's a weaker version of the same problem. It's closer to plausible than exactly 100%, but still close enough to the theoretical ceiling that it should be treated with the same scrutiny &mdash; check for a supporting chromatogram, method details, and whether the same figure appears across the vendor's whole catalog.</p>
+          <h3>Does a low, honest-looking purity number guarantee a COA is real?</h3>
+          <p>No. A believable purity figure is necessary but not sufficient. It should be checked alongside the chromatogram, the testing method, the laboratory's identity and accreditation, and the batch number &mdash; a realistic purity value on an otherwise unverifiable document is not enough on its own.</p>
+        </div>
+
+        <p class="disclaimer">Research use only. This article is for scientific and educational purposes and is not medical, dosing, or investment advice. Research peptides are not approved for human or veterinary use.</p>
+      </div>
+
+      <div class="related">
+        <h2>Keep reading</h2>
+        <div class="related-grid">
+          <a href="/blog/how-to-spot-a-fake-peptide-coa/">
+            <span class="kicker">Verification</span>
+            <h3>How to Spot a Fake Peptide COA: 12 Red Flags</h3>
+          </a>
+          <a href="/blog/purity-vs-net-peptide-content/">
+            <span class="kicker">The numbers</span>
+            <h3>Purity vs Net Peptide Content</h3>
+          </a>
+          <a href="/blog/what-should-a-peptide-coa-include/">
+            <span class="kicker">Checklist</span>
+            <h3>What Should a Legitimate Peptide COA Include?</h3>
+          </a>
+          <a href="/blog/how-to-read-a-peptide-coa/">
+            <span class="kicker">Beginner guide</span>
+            <h3>How to Read a Peptide COA: A Beginner's Guide</h3>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap row">
+      <span class="ruo">Research use only</span>
+      <span>
+        <a href="/">Home</a> · <a href="/blog/">Blog</a> · <a href="/app/">Open the app</a> · <a href="/app/#/terms">Terms</a> · <a href="/app/#/privacy">Privacy</a>
+      </span>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Why \"100% Purity\" on a Peptide COA Is a Red Flag",
+        "description": "Why real HPLC results never land on exactly 100% purity, the chemistry and instrumentation behind it, and what a genuine purity figure looks like.",
+        "datePublished": "2026-08-21",
+        "dateModified": "2026-08-21",
+        "author": { "@type": "Organization", "name": "Pep Trust" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Pep Trust",
+          "logo": { "@type": "ImageObject", "url": "https://www.peptidestrust.com/logo.png" }
+        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.peptidestrust.com/blog/why-100-percent-purity-is-a-red-flag/" },
+        "image": "https://www.peptidestrust.com/logo.png",
+        "isAccessibleForFree": true
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is 100% purity possible for a peptide?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Not in practice. Peptide synthesis produces trace by-products such as deletion and truncated sequences, and HPLC detectors register a baseline noise floor rather than an absolute zero. Genuine high-purity peptides still show impurity peaks in the 0.1 to 1 percent range, so a chromatogram with literally nothing else present is not credible." }
+          },
+          {
+            "@type": "Question",
+            "name": "What purity number should I actually expect?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A genuine result carries decimal precision reflecting a real peak-area calculation, such as 98.37 percent or 97.84 percent, not round numbers like 98 percent or 100 percent. Research-grade material is typically specified at 98 percent or higher, supported by an actual chromatogram with a named method." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is 99.9% purity also a red flag?",
+            "acceptedAnswer": { "@type": "Answer", "text": "It is a weaker version of the same problem. It is closer to plausible than exactly 100 percent, but still close enough to the theoretical ceiling that it should be treated with the same scrutiny, including checking for a supporting chromatogram, method details, and whether the same figure appears across the vendor's whole catalog." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a low, honest-looking purity number guarantee a COA is real?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. A believable purity figure is necessary but not sufficient. It should be checked alongside the chromatogram, the testing method, the laboratory's identity and accreditation, and the batch number. A realistic purity value on an otherwise unverifiable document is not enough on its own." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

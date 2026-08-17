@@ -8,7 +8,7 @@
   </url>
   <url>
     <loc>https://www.peptidestrust.com/blog/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -23,6 +23,12 @@
     <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.peptidestrust.com/blog/why-100-percent-purity-is-a-red-flag/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.peptidestrust.com/blog/tirzepatide-coa/</loc>
