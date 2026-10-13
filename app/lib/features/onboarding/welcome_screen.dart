@@ -103,14 +103,6 @@ class WelcomeScreen extends ConsumerWidget {
                     'document looks and how complete the testing is — plus a plain-language '
                     'breakdown of every red flag. If the file isn’t a COA at all, we tell you.',
               ),
-              _WelcomeCard(
-                icon: Icons.card_giftcard_outlined,
-                tag: 'ON THE HOUSE',
-                title: 'Your first scan is free',
-                body: 'Try the full diagnostic at no cost — no commitment. See exactly what '
-                    'Pep Trust finds before deciding anything.',
-                accent: c.xp,
-              ),
 
               const SizedBox(height: 8),
               FilledButton(

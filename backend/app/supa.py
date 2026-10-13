@@ -58,16 +58,10 @@ async def verify_user(token: str | None) -> dict | None:
     return None
 
 
-def _month_start_iso() -> str:
-    now = datetime.now(timezone.utc)
-    return now.replace(day=1, hour=0, minute=0, second=0, microsecond=0).isoformat()
-
-
 async def get_entitlement(user_id: str) -> dict:
-    """Compute the user's scan entitlement from subscriptions / credit_ledger /
-    this-month's free usage."""
+    """Compute the user's scan entitlement from subscriptions / credit_ledger."""
     async with httpx.AsyncClient(timeout=_TIMEOUT) as c:
-        sub_r, cred_r, free_r = (
+        sub_r, cred_r = (
             await c.get(
                 f"{SUPABASE_URL}/rest/v1/subscriptions",
                 headers=_rest_headers(),
@@ -78,13 +72,6 @@ async def get_entitlement(user_id: str) -> dict:
                 f"{SUPABASE_URL}/rest/v1/credit_ledger",
                 headers=_rest_headers(),
                 params={"user_id": f"eq.{user_id}", "select": "delta"},
-            ),
-            await c.get(
-                f"{SUPABASE_URL}/rest/v1/scans",
-                headers=_rest_headers(),
-                params={"user_id": f"eq.{user_id}", "billed_as": "eq.free",
-                        "created_at": f"gte.{_month_start_iso()}",
-                        "select": "id", "limit": "1"},
             ),
         )
 
@@ -105,25 +92,19 @@ async def get_entitlement(user_id: str) -> dict:
     if cred_r.status_code == 200:
         credits = sum(int(x.get("delta", 0)) for x in cred_r.json())
 
-    free_used = bool(free_r.json()) if free_r.status_code == 200 else False
-    free_available = not free_used
-
-    can_scan = sub_active or free_available or credits > 0
+    can_scan = sub_active or credits > 0
     return {
         "subscription": subscription,
         "credits": credits,
-        "free_scan_available": free_available,
         "can_scan": can_scan,
     }
 
 
 def decide_billing(ent: dict) -> str | None:
-    """Pick how this scan is paid for, free-first. None => not entitled (402)."""
+    """Pick how this scan is paid for. None => not entitled (402)."""
     sub = ent.get("subscription")
     if sub and sub.get("active"):
         return "subscription"
-    if ent.get("free_scan_available"):
-        return "free"
     if ent.get("credits", 0) > 0:
         return "credit"
     return None

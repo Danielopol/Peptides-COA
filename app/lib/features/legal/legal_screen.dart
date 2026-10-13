@@ -115,7 +115,7 @@ final Map<String, LegalDoc> _docs = {
     ),
     (
       '6. Plans, payments & billing',
-      'The free tier includes a limited number of scans per calendar month. Paid options '
+      'Scanning a COA requires a paid plan. Options '
           'include prepaid scan-credit packs (one-time purchases) and auto-renewing '
           'monthly or annual subscriptions. Prices are shown at checkout. Payments are '
           'processed by Stripe; we do not store your full card details. Subscriptions '

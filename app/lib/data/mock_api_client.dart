@@ -57,7 +57,6 @@ class MockApiClient implements ApiClient {
         'email': 'mock@example.com',
         'subscription': null,
         'credits': 0,
-        'free_scan_available': true,
         'can_scan': true,
       };
 

@@ -87,7 +87,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         context.go('/sign-in?from=/');
         return;
       }
-      // Entitlement gate: free monthly scan / credits / active subscription.
+      // Entitlement gate: credits / active subscription.
       Entitlement? ent;
       try {
         ent = await ref.read(entitlementProvider.future);
@@ -314,8 +314,8 @@ class _DashedBorderPainter extends CustomPainter {
       old.color != color || old.radius != radius;
 }
 
-/// Scan entitlement status under the scan card — free scan / credits /
-/// subscription. Tappable → paywall. Hidden when signed out.
+/// Scan entitlement status under the scan card — credits / subscription.
+/// Tappable → paywall. Hidden when signed out.
 class _EntitlementStatus extends ConsumerWidget {
   const _EntitlementStatus();
 
@@ -332,8 +332,7 @@ class _EntitlementStatus extends ConsumerWidget {
         if (e.credits > 0) {
           return (c.vGreen, '● ${e.credits} SCAN CREDIT${e.credits == 1 ? '' : 'S'} LEFT');
         }
-        if (e.freeScanAvailable) return (c.vGreen, '● 1 FREE SCAN THIS MONTH');
-        return (c.ink3, 'NO SCANS LEFT · CHOOSE A PLAN →');
+        return (c.ink3, 'CHOOSE A PLAN TO SCAN →');
       },
       loading: () => (c.ink3, '…'),
       error: (_, _) => (c.ink3, ''),

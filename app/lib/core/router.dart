@@ -20,8 +20,8 @@ import '../features/results/share_card.dart';
 import '../features/scanning/scanning_screen.dart';
 
 /// The app is public — anyone can browse, run the trust guide, and (for now)
-/// scan. Sign-in is offered, not forced; the entitlement gate (free scan /
-/// credits / subscription) is enforced later, together with Stripe. The only
+/// scan. Sign-in is offered, not forced; the entitlement gate (credits /
+/// subscription) is enforced later, together with Stripe. The only
 /// redirect: after signing in, return the user to wherever they came from
 /// (`?from=`), so the upcoming "sign in to reveal / to scan" prompts feel
 /// seamless.

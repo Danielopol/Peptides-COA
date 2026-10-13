@@ -22,7 +22,7 @@ abstract class ApiClient {
   });
 
   /// GET /api/me → raw entitlement JSON ({email, subscription, credits,
-  /// free_scan_available, can_scan}). Requires a signed-in session.
+  /// can_scan}). Requires a signed-in session.
   Future<Map<String, dynamic>> me();
 
   /// POST /api/checkout → a Stripe Checkout URL for the given plan key

@@ -13,8 +13,8 @@ import '../legal/legal_screen.dart' show legalLink;
 import '../shared/widgets/molecule.dart';
 import '../shared/widgets/page_body.dart';
 
-/// Paywall — shown when a signed-in user is out of scans (no free scan this
-/// month, no credits, no active subscription). Four options; each starts a real
+/// Paywall — shown when a signed-in user has no scans (no credits, no active
+/// subscription). Four options; each starts a real
 /// Stripe Checkout session and redirects the browser to Stripe.
 class PaywallScreen extends ConsumerStatefulWidget {
   const PaywallScreen({super.key});
@@ -137,12 +137,12 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 children: [
                   Text('UNLOCK SCANNING', style: HelixText.microtag(c.accent)),
                   const SizedBox(height: 8),
-                  Text('You’re out of scans.\nChoose how to continue.',
+                  Text('Scanning needs a plan.\nChoose how to continue.',
                       style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(height: 6),
                   Text(
-                    'Everyone gets 1 free scan a month. For more, grab a credit pack '
-                    'or go unlimited with a subscription.',
+                    'Grab a credit pack for the occasional COA, or go unlimited '
+                    'with a subscription.',
                     style: TextStyle(fontSize: 13, height: 1.5, color: c.ink2),
                   ),
                 ],

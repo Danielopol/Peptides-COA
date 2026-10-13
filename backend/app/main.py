@@ -133,7 +133,7 @@ async def scan(
         ent = await supa.get_entitlement(user["id"])
         billed_as = supa.decide_billing(ent)
         if billed_as is None:
-            # No subscription, no free scan left this month, no credits.
+            # No subscription and no credits.
             raise HTTPException(402, "No scans remaining — choose a plan")
 
     body = await file.read()
@@ -145,7 +145,7 @@ async def scan(
     result = run_scan(body, file.filename, origin="self" if origin == "self" else "vendor")
 
     # Record history + consume entitlement only for a real COA result
-    # (not-a-COA and errors never burn a free scan or a credit).
+    # (not-a-COA and errors never burn a credit).
     if user and billed_as and "error" not in result:
         await supa.record_scan(user["id"], result, file.filename,
                                "self" if origin == "self" else "vendor", billed_as)

@@ -93,7 +93,7 @@ class ScanController extends Notifier<ScanState> {
       switch (outcome) {
         case ScanSuccess(:final result):
           // History + entitlement live server-side now; the backend recorded
-          // this scan and consumed a free scan/credit — refetch both.
+          // this scan and consumed a credit if one was used — refetch both.
           ref.invalidate(historyProvider);
           ref.invalidate(entitlementProvider);
           state = ScanDone(result);
