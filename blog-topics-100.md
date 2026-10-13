@@ -106,7 +106,7 @@ Legend: **KW** = primary keyword to target · **Intent** = why they're searching
 60. **How to Read a GHK-Cu COA** — KW: "GHK-Cu COA" · Intent: copper-peptide identity.
 61. ✅ **How to Read a Semaglutide COA (Identity & Purity Checks)** — KW: "semaglutide COA" · Intent: very high volume. *(published)*
 62. ✅ **How to Read a Tirzepatide COA** — KW: "tirzepatide COA" · Intent: high volume. *(published)*
-63. **How to Read a Retatrutide COA** — KW: "retatrutide COA" · Intent: trending compound.
+63. ✅ **How to Read a Retatrutide COA** — KW: "retatrutide COA" · Intent: trending compound. *(published)*
 64. **How to Read an Ipamorelin COA** — KW: "ipamorelin COA" · Intent: GH-secretagogue identity.
 65. **How to Read a CJC-1295 COA (DAC vs no-DAC identity)** — KW: "CJC-1295 COA" · Intent: variant identity.
 66. **How to Read a Tesamorelin COA** — KW: "tesamorelin COA" · Intent: specific peptide.
